@@ -45,7 +45,7 @@ namespace THI_BANG_LAI_XE.Dao
         }
 
         //Update user
-        public static async void UpdateUser(User user)
+        public static async Task UpdateUser(User user)
         {
             try
             {
