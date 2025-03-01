@@ -9,10 +9,15 @@ namespace THI_BANG_LAI_XE.Dao
 {
     public class RegistrationDao
     {
-        private static ThiBangLaiXeContext _context = new ThiBangLaiXeContext();
+        private readonly ThiBangLaiXeContext _context;
+
+        public RegistrationDao(ThiBangLaiXeContext context)
+        {
+            _context = context;
+        }
 
         //add registration
-        public static async void AddRigistration(Registration registration)
+        public async void AddRigistration(Registration registration)
         {
             try
             {

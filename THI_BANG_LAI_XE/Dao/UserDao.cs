@@ -14,15 +14,20 @@ namespace THI_BANG_LAI_XE.Dao
 {
     public class UserDao
     {
-        private static ThiBangLaiXeContext _context = new ThiBangLaiXeContext();
+        private readonly ThiBangLaiXeContext _context;
+
+        public UserDao(ThiBangLaiXeContext context)
+        {
+            _context = context;
+        }
 
         //Add user
-        public static void AddUser(User user)
+        public async Task AddUser(User user)
         {
             try
             {
                 _context.Users.Add(user);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
             catch (Exception ex)
             {
@@ -31,7 +36,7 @@ namespace THI_BANG_LAI_XE.Dao
         }
 
         //get userList 
-        public static IPagedList<User> GetUserList(int page = 1, int pageSize = 10)
+        public IPagedList<User> GetUserList(int page = 1, int pageSize = 10)
         {
             // using x page list
             return _context.Users.ToPagedList(page, pageSize);
@@ -39,13 +44,13 @@ namespace THI_BANG_LAI_XE.Dao
 
 
         //Get user by id
-        public static User? GetUserById(long UserId)
+        public User? GetUserById(long UserId)
         {
             return _context.Users.FirstOrDefault(us => us.UserId == UserId);
         }
 
         //Update user
-        public static async Task UpdateUser(User user)
+        public async Task UpdateUser(User user)
         {
             try
             {
@@ -70,7 +75,7 @@ namespace THI_BANG_LAI_XE.Dao
         }
 
         //Delete user
-        public static async void DeleteUser(long UserId)
+        public async void DeleteUser(long UserId)
         {
             {
                 try

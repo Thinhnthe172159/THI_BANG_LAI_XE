@@ -11,16 +11,21 @@ namespace THI_BANG_LAI_XE.Dao
 {
     public class CourseDao
     {
-        private static ThiBangLaiXeContext _context = new ThiBangLaiXeContext();
+        private readonly ThiBangLaiXeContext _context;
+
+        public CourseDao(ThiBangLaiXeContext context)
+        {
+            _context = context;
+        }
 
         // get course list
-        public static async Task<List<Course>> GetCourseList() => await _context.Courses.ToListAsync();
+        public async Task<List<Course>> GetCourseList() => await _context.Courses.ToListAsync();
 
         //Filter Course by custom field
 
 
         // Add course
-        public static void AddCourse(Course course)
+        public void AddCourse(Course course)
         {
             try
             {
@@ -34,10 +39,10 @@ namespace THI_BANG_LAI_XE.Dao
         }
 
         //get course by id
-        public static async Task<Course?> GetCourseById(int courseId) => await _context.Courses.FirstOrDefaultAsync(c => c.CourseId == courseId);
+        public async Task<Course?> GetCourseById(int courseId) => await _context.Courses.FirstOrDefaultAsync(c => c.CourseId == courseId);
 
         //Update course
-        public static async Task UpdateCourse(Course course)
+        public async Task UpdateCourse(Course course)
         {
             try
             {

@@ -13,16 +13,22 @@ namespace THI_BANG_LAI_XE.Dao
 {
     public class QuestionDao
     {
-        private static ThiBangLaiXeContext _context = new ThiBangLaiXeContext();
+        private readonly ThiBangLaiXeContext _context;
+
+        public QuestionDao(ThiBangLaiXeContext context)
+        {
+            _context = context;
+        }
+
 
         //get list questions
-        public static async Task<List<Question>> GetQuestionList() => await _context.Questions.ToListAsync();
+        public async Task<List<Question>> GetQuestionList() => await _context.Questions.ToListAsync();
 
         //get question by id
-        public static async Task<Question?> GetQuestionById(long QuestionId) => await _context.Questions.FirstOrDefaultAsync(q => q.QuestionId == QuestionId);
+        public async Task<Question?> GetQuestionById(long QuestionId) => await _context.Questions.FirstOrDefaultAsync(q => q.QuestionId == QuestionId);
 
         // Add new question
-        public static async Task AddQuestion(Question question)
+        public async Task AddQuestion(Question question)
         {
             try
             {
@@ -35,7 +41,7 @@ namespace THI_BANG_LAI_XE.Dao
         }
 
         // Update question
-        public static async Task UpdateQuestion(Question question)
+        public async Task UpdateQuestion(Question question)
         {
             try
             {
@@ -55,7 +61,7 @@ namespace THI_BANG_LAI_XE.Dao
         }
 
         // remove question
-        public static async Task RemoveQuestion(long questionId)
+        public async Task RemoveQuestion(long questionId)
         {
             try
             {

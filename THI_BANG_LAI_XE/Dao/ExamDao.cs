@@ -12,10 +12,15 @@ namespace THI_BANG_LAI_XE.Dao
 {
     public class ExamDao
     {
-        private static ThiBangLaiXeContext _context = new ThiBangLaiXeContext();
+        private readonly ThiBangLaiXeContext _context;
+
+        public ExamDao(ThiBangLaiXeContext context)
+        {
+            _context = context;
+        }
 
         // Add new Exam
-        public static async Task AddExam(Exam exam)
+        public async Task AddExam(Exam exam)
         {
             try
             {
@@ -29,13 +34,13 @@ namespace THI_BANG_LAI_XE.Dao
         }
 
         // get exam by id
-        public static async Task<Exam?> GetExamById(int examId) => await _context.Exams.FirstOrDefaultAsync(ex => ex.ExamId == examId);
+        public async Task<Exam?> GetExamById(int examId) => await _context.Exams.FirstOrDefaultAsync(ex => ex.ExamId == examId);
 
         // get Exam list
-        public static async Task<List<Exam>> GetExamList() => await _context.Exams.ToListAsync();
+        public async Task<List<Exam>> GetExamList() => await _context.Exams.ToListAsync();
 
         //Update Exam
-        public static async Task UpdateExam(Exam exam)
+        public async Task UpdateExam(Exam exam)
         {
             try
             {
@@ -56,7 +61,7 @@ namespace THI_BANG_LAI_XE.Dao
         }
 
         // Remove Exam
-        public static async Task RemoveExam(int ExamId)
+        public async Task RemoveExam(int ExamId)
         {
             try
             {

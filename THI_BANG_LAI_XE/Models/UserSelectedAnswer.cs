@@ -9,7 +9,7 @@ public partial class UserSelectedAnswer
 
     public long UserId { get; set; }
 
-    public int ExamPaperId { get; set; }
+    public long QuestionId { get; set; }
 
     public long AnswerId { get; set; }
 

@@ -12,16 +12,21 @@ namespace THI_BANG_LAI_XE.Dao
 {
     public class ExamPaperDao
     {
-        private static ThiBangLaiXeContext _context = new ThiBangLaiXeContext();
+        private readonly ThiBangLaiXeContext _context;
+
+        public ExamPaperDao(ThiBangLaiXeContext context)
+        {
+            _context = context;
+        }
 
         //get exampaper list
-        public static async Task<List<ExamPaper>> getExamPaperList() => await _context.ExamPapers.ToListAsync();
+        public async Task<List<ExamPaper>> getExamPaperList() => await _context.ExamPapers.ToListAsync();
 
         //get exam paper by id
-        public static async Task<ExamPaper?> getExamPaperById(int id) => await _context.ExamPapers.FirstOrDefaultAsync(ex => ex.ExamPaperId == id);
+        public async Task<ExamPaper?> getExamPaperById(int id) => await _context.ExamPapers.FirstOrDefaultAsync(ex => ex.ExamPaperId == id);
 
         //add examPaper 
-        public static async Task AddExamPaper(ExamPaper examPaper)
+        public async Task AddExamPaper(ExamPaper examPaper)
         {
             try
             {
@@ -34,7 +39,7 @@ namespace THI_BANG_LAI_XE.Dao
         }
 
         // Update Exam paper
-        public static async Task UpdateExamPaper(ExamPaper examPaper)
+        public async Task UpdateExamPaper(ExamPaper examPaper)
         {
             try
             {
@@ -52,7 +57,7 @@ namespace THI_BANG_LAI_XE.Dao
         }
 
         //Remove Exampaper
-        public static async Task RemoveExamPaper(int ExamPaperById)
+        public async Task RemoveExamPaper(int ExamPaperById)
         {
             try
             {

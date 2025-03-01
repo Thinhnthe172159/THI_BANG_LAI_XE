@@ -11,16 +11,21 @@ namespace THI_BANG_LAI_XE.Dao
 {
     public class AnswerDao
     {
-        private static ThiBangLaiXeContext _context = new ThiBangLaiXeContext();
+        private readonly ThiBangLaiXeContext _context;
+
+        public AnswerDao(ThiBangLaiXeContext context)
+        {
+            _context = context;
+        }
 
         // get list of answer
-        public static async Task<List<Answer>> GetAnswerList() => await _context.Answers.ToListAsync();
+        public async Task<List<Answer>> GetAnswerList() => await _context.Answers.ToListAsync();
 
         // get answer by id 
-        public static async Task<Answer?> GetAnswerById(long AnswerId) => await _context.Answers.FirstOrDefaultAsync(asw => asw.AnswerId == AnswerId);
+        public async Task<Answer?> GetAnswerById(long AnswerId) => await _context.Answers.FirstOrDefaultAsync(asw => asw.AnswerId == AnswerId);
 
         //Add Answer 
-        public static async Task AddAnswer(Answer answer)
+        public async Task AddAnswer(Answer answer)
         {
             try
             {
@@ -33,7 +38,7 @@ namespace THI_BANG_LAI_XE.Dao
         }
 
         // Update Answer
-        public static async Task UpdateAnswer(Answer answer)
+        public async Task UpdateAnswer(Answer answer)
         {
             try
             {
@@ -52,7 +57,7 @@ namespace THI_BANG_LAI_XE.Dao
         }
 
         //remve Answer
-        public static async Task RemoveAnswer(long answerId)
+        public async Task RemoveAnswer(long answerId)
         {
             try
             {
