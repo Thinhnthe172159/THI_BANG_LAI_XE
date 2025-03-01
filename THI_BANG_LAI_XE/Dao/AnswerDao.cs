@@ -18,19 +18,21 @@ namespace THI_BANG_LAI_XE.Dao
             _context = context;
         }
 
+
+
         // get list of answer
-        public async Task<List<Answer>> GetAnswerList() => await _context.Answers.ToListAsync();
+        public async Task<List<Answer>> GetAnswerListAsync() => await _context.Answers.ToListAsync();
 
         // get answer by id 
-        public async Task<Answer?> GetAnswerById(long AnswerId) => await _context.Answers.FirstOrDefaultAsync(asw => asw.AnswerId == AnswerId);
+        public async Task<Answer?> GetAnswerByIdAsync(long AnswerId) => await _context.Answers.FirstOrDefaultAsync(asw => asw.AnswerId == AnswerId);
 
         //Add Answer 
-        public async Task AddAnswer(Answer answer)
+        public void AddAnswer(Answer answer)
         {
             try
             {
                 _context.Answers.Add(answer);
-                await _context.SaveChangesAsync();
+                _context.SaveChangesAsync();
             }
             catch (Exception)
             {
@@ -38,11 +40,11 @@ namespace THI_BANG_LAI_XE.Dao
         }
 
         // Update Answer
-        public async Task UpdateAnswer(Answer answer)
+        public async Task UpdateAnswerAsync(Answer answer)
         {
             try
             {
-                var AnswerToUdpate = await GetAnswerById(answer.AnswerId);
+                var AnswerToUdpate = await GetAnswerByIdAsync(answer.AnswerId);
                 if (AnswerToUdpate != null)
                 {
                     AnswerToUdpate.QuestionId = answer.QuestionId;
@@ -57,11 +59,11 @@ namespace THI_BANG_LAI_XE.Dao
         }
 
         //remve Answer
-        public async Task RemoveAnswer(long answerId)
+        public async Task RemoveAnswerAsync(long answerId)
         {
             try
             {
-                var AnswerToRemove = await GetAnswerById(answerId);
+                var AnswerToRemove = await GetAnswerByIdAsync(answerId);
                 if (AnswerToRemove != null)
                 {
                     _context.Answers.Remove(AnswerToRemove);

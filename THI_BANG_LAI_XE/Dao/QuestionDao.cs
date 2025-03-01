@@ -20,20 +20,19 @@ namespace THI_BANG_LAI_XE.Dao
             _context = context;
         }
 
-
         //get list questions
-        public async Task<List<Question>> GetQuestionList() => await _context.Questions.ToListAsync();
+        public async Task<List<Question>> GetQuestionListAsync() => await _context.Questions.ToListAsync();
 
         //get question by id
-        public async Task<Question?> GetQuestionById(long QuestionId) => await _context.Questions.FirstOrDefaultAsync(q => q.QuestionId == QuestionId);
+        public async Task<Question?> GetQuestionByIdAsync(long QuestionId) => await _context.Questions.FirstOrDefaultAsync(q => q.QuestionId == QuestionId);
 
         // Add new question
-        public async Task AddQuestion(Question question)
+        public void AddQuestion(Question question)
         {
             try
             {
                 _context.Questions.Add(question);
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
             }
             catch (Exception)
             {
@@ -41,11 +40,11 @@ namespace THI_BANG_LAI_XE.Dao
         }
 
         // Update question
-        public async Task UpdateQuestion(Question question)
+        public async Task UpdateQuestionAsync(Question question)
         {
             try
             {
-                var QuestionToUpdate = await GetQuestionById(question.QuestionId);
+                var QuestionToUpdate = await GetQuestionByIdAsync(question.QuestionId);
                 if (QuestionToUpdate != null)
                 {
                     QuestionToUpdate.ExamPaperId = question.ExamPaperId;
@@ -61,11 +60,11 @@ namespace THI_BANG_LAI_XE.Dao
         }
 
         // remove question
-        public async Task RemoveQuestion(long questionId)
+        public async Task RemoveQuestionAsync(long questionId)
         {
             try
             {
-                var QuestionToRemove = await GetQuestionById(questionId);
+                var QuestionToRemove = await GetQuestionByIdAsync(questionId);
                 if (QuestionToRemove != null)
                 {
                     _context.Questions.Remove(QuestionToRemove);

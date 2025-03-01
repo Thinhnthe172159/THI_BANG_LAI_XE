@@ -16,13 +16,15 @@ namespace THI_BANG_LAI_XE.Dao
             _context = context;
         }
 
+
+
         //add registration
-        public async void AddRigistration(Registration registration)
+        public void AddRigistration(Registration registration)
         {
             try
             {
                 _context.Registrations.Add(registration);
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
             }
             catch (Exception ex)
             {

@@ -21,13 +21,15 @@ namespace THI_BANG_LAI_XE.Dao
             _context = context;
         }
 
+
+
         //Add user
-        public async Task AddUser(User user)
+        public void AddUser(User user)
         {
             try
             {
                 _context.Users.Add(user);
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
             }
             catch (Exception ex)
             {
@@ -44,17 +46,17 @@ namespace THI_BANG_LAI_XE.Dao
 
 
         //Get user by id
-        public User? GetUserById(long UserId)
+        public async Task<User?> GetUserByIdAsync(long UserId)
         {
-            return _context.Users.FirstOrDefault(us => us.UserId == UserId);
+            return await _context.Users.FirstOrDefaultAsync(us => us.UserId == UserId);
         }
 
         //Update user
-        public async Task UpdateUser(User user)
+        public async Task UpdateUserAsync(User user)
         {
             try
             {
-                var userToUpdate = GetUserById(user.UserId);
+                var userToUpdate = await GetUserByIdAsync(user.UserId);
                 if (userToUpdate != null)
                 {
                     userToUpdate.FullName = user.FullName;
@@ -75,12 +77,12 @@ namespace THI_BANG_LAI_XE.Dao
         }
 
         //Delete user
-        public async void DeleteUser(long UserId)
+        public async void DeleteUserAsync(long UserId)
         {
             {
                 try
                 {
-                    var userToDelete = GetUserById(UserId);
+                    var userToDelete = await GetUserByIdAsync(UserId);
                     if (userToDelete != null)
                     {
                         _context.Users.Remove(userToDelete);

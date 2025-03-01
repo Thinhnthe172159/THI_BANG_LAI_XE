@@ -18,30 +18,31 @@ namespace THI_BANG_LAI_XE.Dao
             _context = context;
         }
 
+
         // get all Answer of user by question Id and userId
-        public async Task<List<UserSelectedAnswer>> GetAnswerOfUserByExamPaperId(long QuestID, long userId) => await _context.UserSelectedAnswers.Where(us => us.QuestionId == QuestID && us.UserId == userId).ToListAsync();
+        public async Task<List<UserSelectedAnswer>> GetAnswerOfUserByExamPaperIdAsync(long QuestID, long userId) => await _context.UserSelectedAnswers.Where(us => us.QuestionId == QuestID && us.UserId == userId).ToListAsync();
 
         // get Answer by id, 
-        public async Task<UserSelectedAnswer?> GetAnswerOfUserById(long SelectedID) => await _context.UserSelectedAnswers.FirstOrDefaultAsync(us => us.SelectedId == SelectedID);
+        public async Task<UserSelectedAnswer?> GetAnswerOfUserByIdAsync(long SelectedID) => await _context.UserSelectedAnswers.FirstOrDefaultAsync(us => us.SelectedId == SelectedID);
 
         //Add Answer
-        public async Task AddAnswer(UserSelectedAnswer userSelectedAnswer)
+        public void AddAnswer(UserSelectedAnswer userSelectedAnswer)
         {
             try
             {
                 _context.UserSelectedAnswers.Add(userSelectedAnswer);
-                await _context.SaveChangesAsync();
+                 _context.SaveChanges();
             }
             catch (Exception)
             { }
         }
 
         // Update user Answer
-        public async Task UpdateUserAnswer(UserSelectedAnswer userSelectedAnswer)
+        public async Task UpdateUserAnswerAsync(UserSelectedAnswer userSelectedAnswer)
         {
             try
             {
-                var AnswerToUpdate = await GetAnswerOfUserById(userSelectedAnswer.SelectedId);
+                var AnswerToUpdate = await GetAnswerOfUserByIdAsync(userSelectedAnswer.SelectedId);
                 if (AnswerToUpdate != null)
                 {
                     AnswerToUpdate.AnswerId = userSelectedAnswer.AnswerId;
@@ -53,11 +54,11 @@ namespace THI_BANG_LAI_XE.Dao
         }
 
         //remove user Answer
-        public async Task RemoveUserAnswer(long SelectedId)
+        public async Task RemoveUserAnswerAsync(long SelectedId)
         {
             try
             {
-                var AnswerToRemove = await GetAnswerOfUserById(SelectedId);
+                var AnswerToRemove = await GetAnswerOfUserByIdAsync(SelectedId);
                 if (AnswerToRemove != null)
                 {
                     _context.UserSelectedAnswers.Remove(AnswerToRemove);

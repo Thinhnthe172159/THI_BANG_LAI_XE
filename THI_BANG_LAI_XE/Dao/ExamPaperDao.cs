@@ -19,19 +19,20 @@ namespace THI_BANG_LAI_XE.Dao
             _context = context;
         }
 
+
         //get exampaper list
-        public async Task<List<ExamPaper>> getExamPaperList() => await _context.ExamPapers.ToListAsync();
+        public async Task<List<ExamPaper>> getExamPaperListAsync() => await _context.ExamPapers.ToListAsync();
 
         //get exam paper by id
-        public async Task<ExamPaper?> getExamPaperById(int id) => await _context.ExamPapers.FirstOrDefaultAsync(ex => ex.ExamPaperId == id);
+        public async Task<ExamPaper?> getExamPaperByIdAsync(int id) => await _context.ExamPapers.FirstOrDefaultAsync(ex => ex.ExamPaperId == id);
 
         //add examPaper 
-        public async Task AddExamPaper(ExamPaper examPaper)
+        public void AddExamPaper(ExamPaper examPaper)
         {
             try
             {
                 _context.ExamPapers.Add(examPaper);
-                await _context.SaveChangesAsync();
+                _context.SaveChanges();
             }
             catch (Exception)
             {
@@ -39,11 +40,11 @@ namespace THI_BANG_LAI_XE.Dao
         }
 
         // Update Exam paper
-        public async Task UpdateExamPaper(ExamPaper examPaper)
+        public async Task UpdateExamPaperAsync(ExamPaper examPaper)
         {
             try
             {
-                var ExamPaperToUpdate = await getExamPaperById(examPaper.ExamPaperId);
+                var ExamPaperToUpdate = await getExamPaperByIdAsync(examPaper.ExamPaperId);
                 if (ExamPaperToUpdate != null)
                 {
                     ExamPaperToUpdate.ExamPaperName = examPaper.ExamPaperName;
@@ -57,11 +58,11 @@ namespace THI_BANG_LAI_XE.Dao
         }
 
         //Remove Exampaper
-        public async Task RemoveExamPaper(int ExamPaperById)
+        public async Task RemoveExamPaperAsync(int ExamPaperById)
         {
             try
             {
-                var ExamPaperToRemove = await getExamPaperById(ExamPaperById);
+                var ExamPaperToRemove = await getExamPaperByIdAsync(ExamPaperById);
                 if (ExamPaperToRemove != null)
                 {
                     _context.ExamPapers.Remove(ExamPaperToRemove);
