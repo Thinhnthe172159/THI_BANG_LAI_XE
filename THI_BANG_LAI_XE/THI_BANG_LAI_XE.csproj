@@ -8,6 +8,13 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Controller\**" />
+    <EmbeddedResource Remove="Controller\**" />
+    <None Remove="Controller\**" />
+    <Page Remove="Controller\**" />
+  </ItemGroup>
+
 	<ItemGroup>
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.13" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.13">
@@ -30,7 +37,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Folder Include="Controller\" />
+		<Resource Include="Images\*.png" />
+		<Resource Include="Images\*.jpg" />
+		<Resource Include="Images\*.gif" />
 	</ItemGroup>
+
 
 </Project>
