@@ -1,0 +1,51 @@
+﻿<Window x:Class="THI_BANG_LAI_XE.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:THI_BANG_LAI_XE.View"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <!-- Sidebar -->
+        <StackPanel Background="White" Orientation="Vertical">
+            <Button Content="🔸Home" HorizontalContentAlignment="Left" Margin="0,30,0,0" BorderThickness="0" Background="White" Padding="5"/>
+            <Button Content="🔸Home" HorizontalContentAlignment="Left" Margin="2" BorderThickness="0" Background="White" Padding="5"/>
+            <Button Content="🔸Home" HorizontalContentAlignment="Left" Margin="2" BorderThickness="0" Background="White" Padding="5"/>
+            <Button Content="🔸Home" HorizontalContentAlignment="Left" Margin="2" BorderThickness="0" Background="White" Padding="5"/>
+            <Button Content="🔸Home" HorizontalContentAlignment="Left" Margin="2" BorderThickness="0" Background="White" Padding="5"/>
+            <Button Content="🔸Home" HorizontalContentAlignment="Left" Margin="2" BorderThickness="0" Background="White" Padding="5"/>
+            <Button Content="🔸Home" HorizontalContentAlignment="Left" Margin="2" BorderThickness="0" Background="White" Padding="5"/>
+            <Button Content="🔸Settings" HorizontalContentAlignment="Left" Margin="2" BorderThickness="0" Background="White" Padding="5"/>
+        </StackPanel>
+
+        <!-- Main Content -->
+        <Grid Grid.Column="1">
+            <Border Margin="0,30,0,0" CornerRadius="10, 0,0,0">
+                <Border.Background>
+                    <ImageBrush ImageSource="/Images/background1.png"/>
+                </Border.Background>
+                <ScrollViewer>
+                    <StackPanel Margin="10">
+                        <TextBlock Text=".NET 8" FontSize="18" FontWeight="Bold" />
+                        <TextBlock Text="WPF Gallery" FontSize="24" FontWeight="Bold" />
+                        <WrapPanel>
+                            <Border Background="White" Padding="10" Margin="5" Width="150" Height="100" BorderBrush="Gray" BorderThickness="0" CornerRadius="10">
+                                <TextBlock Text="Getting Started" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            </Border>
+            
+                        </WrapPanel>
+                    </StackPanel>
+                </ScrollViewer>
+
+
+            </Border>
+        </Grid>
+    </Grid>
+</Window>
