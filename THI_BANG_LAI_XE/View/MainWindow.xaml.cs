@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using THI_BANG_LAI_XE.Dao;
+using THI_BANG_LAI_XE.Models;
 
 namespace THI_BANG_LAI_XE.View
 {
@@ -19,14 +21,28 @@ namespace THI_BANG_LAI_XE.View
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Query _context;
+        private ThiBangLaiXeContext _db;
         public MainWindow()
         {
             InitializeComponent();
+            this._db = new ThiBangLaiXeContext();
+            this._context = new Query(_db);
+            LoadAllCourser();
         }
 
-        private void ScrollViewer_Scroll(object sender, System.Windows.Controls.Primitives.ScrollEventArgs e)
+        private void DataCourse_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            var item = this.DataCourse.SelectedItem as Course;
+            if (item != null)
+            {
+                ContentFrame.Navigate(new CourseDetail(item));
+            }
+        }
 
+        void LoadAllCourser()
+        {
+            this.DataCourse.ItemsSource = _context.courseDao.GetCourseList();
         }
     }
 }

@@ -16,4 +16,6 @@ public partial class Question
     public virtual ICollection<Answer> Answers { get; set; } = new List<Answer>();
 
     public virtual ExamPaper ExamPaper { get; set; } = null!;
+
+    public virtual ICollection<UserSelectedAnswer> UserSelectedAnswers { get; set; } = new List<UserSelectedAnswer>();
 }

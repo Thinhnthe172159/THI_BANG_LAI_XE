@@ -32,20 +32,24 @@
                     <ImageBrush ImageSource="/Images/background1.png"/>
                 </Border.Background>
                 <ScrollViewer>
-                    <StackPanel Margin="10">
-                        <TextBlock Text=".NET 8" FontSize="18" FontWeight="Bold" />
-                        <TextBlock Text="WPF Gallery" FontSize="24" FontWeight="Bold" />
-                        <WrapPanel>
-                            <Border Background="White" Padding="10" Margin="5" Width="150" Height="100" BorderBrush="Gray" BorderThickness="0" CornerRadius="10">
-                                <TextBlock Text="Getting Started" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                            </Border>
-            
-                        </WrapPanel>
-                    </StackPanel>
+                    <DataGrid Name="DataCourse" AutoGenerateColumns="False" IsReadOnly="True" Margin="2" SelectionChanged="DataCourse_SelectionChanged">
+                        <DataGrid.Background>
+                            <ImageBrush></ImageBrush>
+                        </DataGrid.Background>
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="*" Header="CourseName" Binding="{Binding CourseId}" Visibility="Hidden"></DataGridTextColumn>
+                            <DataGridTextColumn Width="*" Header="CourseName" Binding="{Binding CourseName}"></DataGridTextColumn>
+                            <DataGridTextColumn Width="*" Header="Lecture" Binding="{Binding Teacher.FullName}"></DataGridTextColumn>
+                            <DataGridTextColumn Width="*" Header="Start" Binding="{Binding StartDate}"></DataGridTextColumn>
+                            <DataGridTextColumn Width="*" Header="End" Binding="{Binding EndDate}"></DataGridTextColumn>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </ScrollViewer>
-
-
+                
             </Border>
         </Grid>
+         <Frame x:Name="ContentFrame" 
+               NavigationUIVisibility="Hidden" 
+               Grid.Column="1"/>
     </Grid>
 </Window>

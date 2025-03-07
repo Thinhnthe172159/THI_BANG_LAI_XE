@@ -7,7 +7,7 @@ public partial class UserSelectedAnswer
 {
     public long SelectedId { get; set; }
 
-    public long UserId { get; set; }
+    public long? UserId { get; set; }
 
     public long QuestionId { get; set; }
 
@@ -19,7 +19,7 @@ public partial class UserSelectedAnswer
 
     public virtual Exam Exam { get; set; } = null!;
 
-    public virtual ExamPaper ExamPaper { get; set; } = null!;
+    public virtual Question Question { get; set; } = null!;
 
-    public virtual User User { get; set; } = null!;
+    public virtual User? User { get; set; }
 }

@@ -15,7 +15,7 @@ public partial class Registration
 
     public string? Comments { get; set; }
 
-    public DateTime DateCreated { get; set; } = DateTime.Now;
+    public DateTime DateCreated { get; set; }
 
     public virtual Course? Course { get; set; }
 
