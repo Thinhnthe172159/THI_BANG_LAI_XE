@@ -35,8 +35,8 @@ namespace THI_BANG_LAI_XE.View
             var item = this.DataCourse.SelectedItem as Course;
             if (item != null)
             {
-                MainWindow mainWindow = Application.Current.MainWindow as MainWindow;
-                mainWindow.ContentFrame.Navigate(new CourseDetail(item));
+                MainWindow? mainWindow = Application.Current.MainWindow as MainWindow;
+                mainWindow?.ContentFrame.Navigate(new CourseDetail(item));
             }
         }
 

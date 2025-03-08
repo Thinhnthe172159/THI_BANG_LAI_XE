@@ -10,6 +10,6 @@
 
     <Grid>
     
-        <TextBlock Text="Hello" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20"/>
+        <TextBlock x:Name="txtUserName" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="20"/>
     </Grid>
 </Page>

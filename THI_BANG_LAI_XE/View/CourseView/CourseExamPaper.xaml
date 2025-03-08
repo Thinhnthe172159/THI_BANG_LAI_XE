@@ -23,42 +23,31 @@
         <StackPanel Grid.Row="0" Orientation="Horizontal">
             <Button Grid.Row="0" Content="Courses" Background="Transparent" BorderThickness="0" FontSize="20" Click="Button_Click" ></Button>
             <Button Grid.Row="0" Content=" >  Documents" Background="Transparent" BorderThickness="0" FontSize="20" Click="Button_Click_1" ></Button>
-            <TextBlock Grid.Row="0" Text=" >  Đề 01" FontSize="20"></TextBlock>
+            <TextBlock Grid.Row="0" x:Name="ExamPaperNo" FontSize="20"></TextBlock>
         </StackPanel>
 
 
         <!-- Question content -->
         <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Vertical">
-            <TextBlock Text="Question number"></TextBlock>
             <Border>
-                <TextBlock TextWrapping="Wrap" Text="Khi điều khiển xe trên đường, người lái xe phải mang theo giấy tờ gì?" FontSize="13" Margin="2"></TextBlock>
+                <TextBlock TextWrapping="Wrap" x:Name="txtQuestionDetail"  FontSize="13" Margin="2"></TextBlock>
             </Border>
             <Viewbox Height="200">
                 <Border Background="AliceBlue">
-                    <Image Source="https://banglaixehanoi.com.vn/wp-content/uploads/2019/05/thi-bang-lai-xe-a1-1.jpg"></Image>
+                    <Image x:Name="ImageSource"></Image>
                 </Border>
             </Viewbox>
         </StackPanel>
-        
+
         <!-- Answer -->
-        <StackPanel Grid.Row="2" Grid.Column="0" Orientation="Vertical">
-            <CheckBox Content="Giấy đăng ký xe"/>
-            <CheckBox Content="Giấy đăng ký xe"/>
-            <CheckBox Content="Giấy đăng ký xe"/>
-            <CheckBox Content="Giấy đăng ký xe"/>
+        <StackPanel Grid.Row="2" x:Name="RadioAnswer" Grid.Column="0" Orientation="Vertical">
+            
         </StackPanel>
-        
-        
+
+
         <TextBlock Text="Questtion number" Grid.Column="1" Grid.Row="1"></TextBlock>
         <ScrollViewer Grid.Column="1" Grid.Row="1" Padding="0,20,0,0">
-            <WrapPanel HorizontalAlignment="Left">
-                <Button Content="1" Width="40" Margin="2" Height="30"></Button>
-                <Button Content="2" Width="40" Margin="2" Height="30"></Button>
-                <Button Content="3" Width="40" Margin="2" Height="30"></Button>
-                <Button Content="4" Width="40" Margin="2" Height="30"></Button>
-                <Button Content="5" Width="40" Margin="2" Height="30"></Button>
-                <Button Content="6" Width="40" Margin="2" Height="30"></Button>
-                <Button Content="7" Width="40" Margin="2" Height="30"></Button>
+            <WrapPanel HorizontalAlignment="Left" x:Name="QuestionPanel">
             </WrapPanel>
         </ScrollViewer>
 

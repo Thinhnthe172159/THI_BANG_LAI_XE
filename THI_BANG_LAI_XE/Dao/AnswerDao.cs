@@ -21,10 +21,10 @@ namespace THI_BANG_LAI_XE.Dao
 
 
         // get list of answer
-        public async Task<List<Answer>> GetAnswerListAsync() => await _context.Answers.ToListAsync();
+        public List<Answer> GetAnswerList() => _context.Answers.ToList();
 
         // get answer by id 
-        public async Task<Answer?> GetAnswerByIdAsync(long AnswerId) => await _context.Answers.FirstOrDefaultAsync(asw => asw.AnswerId == AnswerId);
+        public Answer? GetAnswerById(long AnswerId) => _context.Answers.FirstOrDefault(asw => asw.AnswerId == AnswerId);
 
         //Add Answer 
         public void AddAnswer(Answer answer)
@@ -40,18 +40,18 @@ namespace THI_BANG_LAI_XE.Dao
         }
 
         // Update Answer
-        public async Task UpdateAnswerAsync(Answer answer)
+        public void UpdateAnswerAsync(Answer answer)
         {
             try
             {
-                var AnswerToUdpate = await GetAnswerByIdAsync(answer.AnswerId);
+                var AnswerToUdpate = GetAnswerById(answer.AnswerId);
                 if (AnswerToUdpate != null)
                 {
                     AnswerToUdpate.QuestionId = answer.QuestionId;
                     AnswerToUdpate.DetailAnswer = answer.DetailAnswer;
                     AnswerToUdpate.IsCorrectOrNot = answer.IsCorrectOrNot;
                     _context.Answers.Update(AnswerToUdpate);
-                    await _context.SaveChangesAsync();
+                    _context.SaveChanges();
                 }
             }
             catch (Exception)
@@ -59,15 +59,15 @@ namespace THI_BANG_LAI_XE.Dao
         }
 
         //remve Answer
-        public async Task RemoveAnswerAsync(long answerId)
+        public void RemoveAnswer(long answerId)
         {
             try
             {
-                var AnswerToRemove = await GetAnswerByIdAsync(answerId);
+                var AnswerToRemove = GetAnswerById(answerId);
                 if (AnswerToRemove != null)
                 {
                     _context.Answers.Remove(AnswerToRemove);
-                    await _context.SaveChangesAsync();
+                    _context.SaveChanges();
                 }
             }
             catch (Exception)

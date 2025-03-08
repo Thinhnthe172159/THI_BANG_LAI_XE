@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using THI_BANG_LAI_XE.Dao;
 using THI_BANG_LAI_XE.Models;
+using THI_BANG_LAI_XE.View;
 
 namespace THI_BANG_LAI_XE
 {
@@ -60,9 +61,11 @@ namespace THI_BANG_LAI_XE
                     return;
                 }
 
-                MessageBox.Show("Đăng nhập thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                //  MessageBox.Show("Đăng nhập thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
 
-                MainWindow mainWindow = new MainWindow();
+
+                MainWindow mainWindow = new MainWindow(user);
+                Application.Current.MainWindow = mainWindow;
                 mainWindow.Show();
                 this.Close();
             }
@@ -78,10 +81,10 @@ namespace THI_BANG_LAI_XE
         private void Register_MouseDown(object sender, MouseButtonEventArgs e)
         {
 
-            RegisterWindow registerWindow = new RegisterWindow();
+            //RegisterWindow registerWindow = new RegisterWindow();
 
-            // Hiển thị RegisterWindow
-            registerWindow.Show();
+            //// Hiển thị RegisterWindow
+            //registerWindow.Show();
 
             // Ẩn LoginWindow (tùy chọn)
             // this.Hide(); 

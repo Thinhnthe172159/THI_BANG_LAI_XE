@@ -24,9 +24,11 @@ namespace THI_BANG_LAI_XE.View
     public partial class MainWindow : Window
     {
         private Button selectedButton;
+        public static User? userLogedIn;
 
-        public MainWindow()
+        public MainWindow(User user)
         {
+            userLogedIn = user;
             InitializeComponent();
             ContentFrame.Navigate(new HomePage());
             selectedButton = new Button();

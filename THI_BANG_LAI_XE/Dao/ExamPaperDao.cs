@@ -26,12 +26,12 @@ namespace THI_BANG_LAI_XE.Dao
         //get Exam paper by Course
         public async Task<List<ExamPaper>> getExamPaperByCourse(int courseId)
         {
-            Course? course = await _context.Courses.Include(c=>c.ExamPapers).FirstOrDefaultAsync(c => c.CourseId == courseId);
+            Course? course = await _context.Courses.Include(c => c.ExamPapers).FirstOrDefaultAsync(c => c.CourseId == courseId);
             return course.ExamPapers.ToList();
         }
 
         //get exam paper by id
-        public async Task<ExamPaper?> getExamPaperByIdAsync(int id) => await _context.ExamPapers.FirstOrDefaultAsync(ex => ex.ExamPaperId == id);
+        public ExamPaper? getExamPaperById(int id) => _context.ExamPapers.FirstOrDefault(ex => ex.ExamPaperId == id);
 
         //add examPaper 
         public void AddExamPaper(ExamPaper examPaper)
@@ -51,7 +51,7 @@ namespace THI_BANG_LAI_XE.Dao
         {
             try
             {
-                var ExamPaperToUpdate = await getExamPaperByIdAsync(examPaper.ExamPaperId);
+                var ExamPaperToUpdate = getExamPaperById(examPaper.ExamPaperId);
                 if (ExamPaperToUpdate != null)
                 {
                     ExamPaperToUpdate.ExamPaperName = examPaper.ExamPaperName;
@@ -65,15 +65,15 @@ namespace THI_BANG_LAI_XE.Dao
         }
 
         //Remove Exampaper
-        public async Task RemoveExamPaperAsync(int ExamPaperById)
+        public void RemoveExamPaperAsync(int ExamPaperById)
         {
             try
             {
-                var ExamPaperToRemove = await getExamPaperByIdAsync(ExamPaperById);
+                var ExamPaperToRemove = getExamPaperById(ExamPaperById);
                 if (ExamPaperToRemove != null)
                 {
                     _context.ExamPapers.Remove(ExamPaperToRemove);
-                    await _context.SaveChangesAsync();
+                    _context.SaveChanges();
                 }
             }
             catch (Exception)

@@ -23,6 +23,13 @@ namespace THI_BANG_LAI_XE.View
         public HomePage()
         {
             InitializeComponent();
+            var user = MainWindow.userLogedIn;
+            if (user != null)
+            {
+                string userName = user.FullName;
+                txtUserName.Text = "Hello " + userName;
+            }
+
         }
     }
 }
