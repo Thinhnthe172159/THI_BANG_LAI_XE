@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using THI_BANG_LAI_XE.Dao;
 using THI_BANG_LAI_XE.Models;
+using THI_BANG_LAI_XE.View.ExamView;
+using THI_BANG_LAI_XE.View.NotificationView;
 
 namespace THI_BANG_LAI_XE.View
 {
@@ -21,28 +23,54 @@ namespace THI_BANG_LAI_XE.View
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Query _context;
-        private ThiBangLaiXeContext _db;
+        private Button selectedButton;
+
         public MainWindow()
         {
             InitializeComponent();
-            this._db = new ThiBangLaiXeContext();
-            this._context = new Query(_db);
-            LoadAllCourser();
+            ContentFrame.Navigate(new HomePage());
+            selectedButton = new Button();
         }
 
-        private void DataCourse_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var item = this.DataCourse.SelectedItem as Course;
-            if (item != null)
+            UpdateButtonSelection((Button)sender);
+            ContentFrame.Navigate(new CourseListPage());
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            UpdateButtonSelection((Button)sender);
+            ContentFrame.Navigate(new HomePage());
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            UpdateButtonSelection((Button)sender);
+            ContentFrame.Navigate(new UserProfilePage());
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            UpdateButtonSelection((Button)sender);
+            ContentFrame.Navigate(new ExamListPage());
+        }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            UpdateButtonSelection((Button)sender);
+            ContentFrame.Navigate(new NotificaitonListPage());
+        }
+
+        private void UpdateButtonSelection(Button clickedButton)
+        {
+            if (selectedButton != null)
             {
-                ContentFrame.Navigate(new CourseDetail(item));
+                selectedButton.Background = (Brush?)new BrushConverter().ConvertFromString("#614bd4");
             }
+            clickedButton.Background = (Brush?)new BrushConverter().ConvertFromString("#816fd4");
+            selectedButton = clickedButton;
         }
 
-        void LoadAllCourser()
-        {
-            this.DataCourse.ItemsSource = _context.courseDao.GetCourseList();
-        }
     }
 }

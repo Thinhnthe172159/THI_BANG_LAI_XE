@@ -23,6 +23,13 @@ namespace THI_BANG_LAI_XE.Dao
         //get exampaper list
         public async Task<List<ExamPaper>> getExamPaperListAsync() => await _context.ExamPapers.ToListAsync();
 
+        //get Exam paper by Course
+        public async Task<List<ExamPaper>> getExamPaperByCourse(int courseId)
+        {
+            Course? course = await _context.Courses.Include(c=>c.ExamPapers).FirstOrDefaultAsync(c => c.CourseId == courseId);
+            return course.ExamPapers.ToList();
+        }
+
         //get exam paper by id
         public async Task<ExamPaper?> getExamPaperByIdAsync(int id) => await _context.ExamPapers.FirstOrDefaultAsync(ex => ex.ExamPaperId == id);
 

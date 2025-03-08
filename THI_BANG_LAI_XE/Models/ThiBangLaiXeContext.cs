@@ -39,6 +39,9 @@ public partial class ThiBangLaiXeContext : DbContext
 
     public virtual DbSet<UserSelectedAnswer> UserSelectedAnswers { get; set; }
 
+    public virtual DbSet<CoursesDocumentation> CoursesDocumentations { get; set; }
+    public virtual DbSet<ExamPapersSelected> ExamPapersSelecteds { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         var builder = new ConfigurationBuilder();

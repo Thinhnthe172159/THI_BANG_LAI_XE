@@ -39,14 +39,14 @@ namespace THI_BANG_LAI_XE.Dao
         }
 
         //get course by id
-        public async Task<Course?> GetCourseById(int courseId) => await _context.Courses.FirstOrDefaultAsync(c => c.CourseId == courseId);
+        public Course? GetCourseById(int courseId) => _context.Courses.Include(c => c.ExamPapers).FirstOrDefault(c => c.CourseId == courseId);
 
         //Update course
         public async Task UpdateCourse(Course course)
         {
             try
             {
-                var UpdateCourse = await GetCourseById(course.CourseId);
+                var UpdateCourse = GetCourseById(course.CourseId);
                 if (UpdateCourse != null)
                 {
                     UpdateCourse.CourseName = course.CourseName;
@@ -66,7 +66,7 @@ namespace THI_BANG_LAI_XE.Dao
         {
             try
             {
-                var DeleteCourse = await GetCourseById(courseId);
+                var DeleteCourse = GetCourseById(courseId);
                 if (DeleteCourse != null)
                 {
                     _context.Courses.Remove(DeleteCourse);

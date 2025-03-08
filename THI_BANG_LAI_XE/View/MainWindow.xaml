@@ -14,41 +14,28 @@
         </Grid.ColumnDefinitions>
 
         <!-- Sidebar -->
-        <StackPanel Background="White" Orientation="Vertical">
-            <Button Content="🔸Home" HorizontalContentAlignment="Left" Margin="0,30,0,0" BorderThickness="0" Background="White" Padding="5"/>
-            <Button Content="🔸Home" HorizontalContentAlignment="Left" Margin="2" BorderThickness="0" Background="White" Padding="5"/>
-            <Button Content="🔸Home" HorizontalContentAlignment="Left" Margin="2" BorderThickness="0" Background="White" Padding="5"/>
-            <Button Content="🔸Home" HorizontalContentAlignment="Left" Margin="2" BorderThickness="0" Background="White" Padding="5"/>
-            <Button Content="🔸Home" HorizontalContentAlignment="Left" Margin="2" BorderThickness="0" Background="White" Padding="5"/>
-            <Button Content="🔸Home" HorizontalContentAlignment="Left" Margin="2" BorderThickness="0" Background="White" Padding="5"/>
-            <Button Content="🔸Home" HorizontalContentAlignment="Left" Margin="2" BorderThickness="0" Background="White" Padding="5"/>
-            <Button Content="🔸Settings" HorizontalContentAlignment="Left" Margin="2" BorderThickness="0" Background="White" Padding="5"/>
-        </StackPanel>
+        <Border Margin="0,30,15,0" CornerRadius="0,50,0,0" Background="#614bd4">
+            <StackPanel Orientation="Vertical" Margin="1,30,30,0">
+                <Button Content="🏠 Home" HorizontalContentAlignment="Left" Margin="2" BorderThickness="0" Background="#614bd4" Padding="5" Click="Button_Click_1" Foreground="White"/>
+                <Button Content="👤 Your profile" HorizontalContentAlignment="Left" Margin="2" BorderThickness="0" Background="#614bd4" Padding="5" Click="Button_Click_2" Foreground="White" />
+                <Button Content="🎓 Courses" HorizontalContentAlignment="Left" Margin="2" BorderThickness="0" Background="#614bd4" Padding="5" Click="Button_Click" Foreground="White"/>
+                <Button Content="📃 Exams" HorizontalContentAlignment="Left" Margin="2" BorderThickness="0" Background="#614bd4" Padding="5" Click="Button_Click_3" Foreground="White"/>
+                <Button Content="🔔 Notificaiton" HorizontalContentAlignment="Left" Margin="2" BorderThickness="0" Background="#614bd4" Padding="5" Click="Button_Click_4" Foreground="White"/>
+            </StackPanel>
+        </Border>
+        <Button Content="🚪 Log out" HorizontalContentAlignment="Left" Margin="2,2,50,2" BorderThickness="0" 
+                Background="#614bd4" Padding="5" Foreground="White" 
+                VerticalAlignment="Bottom"/>
 
         <!-- Main Content -->
         <Grid Grid.Column="1">
-            <Border Margin="0,30,0,0" CornerRadius="10, 0,0,0">
+            <Border Margin="0,30,0,0" CornerRadius="50, 0,0,0">
                 <Border.Background>
                     <ImageBrush ImageSource="/Images/background1.png"/>
                 </Border.Background>
-                <ScrollViewer>
-                    <DataGrid Name="DataCourse" AutoGenerateColumns="False" IsReadOnly="True" Margin="2" SelectionChanged="DataCourse_SelectionChanged">
-                        <DataGrid.Background>
-                            <ImageBrush></ImageBrush>
-                        </DataGrid.Background>
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Width="*" Header="CourseName" Binding="{Binding CourseId}" Visibility="Hidden"></DataGridTextColumn>
-                            <DataGridTextColumn Width="*" Header="CourseName" Binding="{Binding CourseName}"></DataGridTextColumn>
-                            <DataGridTextColumn Width="*" Header="Lecture" Binding="{Binding Teacher.FullName}"></DataGridTextColumn>
-                            <DataGridTextColumn Width="*" Header="Start" Binding="{Binding StartDate}"></DataGridTextColumn>
-                            <DataGridTextColumn Width="*" Header="End" Binding="{Binding EndDate}"></DataGridTextColumn>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </ScrollViewer>
-                
             </Border>
         </Grid>
-         <Frame x:Name="ContentFrame" 
+        <Frame x:Name="ContentFrame" 
                NavigationUIVisibility="Hidden" 
                Grid.Column="1"/>
     </Grid>

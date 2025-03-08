@@ -12,16 +12,15 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using THI_BANG_LAI_XE.Models;
 
 namespace THI_BANG_LAI_XE.View
 {
     /// <summary>
-    /// Interaction logic for CourseDetail.xaml
+    /// Interaction logic for UserProfilePage.xaml
     /// </summary>
-    public partial class CourseDetail : Page
+    public partial class UserProfilePage : Page
     {
-        public CourseDetail(Course course)
+        public UserProfilePage()
         {
             InitializeComponent();
         }

@@ -1,0 +1,70 @@
+﻿<Page x:Class="THI_BANG_LAI_XE.View.CourseView.CourseDetail"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:THI_BANG_LAI_XE.View.CourseView"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="CourseDetail">
+
+    <Grid Background="White">
+        
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <Button Grid.Row="0" Content="Courses" Background="Transparent" BorderThickness="0" FontSize="20" Click="Button_Click"></Button>
+            <Button Grid.Row="0" Content=" >  Documents" Background="Transparent" BorderThickness="0" FontSize="20" ></Button>
+        </StackPanel>
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,15,0" HorizontalAlignment="Right">
+            <Grid>
+                <Border Background="White" BorderBrush="DarkBlue" BorderThickness="0,0,1,1" 
+             CornerRadius="7" Padding="5" Width="200">
+                    <TextBox FontSize="15" Background="Transparent" BorderThickness="0" Name="txtExamPaperName"
+                  Padding="0,0,35,0" TextChanged="TextBox_TextChanged"/>
+                </Border>
+                <Button Content="🔍" Background="Transparent" BorderThickness="0" FontSize="15"
+             HorizontalAlignment="Right" VerticalAlignment="Center" 
+             Margin="0,0,5,0" Width="30"/>
+            </Grid>
+        </StackPanel>
+
+        <Grid Background="White" Grid.Row="2">
+            <ScrollViewer VerticalScrollBarVisibility="Auto">
+                <ItemsControl x:Name="ExamPaperList" >
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Background="#F5F5F5" Margin="10"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Width="250" Padding="10" Background="White" CornerRadius="10" Margin="10">
+                                <StackPanel>
+                                    <!-- Ảnh sản phẩm -->
+                                    <Image Source="/Images/Test.jpg" Width="200" Height="150" Stretch="UniformToFill"
+                                   HorizontalAlignment="Center" Margin="0,10,0,0"/>
+
+                                    <!-- Tên  -->
+                                    <TextBlock Text="{Binding ExamPaperName}" FontSize="14" FontWeight="Bold" Margin="0,5,0,0"/>
+
+                                    <TextBlock Visibility="Hidden" Name="txtExamPaperId" Text="{Binding ExamPaperId}"></TextBlock>
+
+                                    <!-- Nút view -->   
+                                    <Button Content="View" Background="DarkGray" Foreground="White" 
+                                    FontSize="14" Padding="5" BorderThickness="0" Cursor="Hand" Margin="0,10,0,0" Click="ViewButton_Click"/>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+
+        </Grid>
+    </Grid>
+</Page>
