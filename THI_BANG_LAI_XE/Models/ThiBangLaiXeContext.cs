@@ -214,6 +214,10 @@ public partial class ThiBangLaiXeContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_UserSelectedAnswer_Exams");
 
+            //entity.HasOne(d => d.ExamPaper).WithMany(p => p.UserSelectedAnswers)
+            //    .HasForeignKey(d => d.Answer)
+            //    .OnDelete(DeleteBehavior.ClientSetNull)
+            //    .HasConstraintName("FK_UserSelectedAnswer_ExamPapers");
             entity.HasOne(d => d.ExamPaper).WithMany(p => p.UserSelectedAnswers)
                 .HasForeignKey(d => d.ExamPaperId)
                 .HasConstraintName("FK_UserSelectedAnswer_ExamPapers");

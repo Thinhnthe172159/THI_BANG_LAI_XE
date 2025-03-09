@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using THI_BANG_LAI_XE.Dao;
+using THI_BANG_LAI_XE.Models;
+
 
 namespace THI_BANG_LAI_XE.View
 {
@@ -20,9 +23,18 @@ namespace THI_BANG_LAI_XE.View
     /// </summary>
     public partial class UserProfilePage : Page
     {
+        private readonly Query context;
+        private readonly ThiBangLaiXeContext dbSet;
+        public MainWindow()
         public UserProfilePage()
         {
             InitializeComponent();
+            this.dbSet = new ThiBangLaiXeContext();
+            context = new Query(dbSet);
+        }
+        public void getListCourse()
+        {
+            var course = context.courseDao.GetCourseList();
         }
     }
 }
