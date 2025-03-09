@@ -21,13 +21,13 @@ namespace THI_BANG_LAI_XE.Dao
         }
 
         //get list questions
-        public async Task<List<Question>> GetQuestionListAsync() => await _context.Questions.ToListAsync();
+        public List<Question> GetQuestionList() => _context.Questions.ToList();
 
         //get list question by ExamPaper 
-        public List<Question> GetQuestionListByExamPaper(int ExamPaperId) => _context.Questions.Include(q=>q.Answers).Where(q => q.ExamPaperId == ExamPaperId).ToList();
+        public List<Question> GetQuestionListByExamPaper(int ExamPaperId) => _context.Questions.Include(q => q.Answers).Where(q => q.ExamPaperId == ExamPaperId).ToList();
 
         //get question by id
-        public async Task<Question?> GetQuestionByIdAsync(long QuestionId) => await _context.Questions.Include(q => q.Answers).FirstOrDefaultAsync(q => q.QuestionId == QuestionId);
+        public Question? GetQuestionById(long QuestionId) => _context.Questions.Include(q => q.Answers).FirstOrDefault(q => q.QuestionId == QuestionId);
 
         // Add new question
         public void AddQuestion(Question question)
@@ -43,18 +43,18 @@ namespace THI_BANG_LAI_XE.Dao
         }
 
         // Update question
-        public async Task UpdateQuestionAsync(Question question)
+        public void UpdateQuestionAsync(Question question)
         {
             try
             {
-                var QuestionToUpdate = await GetQuestionByIdAsync(question.QuestionId);
+                var QuestionToUpdate = GetQuestionById(question.QuestionId);
                 if (QuestionToUpdate != null)
                 {
                     QuestionToUpdate.ExamPaperId = question.ExamPaperId;
                     QuestionToUpdate.DetailQuestion = question.DetailQuestion;
                     QuestionToUpdate.ImageUrl = question.ImageUrl;
                     _context.Questions.Update(QuestionToUpdate);
-                    await _context.SaveChangesAsync();
+                    _context.SaveChanges();
                 }
             }
             catch (Exception)
@@ -67,7 +67,7 @@ namespace THI_BANG_LAI_XE.Dao
         {
             try
             {
-                var QuestionToRemove = await GetQuestionByIdAsync(questionId);
+                var QuestionToRemove = GetQuestionById(questionId);
                 if (QuestionToRemove != null)
                 {
                     _context.Questions.Remove(QuestionToRemove);

@@ -19,7 +19,7 @@ namespace THI_BANG_LAI_XE.Dao
         }
 
         // get course list
-        public async Task<List<Course>> GetCourseList() => await _context.Courses.ToListAsync();
+        public List<Course> GetCourseList() => _context.Courses.ToList();
 
         //Filter Course by custom field
 
@@ -42,7 +42,7 @@ namespace THI_BANG_LAI_XE.Dao
         public Course? GetCourseById(int courseId) => _context.Courses.Include(c => c.ExamPapers).FirstOrDefault(c => c.CourseId == courseId);
 
         //Update course
-        public async Task UpdateCourse(Course course)
+        public void UpdateCourse(Course course)
         {
             try
             {
@@ -55,14 +55,14 @@ namespace THI_BANG_LAI_XE.Dao
                     UpdateCourse.EndDate = course.EndDate;
                     UpdateCourse.ModifiedDate = DateTime.Now;
                     _context.Courses.Update(UpdateCourse);
-                    await _context.SaveChangesAsync();
+                    _context.SaveChanges();
                 }
             }
             catch (Exception) { }
         }
 
         //Delete Course
-        public async Task RemoveCourse(int courseId)
+        public void RemoveCourse(int courseId)
         {
             try
             {
@@ -70,7 +70,7 @@ namespace THI_BANG_LAI_XE.Dao
                 if (DeleteCourse != null)
                 {
                     _context.Courses.Remove(DeleteCourse);
-                    await _context.SaveChangesAsync();
+                    _context.SaveChanges();
                 }
             }
             catch (Exception) { }

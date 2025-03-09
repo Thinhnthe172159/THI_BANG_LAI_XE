@@ -40,9 +40,9 @@ namespace THI_BANG_LAI_XE.View
             }
         }
 
-        async void LoadAllCourser()
+        void LoadAllCourser()
         {
-            this.DataCourse.ItemsSource = await _context.courseDao.GetCourseList();
+            this.DataCourse.ItemsSource = _context.courseDao.GetCourseList();
         }
     }
 }

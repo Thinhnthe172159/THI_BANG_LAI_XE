@@ -21,12 +21,12 @@ namespace THI_BANG_LAI_XE.Dao
 
 
         //get exampaper list
-        public async Task<List<ExamPaper>> getExamPaperListAsync() => await _context.ExamPapers.ToListAsync();
+        public List<ExamPaper> getExamPaperList() => _context.ExamPapers.ToList();
 
         //get Exam paper by Course
-        public async Task<List<ExamPaper>> getExamPaperByCourse(int courseId)
+        public List<ExamPaper> getExamPaperByCourse(int courseId)
         {
-            Course? course = await _context.Courses.Include(c => c.ExamPapers).FirstOrDefaultAsync(c => c.CourseId == courseId);
+            Course? course = _context.Courses.Include(c => c.ExamPapers).FirstOrDefault(c => c.CourseId == courseId);
             return course.ExamPapers.ToList();
         }
 
@@ -47,7 +47,7 @@ namespace THI_BANG_LAI_XE.Dao
         }
 
         // Update Exam paper
-        public async Task UpdateExamPaperAsync(ExamPaper examPaper)
+        public void UpdateExamPaperAsync(ExamPaper examPaper)
         {
             try
             {
@@ -56,7 +56,7 @@ namespace THI_BANG_LAI_XE.Dao
                 {
                     ExamPaperToUpdate.ExamPaperName = examPaper.ExamPaperName;
                     _context.ExamPapers.Update(ExamPaperToUpdate);
-                    await _context.SaveChangesAsync();
+                    _context.SaveChanges();
                 }
             }
             catch (Exception)

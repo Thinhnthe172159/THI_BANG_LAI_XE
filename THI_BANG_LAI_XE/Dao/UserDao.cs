@@ -38,25 +38,30 @@ namespace THI_BANG_LAI_XE.Dao
         }
 
         //get userList 
-        public IPagedList<User> GetUserList(int page = 1, int pageSize = 10)
+        public IPagedList<User> GetUserPageList(int page = 1, int pageSize = 10)
         {
             // using x page list
             return _context.Users.ToPagedList(page, pageSize);
         }
+        public List<User> GetUserList()
+        {
+            // using x page list
+            return _context.Users.ToList();
+        }
 
 
         //Get user by id
-        public async Task<User?> GetUserByIdAsync(long UserId)
+        public User? GetUserById(long UserId)
         {
-            return await _context.Users.FirstOrDefaultAsync(us => us.UserId == UserId);
+            return _context.Users.FirstOrDefault(us => us.UserId == UserId);
         }
 
         //Update user
-        public async Task UpdateUserAsync(User user)
+        public void UpdateUser(User user)
         {
             try
             {
-                var userToUpdate = await GetUserByIdAsync(user.UserId);
+                var userToUpdate = GetUserById(user.UserId);
                 if (userToUpdate != null)
                 {
                     userToUpdate.FullName = user.FullName;
@@ -67,7 +72,7 @@ namespace THI_BANG_LAI_XE.Dao
                     userToUpdate.Phone = user.Phone;
                     userToUpdate.School = user.School;
                     _context.Users.Update(userToUpdate);
-                    await _context.SaveChangesAsync();
+                    _context.SaveChanges();
                 }
             }
             catch (Exception ex)
@@ -77,16 +82,16 @@ namespace THI_BANG_LAI_XE.Dao
         }
 
         //Delete user
-        public async void DeleteUserAsync(long UserId)
+        public void DeleteUserAsync(long UserId)
         {
             {
                 try
                 {
-                    var userToDelete = await GetUserByIdAsync(UserId);
+                    var userToDelete = GetUserById(UserId);
                     if (userToDelete != null)
                     {
                         _context.Users.Remove(userToDelete);
-                        await _context.SaveChangesAsync();
+                        _context.SaveChanges();
                     }
                 }
                 catch (Exception ex)

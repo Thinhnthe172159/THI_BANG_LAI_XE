@@ -20,10 +20,10 @@ namespace THI_BANG_LAI_XE.Dao
 
 
         // get all Answer of user by question Id and userId
-        public async Task<List<UserSelectedAnswer>> GetAnswerOfUserByExamPaperIdAsync(long QuestID, long userId) => await _context.UserSelectedAnswers.Where(us => us.QuestionId == QuestID && us.UserId == userId).ToListAsync();
+        public List<UserSelectedAnswer> GetAnswerOfUserByExamPaperId(long QuestID, long userId) => _context.UserSelectedAnswers.Where(us => us.QuestionId == QuestID && us.UserId == userId).ToList();
 
         // get Answer by id, 
-        public async Task<UserSelectedAnswer?> GetAnswerOfUserByIdAsync(long SelectedID) => await _context.UserSelectedAnswers.FirstOrDefaultAsync(us => us.SelectedId == SelectedID);
+        public UserSelectedAnswer? GetAnswerOfUserById(long SelectedID) => _context.UserSelectedAnswers.FirstOrDefault(us => us.SelectedId == SelectedID);
 
         //Add Answer
         public void AddAnswer(UserSelectedAnswer userSelectedAnswer)
@@ -31,7 +31,7 @@ namespace THI_BANG_LAI_XE.Dao
             try
             {
                 _context.UserSelectedAnswers.Add(userSelectedAnswer);
-                 _context.SaveChanges();
+                _context.SaveChanges();
             }
             catch (Exception)
             { }
@@ -42,7 +42,7 @@ namespace THI_BANG_LAI_XE.Dao
         {
             try
             {
-                var AnswerToUpdate = await GetAnswerOfUserByIdAsync(userSelectedAnswer.SelectedId);
+                var AnswerToUpdate = GetAnswerOfUserById(userSelectedAnswer.SelectedId);
                 if (AnswerToUpdate != null)
                 {
                     AnswerToUpdate.AnswerId = userSelectedAnswer.AnswerId;
@@ -54,15 +54,15 @@ namespace THI_BANG_LAI_XE.Dao
         }
 
         //remove user Answer
-        public async Task RemoveUserAnswerAsync(long SelectedId)
+        public void RemoveUserAnswerAsync(long SelectedId)
         {
             try
             {
-                var AnswerToRemove = await GetAnswerOfUserByIdAsync(SelectedId);
+                var AnswerToRemove = GetAnswerOfUserById(SelectedId);
                 if (AnswerToRemove != null)
                 {
                     _context.UserSelectedAnswers.Remove(AnswerToRemove);
-                    await _context.SaveChangesAsync();
+                    _context.SaveChanges();
                 }
             }
             catch (Exception) { }

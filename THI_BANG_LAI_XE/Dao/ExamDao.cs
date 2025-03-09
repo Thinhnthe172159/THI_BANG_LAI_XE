@@ -36,24 +36,24 @@ namespace THI_BANG_LAI_XE.Dao
         }
 
         // get exam by id
-        public async Task<Exam?> GetExamByIdAsync(int examId) => await _context.Exams.FirstOrDefaultAsync(ex => ex.ExamId == examId);
+        public Exam? GetExamById(int examId) => _context.Exams.FirstOrDefault(ex => ex.ExamId == examId);
 
         // get Exam list
-        public async Task<List<Exam>> GetExamListAsync() => await _context.Exams.ToListAsync();
+        public List<Exam> GetExamList() => _context.Exams.ToList();
 
         //Update Exam
-        public async Task UpdateExamAsync(Exam exam)
+        public void UpdateExamAsync(Exam exam)
         {
             try
             {
-                var ExamToUpdate = await GetExamByIdAsync(exam.ExamId);
+                var ExamToUpdate = GetExamById(exam.ExamId);
                 if (ExamToUpdate != null)
                 {
                     ExamToUpdate.CourseId = exam.CourseId;
                     ExamToUpdate.Date = exam.Date;
                     ExamToUpdate.Room = exam.Room;
                     _context.Exams.Update(ExamToUpdate);
-                    await _context.SaveChangesAsync();
+                    _context.SaveChanges();
                 }
             }
             catch (Exception)
@@ -63,15 +63,15 @@ namespace THI_BANG_LAI_XE.Dao
         }
 
         // Remove Exam
-        public async Task RemoveExamAsync(int ExamId)
+        public void RemoveExamAsync(int ExamId)
         {
             try
             {
-                var ExamToRemove = await GetExamByIdAsync(ExamId);
+                var ExamToRemove = GetExamById(ExamId);
                 if (ExamToRemove != null)
                 {
                     _context.Exams.Remove(ExamToRemove);
-                    await _context.SaveChangesAsync();
+                    _context.SaveChanges();
                 }
             }
             catch (Exception)
