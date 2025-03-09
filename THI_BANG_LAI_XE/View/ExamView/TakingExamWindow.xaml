@@ -1,0 +1,65 @@
+﻿<Window x:Class="THI_BANG_LAI_XE.View.ExamView.TakingExamWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:THI_BANG_LAI_XE.View.ExamView"
+        mc:Ignorable="d"
+        Title="TakingExamWindow"
+        WindowState="Maximized"
+        WindowStyle="None"
+        ResizeMode="NoResize">
+    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*">
+            </ColumnDefinition>
+            <ColumnDefinition Width="200"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <TextBlock x:Name="lblTimer"
+                   FontSize="20"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Top"
+                   Margin="10"
+                   Foreground="Red"/>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal">
+            <TextBlock Grid.Row="0" x:Name="ExamPaperNo" FontSize="20"></TextBlock>
+        </StackPanel>
+        
+
+        <!-- Question content -->
+        <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Vertical">
+            <Border>
+                <TextBlock TextWrapping="Wrap" x:Name="txtQuestionDetail"  FontSize="20" Margin="2"></TextBlock>
+            </Border>
+            <Viewbox Height="400">
+                <Border Background="AliceBlue">
+                    <Image x:Name="ImageSource"></Image>
+                </Border>
+            </Viewbox>
+        </StackPanel>
+
+        <!-- Answer -->
+        <StackPanel Grid.Row="2" x:Name="RadioAnswer" Grid.Column="0" Orientation="Vertical">
+
+        </StackPanel>
+        <Border Grid.Row="2" Grid.Column="1" CornerRadius="5" Background="DeepSkyBlue" Margin="0,0,20,0" VerticalAlignment="Top">
+            <Button  Content="submit" Background="Transparent" Foreground="White" BorderThickness="0" Click="Button_Click_2"></Button>
+        </Border>
+
+
+
+        <TextBlock Text="Questtion number" Grid.Column="1" Grid.Row="1"></TextBlock>
+        <ScrollViewer Grid.Column="1" Grid.Row="1" Padding="0,20,0,0">
+            <WrapPanel HorizontalAlignment="Left" x:Name="QuestionPanel">
+            </WrapPanel>
+        </ScrollViewer>
+
+    </Grid>
+</Window>

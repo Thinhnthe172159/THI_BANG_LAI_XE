@@ -54,10 +54,14 @@ namespace THI_BANG_LAI_XE.View.CourseView
             if (sender is Button button && button.DataContext is ExamPaper selectedExam)
             {
                 var newExamPaper = _context.examPaperDao.getExamPaperById(selectedExam.ExamPaperId);
-                if (newExamPaper != null)
+                if (newExamPaper != null && newExamPaper.Questions.Count != 0)
                 {
                     MainWindow? mainWindow = Application.Current.MainWindow as MainWindow;
                     mainWindow?.ContentFrame.Navigate(new CourseExamPaper(newExamPaper, null));
+                }
+                else
+                {
+                    MessageBox.Show("Đề thi rỗng !");
                 }
             }
         }

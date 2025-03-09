@@ -30,13 +30,30 @@ namespace THI_BANG_LAI_XE.View
             LoadAllCourser();
         }
 
-        private void DataCourse_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //private void DataCourse_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        //{
+        //    var item = this.DataCourse.SelectedItem as Course;
+        //    if (item != null)
+        //    {
+        //        MainWindow? mainWindow = Application.Current.MainWindow as MainWindow;
+        //        mainWindow?.ContentFrame.Navigate(new CourseDetail(item));
+        //    }
+        //}
+
+        private void ViewCourseButton(object sender, RoutedEventArgs e)
         {
-            var item = this.DataCourse.SelectedItem as Course;
-            if (item != null)
+            if (sender is Button button && button.DataContext is Course selectedCourse)
             {
-                MainWindow? mainWindow = Application.Current.MainWindow as MainWindow;
-                mainWindow?.ContentFrame.Navigate(new CourseDetail(item));
+                var SelectedCourse = _context.courseDao.GetCourseById(selectedCourse.CourseId);
+                if (SelectedCourse != null && _context.registrationDao.IsCourseRegisted(MainWindow.userLogedIn.UserId, selectedCourse.CourseId))
+                {
+                    MainWindow? mainWindow = Application.Current.MainWindow as MainWindow;
+                    mainWindow?.ContentFrame.Navigate(new CourseDetail(SelectedCourse));
+                }
+                else
+                {
+                    MessageBox.Show("Ban chưa đăng ký khóa học !");
+                }
             }
         }
 

@@ -36,10 +36,10 @@ namespace THI_BANG_LAI_XE.Dao
         }
 
         // get exam by id
-        public Exam? GetExamById(int examId) => _context.Exams.FirstOrDefault(ex => ex.ExamId == examId);
+        public Exam? GetExamById(int examId) => _context.Exams.Include(ex => ex.ExamPapers).FirstOrDefault(ex => ex.ExamId == examId);
 
         // get Exam list
-        public List<Exam> GetExamList() => _context.Exams.ToList();
+        public List<Exam> GetExamList() => _context.Exams.Include(e => e.Course).ToList();
 
         //Update Exam
         public void UpdateExamAsync(Exam exam)

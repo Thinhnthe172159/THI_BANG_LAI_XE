@@ -31,7 +31,7 @@ namespace THI_BANG_LAI_XE.Dao
         }
 
         //get exam paper by id
-        public ExamPaper? getExamPaperById(int id) => _context.ExamPapers.FirstOrDefault(ex => ex.ExamPaperId == id);
+        public ExamPaper? getExamPaperById(int id) => _context.ExamPapers.Include(ex => ex.Questions).FirstOrDefault(ex => ex.ExamPaperId == id);
 
         //add examPaper 
         public void AddExamPaper(ExamPaper examPaper)

@@ -19,7 +19,7 @@ namespace THI_BANG_LAI_XE.Dao
         }
 
         // get course list
-        public List<Course> GetCourseList() => _context.Courses.ToList();
+        public List<Course> GetCourseList() => _context.Courses.Include(c => c.Teacher).ToList();
 
         //Filter Course by custom field
 
@@ -39,7 +39,7 @@ namespace THI_BANG_LAI_XE.Dao
         }
 
         //get course by id
-        public Course? GetCourseById(int courseId) => _context.Courses.Include(c => c.ExamPapers).FirstOrDefault(c => c.CourseId == courseId);
+        public Course? GetCourseById(int courseId) => _context.Courses.Include(c => c.ExamPapers).Include(c => c.Teacher).FirstOrDefault(c => c.CourseId == courseId);
 
         //Update course
         public void UpdateCourse(Course course)

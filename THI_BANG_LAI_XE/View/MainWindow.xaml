@@ -15,11 +15,10 @@
 
         <!-- Sidebar -->
         <Border Margin="0,30,15,0" CornerRadius="0,50,0,0" Background="#614bd4">
-            <StackPanel Orientation="Vertical" Margin="1,30,30,0">
+            <StackPanel Orientation="Vertical" Margin="1,30,30,0" x:Name="buttonList">
                 <Button Content="🏠 Home" HorizontalContentAlignment="Left" Margin="2" BorderThickness="0" Background="#614bd4" Padding="5" Click="Button_Click_1" Foreground="White"/>
                 <Button Content="👤 Your profile" HorizontalContentAlignment="Left" Margin="2" BorderThickness="0" Background="#614bd4" Padding="5" Click="Button_Click_2" Foreground="White" />
                 <Button Content="🎓 Courses" HorizontalContentAlignment="Left" Margin="2" BorderThickness="0" Background="#614bd4" Padding="5" Click="Button_Click" Foreground="White"/>
-                <Button Content="📃 Exams" HorizontalContentAlignment="Left" Margin="2" BorderThickness="0" Background="#614bd4" Padding="5" Click="Button_Click_3" Foreground="White"/>
                 <Button Content="🔔 Notificaiton" HorizontalContentAlignment="Left" Margin="2" BorderThickness="0" Background="#614bd4" Padding="5" Click="Button_Click_4" Foreground="White"/>
             </StackPanel>
         </Border>

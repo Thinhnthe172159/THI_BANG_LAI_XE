@@ -15,9 +15,13 @@ public partial class UserSelectedAnswer
 
     public int ExamId { get; set; }
 
+    public int? ExamPaperId { get; set; }
+
     public virtual Answer Answer { get; set; } = null!;
 
     public virtual Exam Exam { get; set; } = null!;
+
+    public virtual ExamPaper? ExamPaper { get; set; }
 
     public virtual Question Question { get; set; } = null!;
 

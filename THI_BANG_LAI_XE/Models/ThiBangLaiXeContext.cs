@@ -39,9 +39,6 @@ public partial class ThiBangLaiXeContext : DbContext
 
     public virtual DbSet<UserSelectedAnswer> UserSelectedAnswers { get; set; }
 
-    public virtual DbSet<CoursesDocumentation> CoursesDocumentations { get; set; }
-    public virtual DbSet<ExamPapersSelected> ExamPapersSelecteds { get; set; }
-
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         var builder = new ConfigurationBuilder();
@@ -49,6 +46,7 @@ public partial class ThiBangLaiXeContext : DbContext
         builder.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
         var configuration = builder.Build();
         optionsBuilder.UseSqlServer(configuration.GetConnectionString("Default"));
+
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -215,6 +213,10 @@ public partial class ThiBangLaiXeContext : DbContext
                 .HasForeignKey(d => d.ExamId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_UserSelectedAnswer_Exams");
+
+            entity.HasOne(d => d.ExamPaper).WithMany(p => p.UserSelectedAnswers)
+                .HasForeignKey(d => d.ExamPaperId)
+                .HasConstraintName("FK_UserSelectedAnswer_ExamPapers");
 
             entity.HasOne(d => d.Question).WithMany(p => p.UserSelectedAnswers)
                 .HasForeignKey(d => d.QuestionId)

@@ -14,26 +14,60 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <TextBlock Text="Courses" Margin="1" Grid.Row="0" FontSize="20"></TextBlock>
-        <ScrollViewer Grid.Row="1">
-            <DataGrid BorderThickness="0" 
-          Name="DataCourse" 
-          AutoGenerateColumns="False" 
-          IsReadOnly="True" 
-          Margin="2" 
-          SelectionChanged="DataCourse_SelectionChanged"
-          GridLinesVisibility="None" 
-          HeadersVisibility="Column"
-                      HorizontalContentAlignment="Center"
-                      HorizontalScrollBarVisibility="Hidden"
-          Background="Transparent">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Width="*" Header="CourseName" Binding="{Binding CourseId}" Visibility="Hidden"></DataGridTextColumn>
-                    <DataGridTextColumn Width="*" Header="CourseName" Binding="{Binding CourseName}"></DataGridTextColumn>
-                    <DataGridTextColumn Width="*" Header="Lecture" Binding="{Binding Teacher.FullName}"></DataGridTextColumn>
-                    <DataGridTextColumn Width="*" Header="Start" Binding="{Binding StartDate}"></DataGridTextColumn>
-                    <DataGridTextColumn Width="*" Header="End" Binding="{Binding EndDate}"></DataGridTextColumn>
-                </DataGrid.Columns>
-            </DataGrid>
+        <ScrollViewer Grid.Row="1" Margin="10">
+
+
+            <!-- 
+              <DataGrid BorderThickness="0" 
+Name="DataCourse" 
+AutoGenerateColumns="False" 
+IsReadOnly="True" 
+Margin="2" 
+SelectionChanged="DataCourse_SelectionChanged"
+GridLinesVisibility="None" 
+HeadersVisibility="Column"
+            HorizontalContentAlignment="Center"
+            HorizontalScrollBarVisibility="Hidden"
+Background="Transparent">
+      <DataGrid.Columns>
+          <DataGridTextColumn Width="*" Header="CourseName" Binding="{Binding CourseId}" Visibility="Hidden"></DataGridTextColumn>
+          <DataGridTextColumn Width="*" Header="CourseName" Binding="{Binding CourseName}"></DataGridTextColumn>
+          <DataGridTextColumn Width="*" Header="Lecture" Binding="{Binding Teacher.FullName}"></DataGridTextColumn>
+          <DataGridTextColumn Width="*" Header="Start" Binding="{Binding StartDate}"></DataGridTextColumn>
+          <DataGridTextColumn Width="*" Header="End" Binding="{Binding EndDate}"></DataGridTextColumn>
+      </DataGrid.Columns>
+  </DataGrid>
+            -->
+
+            <ItemsControl x:Name="DataCourse" >
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Background="#F5F5F5" Margin="10"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Width="250" Padding="10" Background="White" CornerRadius="10" Margin="10">
+                            <StackPanel>
+
+                                <!-- Tên  -->
+                                <TextBlock Text="{Binding CourseName}" FontSize="14" FontWeight="Bold" Margin="0,5,0,0"/>
+                                <Label Content="Lecture" FontWeight="Bold"></Label>
+                                <TextBlock Text="{Binding Teacher.FullName}" FontSize="14" Margin="0,5,0,0"/>
+                                <Label Content="Start at" FontWeight="Bold"></Label>
+                                <TextBlock Text="{Binding StartDate}" FontSize="14" Margin="0,5,0,0"/>
+                                <Label Content="End at" FontWeight="Bold"></Label>
+                                <TextBlock Text="{Binding EndDate}" FontSize="14" Margin="0,5,0,0"/>
+                                <!-- Nút view -->
+                                <Button Content="View" Background="DarkGray" Foreground="White" 
+                     FontSize="14" Padding="5" BorderThickness="0" Cursor="Hand" Margin="0,10,0,0" Click="ViewCourseButton"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
         </ScrollViewer>
     </Grid>
 </Page>
