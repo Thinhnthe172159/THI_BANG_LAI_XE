@@ -30,7 +30,7 @@ namespace THI_BANG_LAI_XE
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            Application.Current.Shutdown();
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
@@ -79,12 +79,8 @@ namespace THI_BANG_LAI_XE
         {
 
             RegisterWindow registerWindow = new RegisterWindow();
-
-            // Hiển thị RegisterWindow
             registerWindow.Show();
-
-            // Ẩn LoginWindow (tùy chọn)
-            // this.Hide(); 
+            this.Hide();
         }
     }
 }
