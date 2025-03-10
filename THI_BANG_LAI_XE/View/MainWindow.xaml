@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:THI_BANG_LAI_XE.View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="550" Width="1000">
+        WindowStartupLocation="CenterScreen"
+        Title="Home" Height="550" Width="1000">
 
     <Grid>
         <Grid.ColumnDefinitions>

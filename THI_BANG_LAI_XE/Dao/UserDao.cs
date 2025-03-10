@@ -100,5 +100,9 @@ namespace THI_BANG_LAI_XE.Dao
                 }
             }
         }
+        public bool IsEmailExists(string email)
+        {
+            return _context.Users.Any(u => u.Email == email);
+        }
     }
 }
