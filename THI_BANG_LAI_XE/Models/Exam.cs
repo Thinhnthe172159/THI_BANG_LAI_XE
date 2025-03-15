@@ -19,7 +19,5 @@ public partial class Exam
 
     public virtual ICollection<Result> Results { get; set; } = new List<Result>();
 
-    public virtual ICollection<UserSelectedAnswer> UserSelectedAnswers { get; set; } = new List<UserSelectedAnswer>();
-
     public virtual ICollection<ExamPaper> ExamPapers { get; set; } = new List<ExamPaper>();
 }

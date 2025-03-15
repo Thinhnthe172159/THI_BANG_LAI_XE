@@ -114,5 +114,12 @@ namespace THI_BANG_LAI_XE.View
             selectedButton = clickedButton;
         }
 
+        private void Button_Click_6(object sender, RoutedEventArgs e)
+        {
+            LoginWindow loginWindow = new LoginWindow();
+            loginWindow.Show();
+            this.Close();
+
+        }
     }
 }

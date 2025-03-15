@@ -15,7 +15,9 @@ public partial class Result
 
     public int PassStatus { get; set; }
 
-    public DateTime DateCreated { get; set; }
+    public DateTime DateCreated { get; set; } = DateTime.Now;
+
+    public int ExamPaperId { get; set; }
 
     public virtual Exam Exam { get; set; } = null!;
 

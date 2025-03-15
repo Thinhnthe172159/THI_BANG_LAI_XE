@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
@@ -19,11 +20,7 @@ namespace THI_BANG_LAI_XE.Dao
         }
 
 
-        // get all Answer of user by question Id and userId
-        public List<UserSelectedAnswer> GetAnswerOfUserByExamPaperId(long QuestID, long userId) => _context.UserSelectedAnswers.Where(us => us.QuestionId == QuestID && us.UserId == userId).ToList();
 
-        // get Answer by id, 
-        public UserSelectedAnswer? GetAnswerOfUserById(long SelectedID) => _context.UserSelectedAnswers.FirstOrDefault(us => us.SelectedId == SelectedID);
 
         //Add Answer
         public void AddAnswer(UserSelectedAnswer userSelectedAnswer)
@@ -37,35 +34,39 @@ namespace THI_BANG_LAI_XE.Dao
             { }
         }
 
-        // Update user Answer
-        public async Task UpdateUserAnswerAsync(UserSelectedAnswer userSelectedAnswer)
+        //Update user Answer
+        public void UpdateUserAnswer(UserSelectedAnswer userSelectedAnswer)
         {
             try
             {
-                var AnswerToUpdate = GetAnswerOfUserById(userSelectedAnswer.SelectedId);
+                var AnswerToUpdate = GetAnswerOfUserById(userSelectedAnswer.QuestionId, userSelectedAnswer.UserId);
                 if (AnswerToUpdate != null)
                 {
                     AnswerToUpdate.AnswerId = userSelectedAnswer.AnswerId;
                     _context.UserSelectedAnswers.Update(AnswerToUpdate);
-                    await _context.SaveChangesAsync();
+                    _context.SaveChanges();
                 }
             }
             catch (Exception) { }
         }
 
-        //remove user Answer
-        public void RemoveUserAnswerAsync(long SelectedId)
+        //check answer selected
+        public bool checkAnswerSelect(long questId, long UserId, long answerId)
         {
-            try
-            {
-                var AnswerToRemove = GetAnswerOfUserById(SelectedId);
-                if (AnswerToRemove != null)
-                {
-                    _context.UserSelectedAnswers.Remove(AnswerToRemove);
-                    _context.SaveChanges();
-                }
-            }
-            catch (Exception) { }
+            return _context.UserSelectedAnswers.Where(a => a.QuestionId == questId && a.UserId == UserId && a.AnswerId == answerId).Count() == 1;
+        }
+
+        public UserSelectedAnswer? GetAnswerOfUserById(long questId, long UserId) => _context.UserSelectedAnswers.Include(a => a.Answer).FirstOrDefault(a => a.QuestionId == questId && a.UserId == UserId);
+
+        // get answer of user by exam paper id
+        public List<UserSelectedAnswer> GetAnserOfUserByExamPaperId(int ExamPaperId)
+        {
+            return _context.UserSelectedAnswers.Include(a => a.Question).Include(a => a.Answer).Where(a => a.Question.ExamPaperId == ExamPaperId).ToList();
+        }
+
+        public List<UserSelectedAnswer> getListUserAnswer(long userId, int examPaperId)
+        {
+            return _context.UserSelectedAnswers.Include(a => a.Question).Include(a => a.Answer).Where(a => a.UserId == userId && a.Question.ExamPaperId == examPaperId).ToList();
         }
     }
 }

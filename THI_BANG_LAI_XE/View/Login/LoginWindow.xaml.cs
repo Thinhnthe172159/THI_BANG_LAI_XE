@@ -31,7 +31,7 @@ namespace THI_BANG_LAI_XE
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            Close();
         }
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)

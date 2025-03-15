@@ -46,7 +46,6 @@ public partial class ThiBangLaiXeContext : DbContext
         builder.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
         var configuration = builder.Build();
         optionsBuilder.UseSqlServer(configuration.GetConnectionString("Default"));
-
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -200,27 +199,13 @@ public partial class ThiBangLaiXeContext : DbContext
 
         modelBuilder.Entity<UserSelectedAnswer>(entity =>
         {
-            entity.HasKey(e => e.SelectedId);
+            entity.HasKey(e => new { e.UserId, e.QuestionId }).HasName("PK_UserSelectedAnswer_1");
 
             entity.ToTable("UserSelectedAnswer");
 
             entity.HasOne(d => d.Answer).WithMany(p => p.UserSelectedAnswers)
                 .HasForeignKey(d => d.AnswerId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_UserSelectedAnswer_Answers");
-
-            entity.HasOne(d => d.Exam).WithMany(p => p.UserSelectedAnswers)
-                .HasForeignKey(d => d.ExamId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_UserSelectedAnswer_Exams");
-
-            //entity.HasOne(d => d.ExamPaper).WithMany(p => p.UserSelectedAnswers)
-            //    .HasForeignKey(d => d.Answer)
-            //    .OnDelete(DeleteBehavior.ClientSetNull)
-            //    .HasConstraintName("FK_UserSelectedAnswer_ExamPapers");
-            entity.HasOne(d => d.ExamPaper).WithMany(p => p.UserSelectedAnswers)
-                .HasForeignKey(d => d.ExamPaperId)
-                .HasConstraintName("FK_UserSelectedAnswer_ExamPapers");
 
             entity.HasOne(d => d.Question).WithMany(p => p.UserSelectedAnswers)
                 .HasForeignKey(d => d.QuestionId)
@@ -229,6 +214,7 @@ public partial class ThiBangLaiXeContext : DbContext
 
             entity.HasOne(d => d.User).WithMany(p => p.UserSelectedAnswers)
                 .HasForeignKey(d => d.UserId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_UserSelectedAnswer_Users");
         });
 

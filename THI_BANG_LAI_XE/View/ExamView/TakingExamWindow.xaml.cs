@@ -30,44 +30,25 @@ namespace THI_BANG_LAI_XE.View.ExamView
         private Query _context;
         private ThiBangLaiXeContext _db;
         private Question? Quest;
-        private ExamPaper? exp = new ExamPaper();
+        private User? userInfor = MainWindow.userLogedIn;
+        private ExamPaper? examPaper;
 
-        private TimeSpan examDuration = TimeSpan.FromMinutes(1);
-        private DispatcherTimer examTimer;
+        private TimeSpan examDuration = TimeSpan.FromMinutes(19);
+        private DispatcherTimer? examTimer;
 
-        public TakingExamWindow(Exam ex)
+        public TakingExamWindow(Exam ex, ExamPaper exp)
         {
             _db = new ThiBangLaiXeContext();
             _context = new Query(_db);
-
+            Exam = ex;
+            examPaper = exp;
             InitializeComponent();
-            RandomExamPaper(ex);
-            loadQuesttionContent(Quest, exp);
-            LoadAllQuestion();
+            loadQuesttionContent(Quest, examPaper);
+            LoadAllQuestion(null);
             StartExamTimer();
         }
 
-        void RandomExamPaper(Exam ex)
-        {
-            Random random = new Random();
-            int selectItem = random.Next(0, ex.ExamPapers.Count());
-            List<ExamPaper> list = ex.ExamPapers.ToList();
-            if (selectItem != 0)
-            {
-                for (int i = 0; i < ex.ExamPapers.Count; i++)
-                {
-                    if (selectItem == i)
-                    {
-                        exp = list[i];
-                        break;
-                    }
-                }
-            }
-            else
-            {
-                exp = list[0];
-            }
-        }
+
 
         void loadQuesttionContent(Question? quest, ExamPaper? ex)
         {
@@ -80,18 +61,14 @@ namespace THI_BANG_LAI_XE.View.ExamView
             if (quest != null)
             {
                 txtQuestionDetail.Text = quest.DetailQuestion;
-
-                if (!string.IsNullOrEmpty(quest.ImageUrl))
-                {
-                    ImageSource.Source = new BitmapImage(new Uri(quest.ImageUrl, UriKind.Absolute));
-                }
-                else
-                {
-                    ImageSource.Source = null;
-                }
+                ImageSource.Source = !string.IsNullOrEmpty(quest.ImageUrl)
+                    ? new BitmapImage(new Uri(quest.ImageUrl, UriKind.Absolute))
+                    : null;
 
                 var AnswerList = quest.Answers.ToList();
                 RadioAnswer.Children.Clear();
+                var selectedAnswer = _context.userSelectAnswerDao.GetAnswerOfUserById(quest.QuestionId, userInfor.UserId);
+
                 for (int i = 0; i < AnswerList.Count; i++)
                 {
                     RadioButton rd = new RadioButton
@@ -101,17 +78,42 @@ namespace THI_BANG_LAI_XE.View.ExamView
                         Tag = AnswerList[i].AnswerId,
                         FontSize = 20
                     };
+                    rd.Click += Btn_Click_UpdateAnswer;
+                    rd.IsChecked = selectedAnswer?.AnswerId == AnswerList[i].AnswerId;
+
                     RadioAnswer.Children.Add(rd);
                 }
             }
         }
 
-        void LoadAllQuestion()
+        private void Btn_Click_UpdateAnswer(object sender, RoutedEventArgs e)
         {
-            var QuestionList = _context.questionDao.GetQuestionListByExamPaper(exp.ExamPaperId);
+            var button = sender as RadioButton;
+            if (button?.Tag == null) return;
 
+            long AnswerId = long.Parse(button.Tag.ToString());
+            Question question = _context.answerDao.GetAnswerById(AnswerId).Question;
+            if (question != null)
+            {
+                var AnswerSelected = _context.userSelectAnswerDao.GetAnswerOfUserById(question.QuestionId, userInfor.UserId);
+                if (AnswerSelected != null)
+                {
+                    AnswerSelected.AnswerId = AnswerId;
+                    _context.userSelectAnswerDao.UpdateUserAnswer(AnswerSelected);
+                }
+            }
+        }
+
+
+
+
+        void LoadAllQuestion(Question quest)
+        {
+            var QuestionList = _context.questionDao.GetQuestionListByExamPaper(examPaper.ExamPaperId);
+            QuestionPanel.Children.Clear();
             for (int i = 0; i < QuestionList.Count; i++)
             {
+                var selectedAnswer = _context.userSelectAnswerDao.GetAnswerOfUserById(QuestionList[i].QuestionId, userInfor.UserId);
                 Button btn = new Button
                 {
                     Content = $"{i + 1}",
@@ -121,6 +123,14 @@ namespace THI_BANG_LAI_XE.View.ExamView
                     Tag = QuestionList[i]
                 };
                 btn.Click += Btn_Click;
+                if (selectedAnswer != null && selectedAnswer.QuestionId == QuestionList[i].QuestionId && selectedAnswer.Answer != null)
+                {
+                    btn.Background = Brushes.LightGreen;
+                }
+                if (quest != null && quest.QuestionId == QuestionList[i].QuestionId)
+                {
+                    btn.Background = Brushes.BlueViolet;
+                }
                 QuestionPanel.Children.Add(btn);
             }
         }
@@ -131,7 +141,8 @@ namespace THI_BANG_LAI_XE.View.ExamView
             var button = sender as Button;
             if (button?.Tag is Question question)
             {
-                loadQuesttionContent(question, exp);
+                loadQuesttionContent(question, examPaper);
+                LoadAllQuestion(question);
             }
         }
 
@@ -143,7 +154,7 @@ namespace THI_BANG_LAI_XE.View.ExamView
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            var course = exp?.Courses.FirstOrDefault();
+            var course = examPaper?.Courses.FirstOrDefault();
             if (course != null)
             {
                 MainWindow? mainWindow = Application.Current.MainWindow as MainWindow;
@@ -153,7 +164,37 @@ namespace THI_BANG_LAI_XE.View.ExamView
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            examTimer.Stop();
+
+            if (MessageBox.Show("bạn có muốn kết thúc phần thi ngay bây giờ không?", "Nộp bài", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                Makr();
+                this.Close();
+            }
+        }
+
+        // tính điểm cho người thi
+        void Makr()
+        {
+            var result = _context.resultDao.GetResult(userInfor.UserId, Exam.ExamId);
+            if (result != null)
+            {
+                List<UserSelectedAnswer> UserAnswerList = _context.userSelectAnswerDao.getListUserAnswer(userInfor.UserId, result.ExamPaperId);
+                result.Score = UserAnswerList.Where(u => u.Answer != null && u.Answer.IsCorrectOrNot == 1).Count();
+                if (result.Score >= 21)
+                {
+                    result.PassStatus = 1;// pass
+                }
+                else
+                {
+                    result.PassStatus = 2; // false
+                }
+            }
+            _context.resultDao.UpdateResultStatus(result);
+            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+            var Ex = _context.examDao.GetExamById(result.ExamId);
+            var course = Ex.Course;
+            mainWindow.ContentFrame.Navigate(new ExamListPage(course));
         }
 
 
@@ -172,7 +213,8 @@ namespace THI_BANG_LAI_XE.View.ExamView
             if (examDuration.TotalSeconds <= 0)
             {
                 examTimer.Stop();
-                MessageBox.Show("Thời gian thi đã hết. Hệ thống sẽ tự động đóng màn hình thi.");
+                Makr();
+                MessageBox.Show("Thời gian thi đã hết!");
                 this.Close();
             }
         }

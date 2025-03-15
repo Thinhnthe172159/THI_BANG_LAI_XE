@@ -24,7 +24,7 @@ namespace THI_BANG_LAI_XE.Dao
         public List<Answer> GetAnswerList() => _context.Answers.ToList();
 
         // get answer by id 
-        public Answer? GetAnswerById(long AnswerId) => _context.Answers.FirstOrDefault(asw => asw.AnswerId == AnswerId);
+        public Answer? GetAnswerById(long AnswerId) => _context.Answers.Include(asw => asw.Question).FirstOrDefault(asw => asw.AnswerId == AnswerId);
 
         //Add Answer 
         public void AddAnswer(Answer answer)

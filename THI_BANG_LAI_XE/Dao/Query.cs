@@ -20,6 +20,8 @@ namespace THI_BANG_LAI_XE.Dao
             _questionDao = new Lazy<QuestionDao>(() => new QuestionDao(_context));
             _registrationDao = new Lazy<RegistrationDao>(() => new RegistrationDao(_context));
             _userDao = new Lazy<UserDao>(() => new UserDao(_context));
+            _result = new Lazy<ResultDao>(() => new ResultDao(_context));
+            _userSelectAnswerDao = new Lazy<UserSelectAnswerDao>(() => new UserSelectAnswerDao(_context));
         }
 
         private Lazy<AnswerDao> _answerDao;
@@ -29,6 +31,8 @@ namespace THI_BANG_LAI_XE.Dao
         private Lazy<QuestionDao> _questionDao;
         private Lazy<RegistrationDao> _registrationDao;
         private Lazy<UserDao> _userDao;
+        private Lazy<ResultDao> _result;
+        private Lazy<UserSelectAnswerDao> _userSelectAnswerDao;
 
         public AnswerDao answerDao => _answerDao.Value;
         public CourseDao courseDao => _courseDao.Value;
@@ -37,6 +41,8 @@ namespace THI_BANG_LAI_XE.Dao
         public QuestionDao questionDao => _questionDao.Value;
         public RegistrationDao registrationDao => _registrationDao.Value;
         public UserDao userDao => _userDao.Value;
+        public ResultDao resultDao => _result.Value;
+        public UserSelectAnswerDao userSelectAnswerDao => _userSelectAnswerDao.Value;
     }
 
 }
