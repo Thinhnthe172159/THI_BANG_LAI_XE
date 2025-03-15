@@ -25,7 +25,6 @@ namespace THI_BANG_LAI_XE.View
     {
         private readonly Query context;
         private readonly ThiBangLaiXeContext dbSet;
-        public MainWindow()
         public UserProfilePage()
         {
             InitializeComponent();
