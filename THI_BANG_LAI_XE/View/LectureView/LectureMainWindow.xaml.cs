@@ -43,12 +43,12 @@ namespace THI_BANG_LAI_XE.View.LectureView
 
         private void ProfileButton(object sender, RoutedEventArgs e)
         {
-
+            LectureMainWindow lectureMainWindow = (LectureMainWindow)Application.Current.MainWindow;
+            lectureMainWindow.ContentFrame.Navigate(new UserProfilePage(userLogedIn));
         }
 
         private void StudentButton(object sender, RoutedEventArgs e)
         {
-            var courseListBylecture = _context.courseDao.GetCourseListBylectureId(userLogedIn.UserId);
             LectureMainWindow lectureMainWindow = (LectureMainWindow)Application.Current.MainWindow;
             lectureMainWindow.ContentFrame.Navigate(new ManagerStudent.StudentManagerPage(userLogedIn));
         }
