@@ -56,7 +56,7 @@ namespace THI_BANG_LAI_XE.View
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             UpdateButtonSelection((Button)sender);
-            ContentFrame.Navigate(new UserProfilePage());
+            ContentFrame.Navigate(new UserProfilePage(userLogedIn));
         }
 
         // Exam

@@ -126,7 +126,8 @@ namespace THI_BANG_LAI_XE
                     MessageBox.Show("Error registering user: " + ex.Message);
                 }
 
-
+                LoginWindow loginWindow = new LoginWindow();
+                loginWindow.Show();
                 this.Close();
             }
         }
