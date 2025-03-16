@@ -21,6 +21,8 @@ namespace THI_BANG_LAI_XE.Dao
         // get course list
         public List<Course> GetCourseList() => _context.Courses.Include(c => c.Teacher).ToList();
 
+        public List<Course> GetCourseListBylectureId(long userid) => _context.Courses.Include(c => c.Registrations).Include(c => c.Teacher).Where(c => c.TeacherId == userid).ToList();
+
         //Filter Course by custom field
 
 

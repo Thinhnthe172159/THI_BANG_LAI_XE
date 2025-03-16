@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using THI_BANG_LAI_XE.Dao;
 using THI_BANG_LAI_XE.Models;
 using THI_BANG_LAI_XE.View;
+using THI_BANG_LAI_XE.View.LectureView;
 
 namespace THI_BANG_LAI_XE
 {
@@ -64,9 +65,25 @@ namespace THI_BANG_LAI_XE
                 //  MessageBox.Show("Đăng nhập thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
 
 
-                MainWindow mainWindow = new MainWindow(user);
-                Application.Current.MainWindow = mainWindow;
-                mainWindow.Show();
+
+
+                // checking role user
+                if (user.Role == 1)// Lecture
+                {
+                    LectureMainWindow lectureMainWindow = new LectureMainWindow(user);
+                    Application.Current.MainWindow = lectureMainWindow;
+                    lectureMainWindow.Show();
+                }
+                if (user.Role == 2) // Officier
+                {
+
+                }
+                if (user.Role == 3)// Student
+                {
+                    MainWindow mainWindow = new MainWindow(user);
+                    Application.Current.MainWindow = mainWindow;
+                    mainWindow.Show();
+                }
                 this.Close();
             }
         }
@@ -80,7 +97,6 @@ namespace THI_BANG_LAI_XE
         }
         private void Register_MouseDown(object sender, MouseButtonEventArgs e)
         {
-
             RegisterWindow registerWindow = new RegisterWindow();
             registerWindow.Show();
             this.Hide();

@@ -43,6 +43,33 @@ namespace THI_BANG_LAI_XE.Dao
             // using x page list
             return _context.Users.ToPagedList(page, pageSize);
         }
+
+        //get student list 
+        public IPagedList<User> GetStudentlistRegistCourse(long lectureId, string Fullname, string Phone, int courseId, int page = 1, int pageSize = 10)
+        {
+            var listCourseOfLecture = _context.Courses.Where(c => c.TeacherId == lectureId).Select(c => c.CourseId).ToList();
+            var UserRegistrationsList = _context.Registrations.Include(r => r.Course).Where(r => listCourseOfLecture.Contains((int)r.CourseId)).Select(r => r.User).Where(r => r.Role == 3).AsQueryable();
+
+            if (!string.IsNullOrEmpty(Fullname))
+            {
+                UserRegistrationsList = UserRegistrationsList.Where(u => u.FullName.ToLower().Contains(Fullname.ToLower()));
+            }
+            if (!string.IsNullOrEmpty(Phone))
+            {
+                UserRegistrationsList = UserRegistrationsList.Where(u => u.Phone.Contains(Phone));
+            }
+            if (courseId != 0)
+            {
+                UserRegistrationsList = UserRegistrationsList
+                    .Where(u => u.Registrations.Any(r => r.CourseId == courseId));
+            }
+
+            var list = UserRegistrationsList.ToList();
+
+
+            return list.ToPagedList(page, pageSize);
+        }
+
         public List<User> GetUserList()
         {
             // using x page list
