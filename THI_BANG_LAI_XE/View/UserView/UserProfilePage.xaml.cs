@@ -25,15 +25,50 @@ namespace THI_BANG_LAI_XE.View
     {
         private readonly Query context;
         private readonly ThiBangLaiXeContext dbSet;
-        public UserProfilePage()
+        private readonly User currentUser;
+
+        public UserProfilePage(User user)
         {
             InitializeComponent();
             this.dbSet = new ThiBangLaiXeContext();
             context = new Query(dbSet);
+            this.currentUser = user;
+
+            // Hiển thị thông tin người dùng
+            DisplayUserInfo();
         }
-        public void getListCourse()
+
+        private void DisplayUserInfo()
         {
-            var course = context.courseDao.GetCourseList();
+            if (currentUser != null)
+            {
+                txtName.Text = currentUser.FullName.Trim();
+                txtFullName.Text = currentUser.FullName;
+                txtEmail.Text = currentUser.Email;
+                txtPhone.Text = currentUser.Phone;
+                txtClass.Text = currentUser.Class;
+                txtSchool.Text = currentUser.School;
+                //txtRole.Text = currentUser.Role.ToString;
+                if (currentUser.Role == 1)
+                {
+                    txtRole.Text = "Lecturer";
+                }
+                else if (currentUser.Role == 2)
+                {
+                    txtRole.Text = "Officer";
+                }
+                else if (currentUser.Role == 3)
+                {
+                    txtRole.Text = "Student";
+                }
+                else if (currentUser.Role == 4)
+                {
+                    txtRole.Text = "Admin";
+                }
+
+
+                txtDateCreate.Text = currentUser.DateCreated.ToString("dd/MM/yyyy HH:mm:ss");
+            }
         }
     }
 }
