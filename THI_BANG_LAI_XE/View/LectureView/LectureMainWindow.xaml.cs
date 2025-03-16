@@ -22,10 +22,9 @@ namespace THI_BANG_LAI_XE.View.LectureView
     public partial class LectureMainWindow : Window
     {
         private Button selectedButton;
-        public static User? userLogedIn;
+        public static User userLogedIn;
         private Query _context;
         private ThiBangLaiXeContext _db;
-
 
         public LectureMainWindow(User user)
         {
@@ -34,43 +33,51 @@ namespace THI_BANG_LAI_XE.View.LectureView
             selectedButton = new Button();
             _db = new ThiBangLaiXeContext();
             _context = new Query(_db);
+            selectedButton = new Button();
         }
+
 
         private void HomeButton(object sender, RoutedEventArgs e)
         {
-
+            UpdateButtonSelection((Button)sender);
+            LectureMainWindow lectureMainWindow = (LectureMainWindow)Application.Current.MainWindow;
+            lectureMainWindow.ContentFrame.Navigate(new HomePage(userLogedIn.FullName));
         }
 
         private void ProfileButton(object sender, RoutedEventArgs e)
         {
+            UpdateButtonSelection((Button)sender);
             LectureMainWindow lectureMainWindow = (LectureMainWindow)Application.Current.MainWindow;
             lectureMainWindow.ContentFrame.Navigate(new UserProfilePage(userLogedIn));
         }
 
         private void StudentButton(object sender, RoutedEventArgs e)
         {
+            UpdateButtonSelection((Button)sender);
             LectureMainWindow lectureMainWindow = (LectureMainWindow)Application.Current.MainWindow;
             lectureMainWindow.ContentFrame.Navigate(new ManagerStudent.StudentManagerPage(userLogedIn));
         }
 
         private void CourseButton(object sender, RoutedEventArgs e)
         {
-
+            UpdateButtonSelection((Button)sender);
+            LectureMainWindow lectureMainWindow = (LectureMainWindow)Application.Current.MainWindow;
+            lectureMainWindow.ContentFrame.Navigate(new ManagerCourse.CourseManagerPage(userLogedIn));
         }
 
         private void ExamPaperButton(object sender, RoutedEventArgs e)
         {
-
+            UpdateButtonSelection((Button)sender);
         }
 
         private void ExamButton(object sender, RoutedEventArgs e)
         {
-
+            UpdateButtonSelection((Button)sender);
         }
 
         private void NotificationButton(object sender, RoutedEventArgs e)
         {
-
+            UpdateButtonSelection((Button)sender);
         }
 
         // log out
@@ -79,6 +86,16 @@ namespace THI_BANG_LAI_XE.View.LectureView
             LoginWindow loginWindow = new LoginWindow();
             loginWindow.Show();
             this.Close();
+        }
+
+        private void UpdateButtonSelection(Button clickedButton)
+        {
+            if (selectedButton != null)
+            {
+                selectedButton.Background = (Brush?)new BrushConverter().ConvertFromString("#614bd4");
+            }
+            clickedButton.Background = (Brush?)new BrushConverter().ConvertFromString("#816fd4");
+            selectedButton = clickedButton;
         }
     }
 }
