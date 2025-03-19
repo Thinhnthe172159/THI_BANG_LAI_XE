@@ -68,11 +68,15 @@ namespace THI_BANG_LAI_XE.View.LectureView
         private void ExamPaperButton(object sender, RoutedEventArgs e)
         {
             UpdateButtonSelection((Button)sender);
+            LectureMainWindow lectureMainWindow = (LectureMainWindow)Application.Current.MainWindow;
+            lectureMainWindow.ContentFrame.Navigate(new ManagerExamPaper.ManagerExamPaperPage());
         }
 
         private void ExamButton(object sender, RoutedEventArgs e)
         {
             UpdateButtonSelection((Button)sender);
+            LectureMainWindow lectureMainWindow = (LectureMainWindow)Application.Current.MainWindow;
+            lectureMainWindow.ContentFrame.Navigate(new ManagerExam.ExamManagerPage(userLogedIn));
         }
 
         private void NotificationButton(object sender, RoutedEventArgs e)

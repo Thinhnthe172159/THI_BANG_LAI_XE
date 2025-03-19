@@ -20,7 +20,7 @@ namespace THI_BANG_LAI_XE.Dao
         }
 
         // get course list
-        public List<Course> GetCourseList() => _context.Courses.Include(c => c.Teacher).ToList();
+        public List<Course> GetCourseList() => _context.Courses.Include(c => c.Teacher).Include(c => c.ExamPapers).ToList();
 
         public List<Course> GetCourseListBylectureId(long userid) => _context.Courses.Include(c => c.Registrations).Include(c => c.Teacher).Where(c => c.TeacherId == userid).ToList();
 
@@ -59,7 +59,7 @@ namespace THI_BANG_LAI_XE.Dao
 
         //get newest course
 
-        public Course? GetNewestCourse() => _context.Courses.OrderByDescending(c => c.CreateDate).FirstOrDefault();
+        public Course? GetNewestCourse(long lectureId) => _context.Courses.OrderByDescending(c => c.CreateDate).FirstOrDefault(c => c.TeacherId == lectureId);
 
         //get course by id
         public Course? GetCourseById(int courseId) => _context.Courses.Include(c => c.ExamPapers).Include(c => c.Teacher).FirstOrDefault(c => c.CourseId == courseId);
@@ -122,7 +122,8 @@ namespace THI_BANG_LAI_XE.Dao
             try
             {
                 var course = GetCourseById(courseid);
-                foreach (var exp in course.ExamPapers)
+                var list = course.ExamPapers.ToList();
+                foreach (var exp in list)
                 {
                     course.ExamPapers.Remove(exp);
                 }

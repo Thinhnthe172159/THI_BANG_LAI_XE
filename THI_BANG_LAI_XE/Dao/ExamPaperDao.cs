@@ -21,8 +21,18 @@ namespace THI_BANG_LAI_XE.Dao
 
 
         //get exampaper list
-        public List<ExamPaper> getExamPaperList() => _context.ExamPapers.ToList();
+        public List<ExamPaper> getFilterExamPaperList(string ExamPaperName)
+        {
+            var list = _context.ExamPapers.AsQueryable();
+            if (!string.IsNullOrEmpty(ExamPaperName))
+            {
+                list = list.Where(xp => xp.ExamPaperName.ToLower().Contains(ExamPaperName));
+            }
+            return list.ToList();
+        }
 
+
+        public List<ExamPaper> getExamPaperList() => _context.ExamPapers.ToList();
         //get Exam paper by Course
         public List<ExamPaper> getExamPaperByCourse(int courseId)
         {
