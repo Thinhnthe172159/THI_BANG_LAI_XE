@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using THI_BANG_LAI_XE.Dao;
 using THI_BANG_LAI_XE.Models;
+using THI_BANG_LAI_XE.View.UserView;
 
 
 namespace THI_BANG_LAI_XE.View
@@ -68,6 +69,26 @@ namespace THI_BANG_LAI_XE.View
 
 
                 txtDateCreate.Text = currentUser.DateCreated.ToString("dd/MM/yyyy HH:mm:ss");
+            }
+        }
+
+        private void Button_ChangeInformation(object sender, RoutedEventArgs e)
+        {
+            if (currentUser != null)
+            {
+                ChangeInformation changeInformationPage = new ChangeInformation(currentUser);
+                if (this.NavigationService != null)
+                {
+                    this.NavigationService.Navigate(changeInformationPage);
+                }
+                else
+                {
+                    MessageBox.Show("Lỗi điều hướng!", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Thông tin người dùng không tồn tại!", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
