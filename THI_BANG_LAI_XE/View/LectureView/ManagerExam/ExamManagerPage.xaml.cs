@@ -13,17 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace THI_BANG_LAI_XE.View
+namespace THI_BANG_LAI_XE.View.LectureView.ManagerExam
 {
     /// <summary>
-    /// Interaction logic for HomePage.xaml
+    /// Interaction logic for ExamManagerPage.xaml
     /// </summary>
-    public partial class HomePage : Page
+    public partial class ExamManagerPage : Page
     {
-        public HomePage(string userName)
+        public ExamManagerPage()
         {
             InitializeComponent();
-            txtUserName.Text = "Hello " + userName;
         }
     }
 }

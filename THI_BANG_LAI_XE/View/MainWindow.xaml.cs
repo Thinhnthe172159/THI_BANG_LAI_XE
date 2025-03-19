@@ -25,7 +25,7 @@ namespace THI_BANG_LAI_XE.View
     public partial class MainWindow : Window
     {
         private Button selectedButton;
-        public static User? userLogedIn;
+        public static User userLogedIn;
         private Query _context;
         private ThiBangLaiXeContext _db;
 
@@ -33,7 +33,7 @@ namespace THI_BANG_LAI_XE.View
         {
             userLogedIn = user;
             InitializeComponent();
-            ContentFrame.Navigate(new HomePage());
+            ContentFrame.Navigate(new HomePage(userLogedIn.FullName));
             selectedButton = new Button();
             _db = new ThiBangLaiXeContext();
             _context = new Query(_db);
@@ -49,7 +49,7 @@ namespace THI_BANG_LAI_XE.View
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             UpdateButtonSelection((Button)sender);
-            ContentFrame.Navigate(new HomePage());
+            ContentFrame.Navigate(new HomePage(userLogedIn.FullName));
         }
 
         //User Profile

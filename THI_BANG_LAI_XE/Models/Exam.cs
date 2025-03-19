@@ -13,7 +13,7 @@ public partial class Exam
 
     public string Room { get; set; } = null!;
 
-    public string? DateCreated { get; set; }
+    public DateTime DateCreated { get; set; } = DateTime.Now;
 
     public virtual Course Course { get; set; } = null!;
 
