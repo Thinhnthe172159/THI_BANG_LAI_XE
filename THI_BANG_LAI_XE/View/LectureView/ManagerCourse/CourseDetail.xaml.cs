@@ -167,7 +167,7 @@ namespace THI_BANG_LAI_XE.View.LectureView.ManagerCourse
                     };
                     _context.courseDao.AddCourse(NewCourse);
 
-                    var NewestCourse = _context.courseDao.GetNewestCourse();
+                    var NewestCourse = _context.courseDao.GetNewestCourse(_user.UserId);
                     AddDocument(NewestCourse.CourseId);
                     LectureMainWindow lectureMainWindow = (LectureMainWindow)Application.Current.MainWindow;
                     MessageBox.Show("đã thêm khóa học thành công!");

@@ -1,0 +1,52 @@
+﻿<Page x:Class="THI_BANG_LAI_XE.View.LectureView.ManagerExamPaper.ManagerExamPaperPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:THI_BANG_LAI_XE.View.LectureView.ManagerExamPaper"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ManagerExamPaperPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Exam Paper" Margin="1" Grid.Row="0" FontSize="20"></TextBlock>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left">
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="20,0,0,0" >
+                <Label Content="Exam paper name" Margin="5"></Label>
+                <Border BorderThickness="2" Background="White" BorderBrush="DarkGray" Height="35" CornerRadius="4" Margin="2">
+                    <TextBox Background="Transparent" Height="35" Width="200" BorderThickness="0" x:Name="txtExamPaperName"></TextBox>
+                </Border>
+            </StackPanel>
+        </StackPanel>
+        <ScrollViewer Grid.Row="2">
+            <ItemsControl x:Name="DataExamPaper" Margin="5">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Background="#F5F5F5" Margin="10"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Border Width="250" Padding="10" Background="White" CornerRadius="10" Margin="10">
+                            <StackPanel>
+                                <!-- Tên  -->
+                                <TextBlock Text="{Binding ExamPaperName}" FontSize="14" FontWeight="Bold" Margin="0,5,0,0"/>
+                                <!-- Nút view -->
+                                <Button Tag="{Binding exam}" Content="Preview" Background="DarkGray" Foreground="White" 
+     FontSize="14" Padding="5" BorderThickness="0" Cursor="Hand" Margin="0,10,0,0" />
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</Page>

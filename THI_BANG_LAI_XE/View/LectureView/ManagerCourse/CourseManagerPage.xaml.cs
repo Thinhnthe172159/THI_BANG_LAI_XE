@@ -77,7 +77,7 @@ namespace THI_BANG_LAI_XE.View.LectureView.ManagerCourse
                 LectureMainWindow lectureMainWindow = (LectureMainWindow)Application.Current.MainWindow;
                 lectureMainWindow.ContentFrame.Navigate(new CourseDetail(_user, selectedCourse));
             }
-        }
+        }   
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {

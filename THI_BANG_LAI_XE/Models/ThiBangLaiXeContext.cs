@@ -48,6 +48,7 @@ public partial class ThiBangLaiXeContext : DbContext
         optionsBuilder.UseSqlServer(configuration.GetConnectionString("Default"));
     }
 
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Answer>(entity =>
@@ -102,9 +103,7 @@ public partial class ThiBangLaiXeContext : DbContext
         modelBuilder.Entity<Exam>(entity =>
         {
             entity.Property(e => e.CourseId).HasColumnName("CourseID");
-            entity.Property(e => e.DateCreated)
-                .HasMaxLength(10)
-                .IsFixedLength();
+            entity.Property(e => e.DateCreated).HasColumnType("datetime");
             entity.Property(e => e.Room).HasMaxLength(50);
 
             entity.HasOne(d => d.Course).WithMany(p => p.Exams)
