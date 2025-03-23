@@ -15,6 +15,7 @@ using THI_BANG_LAI_XE.Dao;
 using THI_BANG_LAI_XE.Models;
 using THI_BANG_LAI_XE.View;
 using THI_BANG_LAI_XE.View.LectureView;
+using THI_BANG_LAI_XE.View.Officer;
 
 namespace THI_BANG_LAI_XE
 {
@@ -76,7 +77,9 @@ namespace THI_BANG_LAI_XE
                 }
                 if (user.Role == 2) // Officier
                 {
-
+                    OfficerMainWindow officerMainWindow = new OfficerMainWindow(user);
+                    Application.Current.MainWindow = officerMainWindow;
+                    officerMainWindow.Show();
                 }
                 if (user.Role == 3)// Student
                 {

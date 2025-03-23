@@ -16,6 +16,7 @@ using Microsoft.EntityFrameworkCore;
 using THI_BANG_LAI_XE.Dao;
 using THI_BANG_LAI_XE.Models;
 using THI_BANG_LAI_XE.View.CourseView;
+using THI_BANG_LAI_XE.View.Officer;
 
 namespace THI_BANG_LAI_XE.View.ExamView
 {
@@ -45,13 +46,15 @@ namespace THI_BANG_LAI_XE.View.ExamView
             {
                 var list = _context.examDao.GetExamList();
                 var listCustom = from ex in list
+                let result = _context.resultDao.GetResult(User.UserId, ex.ExamId)
                                  select new
                                  {
                                      Room = ex.Room,
                                      CourseName = ex.Course.CourseName,
                                      Date = ex.Date,
                                      Status = getScore(ex.ExamId),
-                                     exam = ex
+                                     exam = ex,
+                                     IsPassed = result != null && result.PassStatus == 1
                                  };
                 ExamAvailable.ItemsSource = listCustom;
             }
@@ -111,7 +114,16 @@ namespace THI_BANG_LAI_XE.View.ExamView
                             }
                             else
                             {
-                                MessageBox.Show("Bài thi không khả dụng lúc này!");
+                                // certificate pass
+                                if (_context.resultDao.GetResult(userInfor.UserId, exam.ExamId).PassStatus == 1)
+                                {
+                                    CertificatePage certificatePage = new CertificatePage(userInfor);
+                                    NavigationService.Navigate(certificatePage);
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Bài thi không khả dụng lúc này!");
+                                }
                             }
                         }
                         else if (exam.Date < DateOnly.FromDateTime(DateTime.Now))

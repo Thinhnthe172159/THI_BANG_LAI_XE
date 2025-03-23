@@ -61,5 +61,9 @@ namespace THI_BANG_LAI_XE.Dao
         {
             return _context.Results.Where(r => r.UserId == userId && r.ExamId == examId).Count() == 1;
         }
+        public List<Result> GetResultsByUserId(long userId)
+        {
+            return _context.Results.Where(r => r.UserId == userId).ToList();
+        }
     }
 }
