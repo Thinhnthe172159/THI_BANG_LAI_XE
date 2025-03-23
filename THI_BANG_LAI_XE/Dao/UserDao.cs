@@ -56,7 +56,7 @@ namespace THI_BANG_LAI_XE.Dao
             }
             if (!string.IsNullOrEmpty(Phone))
             {
-                UserRegistrationsList = UserRegistrationsList.Where(u => u.Phone.Contains(Phone));
+                UserRegistrationsList = UserRegistrationsList.Where(u => (u.Phone+"").Contains(Phone));
             }
             if (courseId != 0)
             {
@@ -81,6 +81,11 @@ namespace THI_BANG_LAI_XE.Dao
         public User? GetUserById(long UserId)
         {
             return _context.Users.FirstOrDefault(us => us.UserId == UserId);
+        }
+
+        public User? GetUserByIdContainAnswearSelected(long UserId)
+        {
+            return _context.Users.Include(a => a.UserSelectedAnswers).FirstOrDefault(us => us.UserId == UserId);
         }
 
         //Update user

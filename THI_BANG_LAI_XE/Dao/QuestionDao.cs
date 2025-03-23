@@ -66,7 +66,7 @@ namespace THI_BANG_LAI_XE.Dao
         }
 
         // remove question
-        public async Task RemoveQuestion(long questionId)
+        public void RemoveQuestion(long questionId)
         {
             try
             {
@@ -74,7 +74,7 @@ namespace THI_BANG_LAI_XE.Dao
                 if (QuestionToRemove != null)
                 {
                     _context.Questions.Remove(QuestionToRemove);
-                    await _context.SaveChangesAsync();
+                    _context.SaveChanges();
                 }
             }
             catch (Exception)

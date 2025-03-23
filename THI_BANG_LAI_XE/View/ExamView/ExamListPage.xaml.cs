@@ -25,11 +25,11 @@ namespace THI_BANG_LAI_XE.View.ExamView
     /// </summary>
     public partial class ExamListPage : Page
     {
-        private ExamPaper? exp = new ExamPaper();
+        private ExamPaper exp = new ExamPaper();
         private Query _context;
         private ThiBangLaiXeContext _db;
-        private Course? course;
-        private User? userInfor = MainWindow.userLogedIn;
+        private Course course;
+        private User userInfor = MainWindow.userLogedIn;
         public ExamListPage(Course c)
         {
             _db = new ThiBangLaiXeContext();

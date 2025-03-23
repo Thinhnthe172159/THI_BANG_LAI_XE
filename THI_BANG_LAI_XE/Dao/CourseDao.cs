@@ -122,12 +122,16 @@ namespace THI_BANG_LAI_XE.Dao
             try
             {
                 var course = GetCourseById(courseid);
-                var list = course.ExamPapers.ToList();
-                foreach (var exp in list)
+                if (course != null)
                 {
-                    course.ExamPapers.Remove(exp);
+                    var list = course.ExamPapers.ToList();
+                    foreach (var exp in list)
+                    {
+                        course.ExamPapers.Remove(exp);
+                    }
+                    _context.SaveChanges();
                 }
-                _context.SaveChanges();
+
             }
             catch (Exception) { }
         }

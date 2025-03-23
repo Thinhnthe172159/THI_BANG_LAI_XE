@@ -107,7 +107,7 @@ namespace THI_BANG_LAI_XE.View.ExamView
 
 
 
-        void LoadAllQuestion(Question quest)
+        void LoadAllQuestion(Question? quest)
         {
             var QuestionList = _context.questionDao.GetQuestionListByExamPaper(examPaper.ExamPaperId);
             QuestionPanel.Children.Clear();
@@ -188,6 +188,11 @@ namespace THI_BANG_LAI_XE.View.ExamView
                 else
                 {
                     result.PassStatus = 2; // false
+                }
+                var selectAnswear = _context.userDao.GetUserByIdContainAnswearSelected(userInfor.UserId).UserSelectedAnswers.ToList();
+                foreach (var answer in selectAnswear)
+                {
+                    _context.userSelectAnswerDao.DeleteDataRecored(answer.UserId, answer.QuestionId);
                 }
             }
             _context.resultDao.UpdateResultStatus(result);

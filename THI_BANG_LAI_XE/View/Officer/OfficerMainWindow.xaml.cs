@@ -40,8 +40,8 @@ namespace THI_BANG_LAI_XE.View.Officer
 
         private void StudentListButton(object sender, RoutedEventArgs e)
         {
-            UpdateButtonSelection((Button)sender);
-            ContentFrame.Navigate(new StudentListPage());
+            //UpdateButtonSelection((Button)sender);
+            //ContentFrame.Navigate(new StudentListPage());
         }
 
         private void AccountManagerButton(object sender, RoutedEventArgs e)

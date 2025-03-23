@@ -19,16 +19,16 @@
 
         <StackPanel Grid.Row="1"  HorizontalAlignment="Left" Orientation="Horizontal">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="20,0,0,0" >
-                <Label Content="Exam paper name" Margin="5"></Label>
-                <Border BorderThickness="2" Background="White" BorderBrush="DarkGray" Height="35" CornerRadius="4" Margin="2">
-                    <TextBox Background="Transparent" Height="35" Width="200" BorderThickness="0" x:Name="txtExamPaperName" TextChanged="txtExamPaperName_TextChanged"></TextBox>
+                <Label Content="Exam paper name" FontWeight="Bold" Margin="5"></Label>
+                <Border BorderThickness="2" Background="White"  BorderBrush="DarkGray" Height="55" CornerRadius="4" Margin="2">
+                    <TextBox Background="Transparent" Height="50" Width="200" BorderThickness="0" x:Name="txtExamPaperName" TextChanged="txtExamPaperName_TextChanged"></TextBox>
                 </Border>
             </StackPanel>
 
             <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Margin="20,0,0,0" >
                 <Label Content="Enter new exam paper name" FontWeight="Bold" Margin="5"></Label>
-                <Border BorderThickness="2" Background="White" BorderBrush="DarkGray" Height="35" CornerRadius="4" Margin="2">
-                    <TextBox Background="Transparent" Height="35" Width="200" BorderThickness="0" x:Name="txtExamNewName" TextChanged="txtExamPaperName_TextChanged"></TextBox>
+                <Border BorderThickness="2" Background="White" BorderBrush="DarkGray" Height="55" CornerRadius="4" Margin="2">
+                    <TextBox Background="Transparent" Height="50" Width="200" BorderThickness="0" x:Name="txtExamNewName" TextChanged="txtExamPaperName_TextChanged"></TextBox>
                 </Border>
             </StackPanel>
             <Border Background="#614bd4" CornerRadius="8" Height="40" Margin="20,35,0,0">
@@ -63,3 +63,4 @@
         </ScrollViewer>
     </Grid>
 </Page>
+    

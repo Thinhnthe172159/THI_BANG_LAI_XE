@@ -44,11 +44,20 @@ namespace THI_BANG_LAI_XE.View.LectureView.ManagerExamPaper
             LoadExamPaper();
         }
 
+        //preview examPaper
         private void Preview(object sender, RoutedEventArgs e)
         {
-
+            if (sender is Button bt)
+            {
+                var ExamPaper = _context.examPaperDao.getExamPaperById(int.Parse(bt.Tag + ""));
+                if (ExamPaper != null)
+                {
+                    LectureMainWindow lectureMain = (LectureMainWindow)Application.Current.MainWindow;
+                    lectureMain.AddExamPaper = new AddExamPaper(ExamPaper);
+                    lectureMain.AddExamPaper.Show();
+                }
+            }
         }
-
         private void Remove(object sender, RoutedEventArgs e)
         {
 
@@ -86,11 +95,15 @@ namespace THI_BANG_LAI_XE.View.LectureView.ManagerExamPaper
                 };
                 try
                 {
-                    //_context.examPaperDao.AddExamPaper(ExamPaper);
+                    _context.examPaperDao.AddExamPaper(ExamPaper);
                     var examPaper = _context.examPaperDao.getNewestExamPaper();
-                    LectureMainWindow lectureMain = (LectureMainWindow)Application.Current.MainWindow;
-                    lectureMain.AddExamPaper = new AddExamPaper(examPaper);
-                    lectureMain.AddExamPaper.Show();
+                    if (examPaper != null)
+                    {
+                        LectureMainWindow lectureMain = (LectureMainWindow)Application.Current.MainWindow;
+                        LoadExamPaper();
+                        lectureMain.AddExamPaper = new AddExamPaper(examPaper);
+                        lectureMain.AddExamPaper.Show();
+                    }
                 }
                 catch (Exception)
                 {

@@ -20,8 +20,6 @@ namespace THI_BANG_LAI_XE.Dao
         }
 
 
-
-
         //Add Answer
         public void AddAnswer(UserSelectedAnswer userSelectedAnswer)
         {
@@ -67,6 +65,23 @@ namespace THI_BANG_LAI_XE.Dao
         public List<UserSelectedAnswer> getListUserAnswer(long userId, int examPaperId)
         {
             return _context.UserSelectedAnswers.Include(a => a.Question).Include(a => a.Answer).Where(a => a.UserId == userId && a.Question.ExamPaperId == examPaperId).ToList();
+        }
+
+        public void DeleteDataRecored(long userId, long QuestionID)
+        {
+            try
+            {
+                var AnswearSelected = GetAnswerOfUserById(QuestionID, userId);
+                if (AnswearSelected != null)
+                {
+                    _context.UserSelectedAnswers.Remove(AnswearSelected);
+                    _context.SaveChanges();
+                }
+            }
+            catch (Exception)
+            {
+            }
+
         }
     }
 }
