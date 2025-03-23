@@ -5,8 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:THI_BANG_LAI_XE.View.LectureView.ManagerExamPaper"
         mc:Ignorable="d"
-        Title="AddExamPaper" Height="750" Width="1200" VerticalAlignment="Center" HorizontalAlignment="Center">
+        Title="AddExamPaper" Height="750" Width="1200"   WindowStartupLocation="CenterScreen">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Border Background="WhiteSmoke" Grid.Column="0">
+            <StackPanel Orientation="Vertical" Background="Transparent">
+                <TextBlock HorizontalAlignment="Center" FontSize="30" Margin="5" Foreground="DarkBlue" FontWeight="Bold" Text="Question No"></TextBlock>
+                <Border Background="#614bd4" BorderThickness="0" CornerRadius="8" Margin="6">
+                    <Button Content="Add Question ➕" Height="Auto" Padding="10" Foreground="White" FontWeight="Bold" Background="Transparent" BorderThickness="0" Click="AddQuestion"></Button>
+                </Border>
+
+                <DataGrid Margin="8,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Top" BorderThickness="0" Background="Transparent" AutoGenerateColumns="False" IsReadOnly="True" Name="DataQuest" SelectionChanged="DataQuest_SelectionChanged">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="200" Header="Quest List" Binding="{Binding questNo}"></DataGridTextColumn>
+
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </Border>
+        <Frame x:Name="ContentFrame" 
+        NavigationUIVisibility="Hidden" 
+        Grid.Column="1"/>
     </Grid>
 </Window>

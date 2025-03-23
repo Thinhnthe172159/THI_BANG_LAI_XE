@@ -32,21 +32,21 @@ namespace THI_BANG_LAI_XE.View.LectureView.ManagerStudent
             _user = user;
             _db = new ThiBangLaiXeContext();
             _context = new Query(_db);
-            loadStudentList(user.UserId, string.Empty, string.Empty, 0, 1, 1);
+            loadStudentList(user.UserId, string.Empty, string.Empty, 0, 1, 20);
             LoadLectureCourse();
         }
 
         private void FilterByName(object sender, TextChangedEventArgs e)
         {
-            loadStudentList(_user.UserId, txtFUllName.Text, txtPhone.Text, int.Parse(ListCourse.SelectedValue + ""), 1, 1);
+            loadStudentList(_user.UserId, txtFUllName.Text, txtPhone.Text, int.Parse(ListCourse.SelectedValue + ""), 1, 20);
         }
 
         private void FilterByPhoneNumber(object sender, TextChangedEventArgs e)
         {
-            loadStudentList(_user.UserId, txtFUllName.Text, txtPhone.Text, int.Parse(ListCourse.SelectedValue + ""), 1, 1);
+            loadStudentList(_user.UserId, txtFUllName.Text, txtPhone.Text, int.Parse(ListCourse.SelectedValue + ""), 1, 20);
         }
 
-        private void loadStudentList(long userID, string StudentName, string PhoneNumber, int courseid, int page = 1, int pageSize = 1)
+        private void loadStudentList(long userID, string StudentName, string PhoneNumber, int courseid, int page = 1, int pageSize = 20)
         {
             var studentList = _context.userDao.GetStudentlistRegistCourse(userID, StudentName, PhoneNumber, courseid, page, pageSize);
             DataStudent.ItemsSource = studentList;
@@ -76,7 +76,7 @@ namespace THI_BANG_LAI_XE.View.LectureView.ManagerStudent
             if (sender is Button bt)
             {
                 int Page = int.Parse(bt.Tag + "");
-                loadStudentList(_user.UserId, txtFUllName.Text, txtPhone.Text, int.Parse(ListCourse.SelectedValue + ""), Page, 1);
+                loadStudentList(_user.UserId, txtFUllName.Text, txtPhone.Text, int.Parse(ListCourse.SelectedValue + ""), Page, 20);
             }
         }
 
@@ -97,7 +97,7 @@ namespace THI_BANG_LAI_XE.View.LectureView.ManagerStudent
 
         private void ListCourse_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            loadStudentList(_user.UserId, txtFUllName.Text, txtPhone.Text, int.Parse(ListCourse.SelectedValue + ""), 1, 1);
+            loadStudentList(_user.UserId, txtFUllName.Text, txtPhone.Text, int.Parse(ListCourse.SelectedValue + ""), 1, 20);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -105,7 +105,7 @@ namespace THI_BANG_LAI_XE.View.LectureView.ManagerStudent
             txtFUllName.Text = string.Empty;
             txtPhone.Text = string.Empty;
             ListCourse.SelectedIndex = 0;
-            loadStudentList(_user.UserId, string.Empty, string.Empty, 0, 1, 1);
+            loadStudentList(_user.UserId, string.Empty, string.Empty, 0, 1, 20);
         }
     }
 }

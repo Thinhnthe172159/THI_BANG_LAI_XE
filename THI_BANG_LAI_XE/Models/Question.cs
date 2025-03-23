@@ -9,7 +9,7 @@ public partial class Question
 
     public int ExamPaperId { get; set; }
 
-    public string DetailQuestion { get; set; } = null!;
+    public string? DetailQuestion { get; set; }
 
     public string? ImageUrl { get; set; }
 

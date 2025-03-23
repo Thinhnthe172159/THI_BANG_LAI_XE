@@ -1,0 +1,67 @@
+﻿<Page x:Class="THI_BANG_LAI_XE.View.LectureView.ManagerExamPaper.DetailQuestion"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:THI_BANG_LAI_XE.View.LectureView.ManagerExamPaper"
+      mc:Ignorable="d" 
+      d:DesignHeight="750" d:DesignWidth="1000"
+      Title="DetailQuestion">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" BorderThickness="1" CornerRadius="5" Background="WhiteSmoke" >
+            <StackPanel Orientation="Horizontal" >
+                <StackPanel Orientation="Vertical">
+                    <Label Content="Enter question detail *" FontSize="20" FontWeight="Bold" Foreground="red"></Label>
+                    <TextBox Background="White" x:Name="txtQuestionDetail" Height="64" Width="700" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" TextChanged="txtQuestionDetail_TextChanged"></TextBox>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+        <Border BorderThickness="1" Grid.Row="2" Background="WhiteSmoke">
+            <StackPanel Orientation="Horizontal" Margin="5" HorizontalAlignment="Center">
+                <Image Margin="30,0,0,0" Height="150" Width="450" HorizontalAlignment="Left" x:Name="txtImageUrl" Source="{Binding ImageUrl}" ></Image>
+                <Border Margin="10" Background="ForestGreen" CornerRadius="5"  HorizontalAlignment="Right" VerticalAlignment="Center">
+                    <Button Content="Upload Image"  Background="Transparent" Margin="10,10,10,10"  Foreground="White" BorderThickness="0"></Button>
+                </Border>
+            </StackPanel>
+        </Border>
+
+        <StackPanel Name="DetailAnswerEdit" Grid.Row="3" Orientation="Horizontal" Visibility="Hidden" >
+            <StackPanel Orientation="Vertical" Height="133">
+                <StackPanel Orientation="Vertical" Width="700" Height="100">
+                    <Label Content="Answer Detail" FontSize="20"></Label>
+                    <TextBox Height="53" Name="txtAnswer" BorderThickness="2" BorderBrush="DarkBlue" Background="WhiteSmoke" Width="700" TextChanged="txtAnswer_TextChanged"></TextBox>
+                </StackPanel>
+                <CheckBox Margin="10" x:Name="txtIsCorrectAnswer" Content="Is Question Correct" Click="txtIsCorrectAnswer_Click">
+                </CheckBox>
+            </StackPanel>
+        </StackPanel>
+        <TextBox Name="txtAnswerId" Visibility="Hidden"></TextBox>
+        <StackPanel Grid.Row="4" Orientation="Vertical" >
+            <DataGrid Height="190" AutoGenerateColumns="False" IsReadOnly="True" Name="DataAnswer" SelectionChanged="DataAnswer_SelectionChanged">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="*" Header="Question detail" Binding="{Binding DetailAnswer}" ></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0">
+                <Border Margin="2" Width="100"   Background="LightSteelBlue" CornerRadius="5" Height="40">
+                    <Button Content="➕" Background="Transparent" BorderThickness="0" Padding="10" FontWeight="Bold" Foreground="White" Click="Button_Click"></Button>
+                </Border>
+                <Border Margin="2" Width="100"  Height="40" Background="LightBlue" CornerRadius="5" HorizontalAlignment="Left">
+                    <Button Content="➖"  Background="Transparent" BorderThickness="0" Padding="10"  FontWeight="Bold" Foreground="White" Click="Button_Click_1"></Button>
+                </Border>
+            </StackPanel>
+            <Border Margin="10" Background="red" CornerRadius="5"  HorizontalAlignment="Right">
+                <Button Content="! Remove" Background="Transparent" BorderThickness="0" Padding="10" FontSize="16" FontWeight="Bold" Foreground="White" Click="Button_Click_2"></Button>
+            </Border>
+        </StackPanel>
+    </Grid>
+</Page>

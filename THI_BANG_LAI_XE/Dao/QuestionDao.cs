@@ -42,8 +42,11 @@ namespace THI_BANG_LAI_XE.Dao
             }
         }
 
+        //get newest Question by examid
+        public Question? GetNewestQuestion(int examPaperId) => _context.Questions.OrderBy(a => a.QuestionId).FirstOrDefault(ex => ex.ExamPaperId == examPaperId);
+
         // Update question
-        public void UpdateQuestionAsync(Question question)
+        public void UpdateQuestion(Question question)
         {
             try
             {
@@ -63,7 +66,7 @@ namespace THI_BANG_LAI_XE.Dao
         }
 
         // remove question
-        public async Task RemoveQuestionAsync(long questionId)
+        public async Task RemoveQuestion(long questionId)
         {
             try
             {

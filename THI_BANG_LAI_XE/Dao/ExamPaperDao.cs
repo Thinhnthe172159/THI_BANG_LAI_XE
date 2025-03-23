@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;
 using Microsoft.Identity.Client;
 using THI_BANG_LAI_XE.Models;
@@ -41,7 +42,7 @@ namespace THI_BANG_LAI_XE.Dao
         }
 
         //get exam paper by id
-        public ExamPaper? getExamPaperById(int id) => _context.ExamPapers.Include(ex => ex.Questions).FirstOrDefault(ex => ex.ExamPaperId == id);
+        public ExamPaper? getExamPaperById(int id) => _context.ExamPapers.Include(ex => ex.Questions).OrderBy(a => a.CreateDate).FirstOrDefault(ex => ex.ExamPaperId == id);
 
         //add examPaper 
         public void AddExamPaper(ExamPaper examPaper)
@@ -55,6 +56,9 @@ namespace THI_BANG_LAI_XE.Dao
             {
             }
         }
+
+        // get newest examPaper
+        public ExamPaper? getNewestExamPaper() => _context.ExamPapers.Include(a => a.Questions).OrderByDescending(a => a.CreateDate).FirstOrDefault();
 
         // Update Exam paper
         public void UpdateExamPaperAsync(ExamPaper examPaper)
@@ -74,8 +78,36 @@ namespace THI_BANG_LAI_XE.Dao
             }
         }
 
+        public void RemoveAllOldQuestionAndAnswer(int examPaperId)
+        {
+            try
+            {
+                var listQuest = _context.Questions.Where(a => a.ExamPaperId == examPaperId).ToList();
+
+                var listQuestId = listQuest.Select(a => a.QuestionId).ToList();
+                var listAnswer = _context.Answers.Where(a => listQuestId.Contains(a.QuestionId)).ToList();
+
+                _context.Answers.RemoveRange(listAnswer);
+                _context.Questions.RemoveRange(listQuest);
+
+                var examPaper = _context.ExamPapers.FirstOrDefault(a => a.ExamPaperId == examPaperId);
+                if (examPaper != null)
+                {
+                    _context.ExamPapers.Remove(examPaper);
+                }
+
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Lỗi: {ex.Message}");
+                throw; 
+            }
+        }
+
+
         //Remove Exampaper
-        public void RemoveExamPaperAsync(int ExamPaperById)
+        public void RemoveExamPaper(int ExamPaperById)
         {
             try
             {

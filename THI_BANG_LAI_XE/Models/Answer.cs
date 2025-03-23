@@ -9,7 +9,7 @@ public partial class Answer
 
     public long QuestionId { get; set; }
 
-    public string DetailAnswer { get; set; } = null!;
+    public string? DetailAnswer { get; set; }
 
     public int IsCorrectOrNot { get; set; }
 

@@ -9,7 +9,7 @@ public partial class ExamPaper
 
     public string ExamPaperName { get; set; } = null!;
 
-    public DateTime CreateDate { get; set; }
+    public DateTime CreateDate { get; set; } = DateTime.Now;
 
     public virtual ICollection<Question> Questions { get; set; } = new List<Question>();
 

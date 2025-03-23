@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using THI_BANG_LAI_XE.Dao;
 using THI_BANG_LAI_XE.Models;
+using THI_BANG_LAI_XE.View.LectureView.ManagerExam;
+using THI_BANG_LAI_XE.View.LectureView.ManagerExamPaper;
 
 namespace THI_BANG_LAI_XE.View.LectureView
 {
@@ -25,6 +27,7 @@ namespace THI_BANG_LAI_XE.View.LectureView
         public static User userLogedIn;
         private Query _context;
         private ThiBangLaiXeContext _db;
+        public AddExamPaper? AddExamPaper { get; set; }
 
         public LectureMainWindow(User user)
         {

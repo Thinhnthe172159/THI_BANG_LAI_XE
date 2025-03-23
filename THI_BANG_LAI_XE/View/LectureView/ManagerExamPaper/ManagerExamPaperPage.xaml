@@ -17,13 +17,23 @@
 
         <TextBlock Text="Exam Paper" Margin="1" Grid.Row="0" FontSize="20"></TextBlock>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left">
+        <StackPanel Grid.Row="1"  HorizontalAlignment="Left" Orientation="Horizontal">
             <StackPanel Orientation="Vertical" HorizontalAlignment="Left" Margin="20,0,0,0" >
                 <Label Content="Exam paper name" Margin="5"></Label>
                 <Border BorderThickness="2" Background="White" BorderBrush="DarkGray" Height="35" CornerRadius="4" Margin="2">
-                    <TextBox Background="Transparent" Height="35" Width="200" BorderThickness="0" x:Name="txtExamPaperName"></TextBox>
+                    <TextBox Background="Transparent" Height="35" Width="200" BorderThickness="0" x:Name="txtExamPaperName" TextChanged="txtExamPaperName_TextChanged"></TextBox>
                 </Border>
             </StackPanel>
+
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Margin="20,0,0,0" >
+                <Label Content="Enter new exam paper name" FontWeight="Bold" Margin="5"></Label>
+                <Border BorderThickness="2" Background="White" BorderBrush="DarkGray" Height="35" CornerRadius="4" Margin="2">
+                    <TextBox Background="Transparent" Height="35" Width="200" BorderThickness="0" x:Name="txtExamNewName" TextChanged="txtExamPaperName_TextChanged"></TextBox>
+                </Border>
+            </StackPanel>
+            <Border Background="#614bd4" CornerRadius="8" Height="40" Margin="20,35,0,0">
+                <Button Content="Add new exam paper" Foreground="White" Padding="10" Background="Transparent" BorderThickness="0" Click="AddExamPaper"></Button>
+            </Border>
         </StackPanel>
         <ScrollViewer Grid.Row="2">
             <ItemsControl x:Name="DataExamPaper" Margin="5">
@@ -40,8 +50,11 @@
                                 <!-- Tên  -->
                                 <TextBlock Text="{Binding ExamPaperName}" FontSize="14" FontWeight="Bold" Margin="0,5,0,0"/>
                                 <!-- Nút view -->
-                                <Button Tag="{Binding exam}" Content="Preview" Background="DarkGray" Foreground="White" 
-     FontSize="14" Padding="5" BorderThickness="0" Cursor="Hand" Margin="0,10,0,0" />
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Tag="{Binding ExamPaperId}" Width="Auto" Content="Preview" Background="DarkGray" Foreground="White" FontSize="14" Padding="5" BorderThickness="0" Cursor="Hand" Margin="0,10,0,0" Click="Preview" />
+                                    <Button Tag="{Binding ExamPaperId}" Width="Auto" Content="Remove" Background="Red" Foreground="White" FontSize="14" Padding="5" BorderThickness="0" Cursor="Hand" Margin="0,10,0,0" Click="Remove" />
+                                </StackPanel>
+
                             </StackPanel>
                         </Border>
                     </DataTemplate>

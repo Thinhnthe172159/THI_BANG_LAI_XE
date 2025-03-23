@@ -179,22 +179,28 @@ namespace THI_BANG_LAI_XE.View.LectureView.ManagerCourse
         // remove course
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                if (MessageBox.Show("Bạn có muốn xóa khóa học này không?", "Xóa khóa học", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
-                {
-                    _context.courseDao.removeAllExamPaperOfCourse(_course.CourseId);
-                    _context.courseDao.RemoveCourse(_course.CourseId);
-                    LectureMainWindow lectureMainWindow = (LectureMainWindow)Application.Current.MainWindow;
-                    lectureMainWindow.ContentFrame.Navigate(new CourseManagerPage(_user));
-                    MessageBox.Show("đã xóa khóa học!");
-                }
 
-            }
-            catch (Exception ex)
+            if (MessageBox.Show("Bạn có muốn xóa khóa học này không?", "Xóa khóa học", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
             {
-                MessageBox.Show(ex.ToString());
+                try
+                {
+                    if (_db.Registrations.Where(a => a.CourseId == _course.CourseId).Count() < 1)
+                    {
+                        _context.courseDao.removeAllExamPaperOfCourse(_course.CourseId);
+                        _context.courseDao.RemoveCourse(_course.CourseId);
+                        LectureMainWindow lectureMainWindow = (LectureMainWindow)Application.Current.MainWindow;
+                        lectureMainWindow.ContentFrame.Navigate(new CourseManagerPage(_user));
+                        MessageBox.Show("đã xóa khóa học!");
+                    }
+                    MessageBox.Show("Khóa học đã được sử dụng, không thể xóa!");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Khóa học đã được sử dụng, không thể xóa!");
+                }
             }
+
+
         }
     }
 }

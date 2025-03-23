@@ -22,6 +22,7 @@ namespace THI_BANG_LAI_XE.Dao
 
         // get list of answer
         public List<Answer> GetAnswerList() => _context.Answers.ToList();
+        public List<Answer> GetAnswerListByQestion(long QuestionID) => _context.Answers.Where(a => a.QuestionId == QuestionID).ToList();
 
         // get answer by id 
         public Answer? GetAnswerById(long AnswerId) => _context.Answers.Include(asw => asw.Question).FirstOrDefault(asw => asw.AnswerId == AnswerId);
@@ -32,7 +33,7 @@ namespace THI_BANG_LAI_XE.Dao
             try
             {
                 _context.Answers.Add(answer);
-                _context.SaveChangesAsync();
+                _context.SaveChanges();
             }
             catch (Exception)
             {
@@ -40,7 +41,7 @@ namespace THI_BANG_LAI_XE.Dao
         }
 
         // Update Answer
-        public void UpdateAnswerAsync(Answer answer)
+        public void UpdateAnswer(Answer answer)
         {
             try
             {
@@ -74,5 +75,7 @@ namespace THI_BANG_LAI_XE.Dao
             {
             }
         }
+
+
     }
 }

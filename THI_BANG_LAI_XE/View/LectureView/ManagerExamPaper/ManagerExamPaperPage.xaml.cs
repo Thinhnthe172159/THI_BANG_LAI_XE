@@ -39,6 +39,65 @@ namespace THI_BANG_LAI_XE.View.LectureView.ManagerExamPaper
             DataExamPaper.ItemsSource = _context.examPaperDao.getFilterExamPaperList(txtExamPaperName.Text);
         }
 
+        private void txtExamPaperName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            LoadExamPaper();
+        }
 
+        private void Preview(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Remove(object sender, RoutedEventArgs e)
+        {
+
+            if (MessageBox.Show("Bạn có muốn xóa đề thi này không?", "Xóa đề thi", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+
+                if (sender is Button bt)
+                {
+
+                    try
+                    {
+                        _context.examPaperDao.RemoveAllOldQuestionAndAnswer(int.Parse(bt.Tag.ToString()));
+                        MessageBox.Show("Đã xóa bài kiểm tra thành công!");
+                        LoadExamPaper();
+                    }
+                    catch (Exception)
+                    {
+                        MessageBox.Show("Không thể xóa đề thi này vì nó đang được sử dụng");
+                    }
+                }
+            }
+        }
+
+        private void AddExamPaper(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtExamNewName.Text))
+            {
+                MessageBox.Show("Tên đề thi không được để trống!");
+            }
+            else
+            {
+                var ExamPaper = new ExamPaper
+                {
+                    ExamPaperName = txtExamNewName.Text
+                };
+                try
+                {
+                    //_context.examPaperDao.AddExamPaper(ExamPaper);
+                    var examPaper = _context.examPaperDao.getNewestExamPaper();
+                    LectureMainWindow lectureMain = (LectureMainWindow)Application.Current.MainWindow;
+                    lectureMain.AddExamPaper = new AddExamPaper(examPaper);
+                    lectureMain.AddExamPaper.Show();
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Đã xảy ra lỗi khi thêm đề thi mới!");
+                }
+
+            }
+        }
     }
 }
