@@ -88,6 +88,8 @@ namespace THI_BANG_LAI_XE.View.LectureView
         private void NotificationButton(object sender, RoutedEventArgs e)
         {
             UpdateButtonSelection((Button)sender);
+            LectureMainWindow lectureMainWindow = (LectureMainWindow)Application.Current.MainWindow;
+            lectureMainWindow.ContentFrame.Navigate(new NotificationView.NotificaitonListPage(userLogedIn));
         }
 
         // log out

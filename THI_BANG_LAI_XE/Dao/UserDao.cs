@@ -21,8 +21,8 @@ namespace THI_BANG_LAI_XE.Dao
             _context = context;
         }
 
-
-
+        // getSystem
+        public User? System() => _context.Users.FirstOrDefault(a => a.UserId == 2);
         //Add user
         public void AddUser(User user)
         {
@@ -56,7 +56,7 @@ namespace THI_BANG_LAI_XE.Dao
             }
             if (!string.IsNullOrEmpty(Phone))
             {
-                UserRegistrationsList = UserRegistrationsList.Where(u => (u.Phone+"").Contains(Phone));
+                UserRegistrationsList = UserRegistrationsList.Where(u => (u.Phone + "").Contains(Phone));
             }
             if (courseId != 0)
             {

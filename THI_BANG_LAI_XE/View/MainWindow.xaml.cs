@@ -81,7 +81,7 @@ namespace THI_BANG_LAI_XE.View
         private void Button_Click_4(object sender, RoutedEventArgs e)
         {
             UpdateButtonSelection((Button)sender);
-            ContentFrame.Navigate(new NotificaitonListPage());
+            ContentFrame.Navigate(new NotificaitonListPage(userLogedIn));
         }
 
 

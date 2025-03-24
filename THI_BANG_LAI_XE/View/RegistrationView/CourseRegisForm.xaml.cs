@@ -56,6 +56,14 @@ namespace THI_BANG_LAI_XE.View.RegistrationView
                 _context.registrationDao.AddRigistration(register);
                 MessageBox.Show("Hệ thống đã nhận được đăng ký của bạn, vui lòng chờ duyệt đăng ký.");
                 this.Close();
+                var notification = new Notification
+                {
+                    Sender = MainWindow.userLogedIn.UserId,
+                    Receiver = course.Teacher.UserId,
+                    Title = "Đăng Ký khóa học",
+                    Content = $"Đăng ký khóa học từ {MainWindow.userLogedIn.FullName}\nKhóa học: {course.CourseName}\n{txtMessage.Text}"
+                };
+                _context.notificationDao.AddNotification(notification);
             }
             catch (Exception)
             {

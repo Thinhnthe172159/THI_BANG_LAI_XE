@@ -55,7 +55,7 @@ namespace THI_BANG_LAI_XE.Dao
 
         public Registration? getRegistedById(long id)
         {
-            return _context.Registrations.FirstOrDefault(r => r.RegistrationId == id);
+            return _context.Registrations.Include(a => a.User).FirstOrDefault(r => r.RegistrationId == id);
         }
         public Registration? getCourseRegistedByUserId(long Userid)
         {
@@ -69,7 +69,7 @@ namespace THI_BANG_LAI_XE.Dao
 
         public bool IsCourseRegisted(long UserId, int CourseId)
         {
-            return _context.Registrations.FirstOrDefault(r => r.UserId == UserId && r.CourseId == CourseId && r.Status == 1) == null ? false : true;
+            return _context.Registrations.FirstOrDefault(r => r.UserId == UserId && r.CourseId == CourseId) == null ? false : true;
         }
 
 
