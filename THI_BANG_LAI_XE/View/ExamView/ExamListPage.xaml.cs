@@ -90,9 +90,42 @@ namespace THI_BANG_LAI_XE.View.ExamView
                     if (Result != null)
                     {
                         exp = _context.examPaperDao.getExamPaperById(Result.ExamPaperId);
+                        if (Result.PassStatus == 1) 
+                        {
+                            if (_context.certificateDao.GetCertificateByUserId(userInfor.UserId) != null)
+                            {
+                                CertificatePage certificatePage = new CertificatePage(userInfor, _context);
+                                NavigationService.Navigate(certificatePage);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Bạn chưa được cấp chứng chỉ.");
+                            }
+                        }
+                        else if (Result.PassStatus == 0)
+                        {
+                            if (exam.Date == DateOnly.FromDateTime(DateTime.Now))
+                            {
+                                TakingExamWindow takingExamWindow = new TakingExamWindow(exam, exp);
+                                takingExamWindow.Show();
+                            }
+                            else if (exam.Date < DateOnly.FromDateTime(DateTime.Now))
+                            {
+                                MessageBox.Show("Đã quá ngày làm bài thi");
+                            }
+                            else
+                            {
+                                MessageBox.Show("Chưa đến ngày làm bài thi");
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Bài thi không khả dụng lúc này!");
+                        }
                     }
                     else
                     {
+                        // user chưa thi
                         RandomExamPaper(exam);
                         Result = new Result
                         {
@@ -108,30 +141,12 @@ namespace THI_BANG_LAI_XE.View.ExamView
                         {
                             _context.userSelectAnswerDao.AddAnswer(new UserSelectedAnswer { UserId = userInfor.UserId, QuestionId = quest.QuestionId });
                         }
-                    }
 
-                    if (exp != null && _context.resultDao.ResultExist(userInfor.UserId, exam.ExamId))
-                    {
+                        // Cho phép thi nếu còn date
                         if (exam.Date == DateOnly.FromDateTime(DateTime.Now))
                         {
-                            if (_context.resultDao.GetResult(userInfor.UserId, exam.ExamId).PassStatus < 1)
-                            {
-                                TakingExamWindow takingExamWindow = new TakingExamWindow(exam, exp);
-                                takingExamWindow.Show();
-                            }
-                            else
-                            {
-                                // certificate pass
-                                if (_context.resultDao.GetResult(userInfor.UserId, exam.ExamId).PassStatus == 1)
-                                {
-                                    CertificatePage certificatePage = new CertificatePage(userInfor);
-                                    NavigationService.Navigate(certificatePage);
-                                }
-                                else
-                                {
-                                    MessageBox.Show("Bài thi không khả dụng lúc này!");
-                                }
-                            }
+                            TakingExamWindow takingExamWindow = new TakingExamWindow(exam, exp);
+                            takingExamWindow.Show();
                         }
                         else if (exam.Date < DateOnly.FromDateTime(DateTime.Now))
                         {

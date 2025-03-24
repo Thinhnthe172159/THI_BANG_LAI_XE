@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using THI_BANG_LAI_XE.Models;
+using THI_BANG_LAI_XE.Dao;
 
 namespace THI_BANG_LAI_XE.Dao
 {
@@ -22,6 +23,7 @@ namespace THI_BANG_LAI_XE.Dao
             _userDao = new Lazy<UserDao>(() => new UserDao(_context));
             _result = new Lazy<ResultDao>(() => new ResultDao(_context));
             _userSelectAnswerDao = new Lazy<UserSelectAnswerDao>(() => new UserSelectAnswerDao(_context));
+            _certificateDao = new Lazy<CertificateDao>(() => new CertificateDao(_context));
         }
 
         private Lazy<AnswerDao> _answerDao;
@@ -33,6 +35,7 @@ namespace THI_BANG_LAI_XE.Dao
         private Lazy<UserDao> _userDao;
         private Lazy<ResultDao> _result;
         private Lazy<UserSelectAnswerDao> _userSelectAnswerDao;
+        private Lazy<CertificateDao> _certificateDao;
 
         public AnswerDao answerDao => _answerDao.Value;
         public CourseDao courseDao => _courseDao.Value;
@@ -43,6 +46,7 @@ namespace THI_BANG_LAI_XE.Dao
         public UserDao userDao => _userDao.Value;
         public ResultDao resultDao => _result.Value;
         public UserSelectAnswerDao userSelectAnswerDao => _userSelectAnswerDao.Value;
+        public CertificateDao certificateDao => _certificateDao.Value;
     }
 
 }

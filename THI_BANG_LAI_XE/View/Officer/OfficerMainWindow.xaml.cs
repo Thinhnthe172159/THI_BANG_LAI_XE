@@ -53,7 +53,7 @@ namespace THI_BANG_LAI_XE.View.Officer
         private void CertificateButton(object sender, RoutedEventArgs e)
         {
             UpdateButtonSelection((Button)sender);
-            ContentFrame.Navigate(new CertificatePage(userLogedIn));
+            ContentFrame.Navigate(new CertificateManage());
         }
 
         private void NotificationButton(object sender, RoutedEventArgs e)
