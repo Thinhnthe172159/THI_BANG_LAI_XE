@@ -20,6 +20,7 @@
                 <Button Content="👤 Your profile" HorizontalContentAlignment="Left" Margin="2" BorderThickness="0" Background="#614bd4" Padding="5" Click="ProfileButton" Foreground="White" />
                 <Button Content="🧑‍🎓 Student" HorizontalContentAlignment="Left" Margin="2" BorderThickness="0" Background="#614bd4" Padding="5" Click="StudentButton" Foreground="White"/>
                 <Button Content="🎓 Courses" HorizontalContentAlignment="Left" Margin="2" BorderThickness="0" Background="#614bd4" Padding="5" Click="CourseButton" Foreground="White"/>
+                <Button Content="🎓 Courses Registration" HorizontalContentAlignment="Left" Margin="2" BorderThickness="0" Background="#614bd4" Padding="5" Click="CourseRegistButton" Foreground="White"/>
                 <Button Content="📂 ExamPaper" HorizontalContentAlignment="Left" Margin="2" BorderThickness="0" Background="#614bd4" Padding="5" Click="ExamPaperButton" Foreground="White"/>
                 <Button Content="📋 Exam" HorizontalContentAlignment="Left" Margin="2" BorderThickness="0" Background="#614bd4" Padding="5" Click="ExamButton" Foreground="White"/>
                 <Button Content="🔔 Notificaiton" HorizontalContentAlignment="Left" Margin="2" BorderThickness="0" Background="#614bd4" Padding="5" Click="NotificationButton" Foreground="White"/>

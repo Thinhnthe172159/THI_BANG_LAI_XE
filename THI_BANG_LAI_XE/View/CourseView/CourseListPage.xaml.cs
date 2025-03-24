@@ -12,9 +12,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Win32;
 using THI_BANG_LAI_XE.Dao;
 using THI_BANG_LAI_XE.Models;
 using THI_BANG_LAI_XE.View.CourseView;
+using THI_BANG_LAI_XE.View.ExamView;
 
 namespace THI_BANG_LAI_XE.View
 {
@@ -45,21 +47,33 @@ namespace THI_BANG_LAI_XE.View
             if (sender is Button button && button.DataContext is Course selectedCourse)
             {
                 var SelectedCourse = _context.courseDao.GetCourseById(selectedCourse.CourseId);
-                if (SelectedCourse != null && _context.registrationDao.IsCourseRegisted(MainWindow.userLogedIn.UserId, selectedCourse.CourseId))
+                if (SelectedCourse != null && _context.registrationDao.IsCourseRegisted(MainWindow.userLogedIn.UserId, selectedCourse.CourseId) && SelectedCourse.StartDate <= DateOnly.FromDateTime(DateTime.Now) && SelectedCourse.EndDate > DateOnly.FromDateTime(DateTime.Now))
                 {
                     MainWindow? mainWindow = Application.Current.MainWindow as MainWindow;
                     mainWindow?.ContentFrame.Navigate(new CourseDetail(SelectedCourse));
                 }
+                else if (SelectedCourse.StartDate > DateOnly.FromDateTime(DateTime.Now))
+                {
+                    MessageBox.Show("Chưa đến ngày bắt đầu khóa học");
+                }
+                else if (SelectedCourse.EndDate < DateOnly.FromDateTime(DateTime.Now))
+                {
+                    MessageBox.Show("Khóa học này đã kết thúc!");
+                }
                 else
                 {
-                    MessageBox.Show("Ban chưa đăng ký khóa học !");
+                    if (MessageBox.Show("Ban chưa đăng ký khóa học,Bạn có muốn tham gia khóa học này không?", "đăng ký khóa học", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    {
+                        MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+                        mainWindow.ContentFrame.Navigate(new RegistrationView.CourseRegistrationPage());
+                    }
                 }
             }
         }
 
         void LoadAllCourser()
         {
-            this.DataCourse.ItemsSource = _context.courseDao.GetCourseList();
+            this.DataCourse.ItemsSource = _context.courseDao.GetRigistedCourse(MainWindow.userLogedIn.UserId);
         }
     }
 }

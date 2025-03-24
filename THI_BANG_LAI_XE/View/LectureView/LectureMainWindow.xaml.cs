@@ -11,10 +11,12 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Microsoft.Identity.Client;
 using THI_BANG_LAI_XE.Dao;
 using THI_BANG_LAI_XE.Models;
 using THI_BANG_LAI_XE.View.LectureView.ManagerExam;
 using THI_BANG_LAI_XE.View.LectureView.ManagerExamPaper;
+using THI_BANG_LAI_XE.View.LectureView.ManagerRegister;
 
 namespace THI_BANG_LAI_XE.View.LectureView
 {
@@ -28,6 +30,7 @@ namespace THI_BANG_LAI_XE.View.LectureView
         private Query _context;
         private ThiBangLaiXeContext _db;
         public AddExamPaper? AddExamPaper { get; set; }
+        public ManagerRegisterPage? managerRegisterPage { get; set; }
 
         public LectureMainWindow(User user)
         {
@@ -103,6 +106,13 @@ namespace THI_BANG_LAI_XE.View.LectureView
             }
             clickedButton.Background = (Brush?)new BrushConverter().ConvertFromString("#816fd4");
             selectedButton = clickedButton;
+        }
+
+        private void CourseRegistButton(object sender, RoutedEventArgs e)
+        {
+            LectureMainWindow lectureMainWindow = (LectureMainWindow)Application.Current.MainWindow;
+            managerRegisterPage = new ManagerRegisterPage();
+            lectureMainWindow.ContentFrame.Navigate(managerRegisterPage);
         }
     }
 }

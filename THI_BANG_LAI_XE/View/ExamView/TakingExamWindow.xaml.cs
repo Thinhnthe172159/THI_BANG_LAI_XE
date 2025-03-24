@@ -26,12 +26,12 @@ namespace THI_BANG_LAI_XE.View.ExamView
     /// </summary>
     public partial class TakingExamWindow : Window
     {
-        private Exam? Exam;
+        private Exam Exam;
         private Query _context;
         private ThiBangLaiXeContext _db;
-        private Question? Quest;
-        private User? userInfor = MainWindow.userLogedIn;
-        private ExamPaper? examPaper;
+        private Question Quest;
+        private User userInfor = MainWindow.userLogedIn;
+        private ExamPaper examPaper;
 
         private TimeSpan examDuration = TimeSpan.FromMinutes(19);
         private DispatcherTimer? examTimer;
@@ -181,7 +181,8 @@ namespace THI_BANG_LAI_XE.View.ExamView
             {
                 List<UserSelectedAnswer> UserAnswerList = _context.userSelectAnswerDao.getListUserAnswer(userInfor.UserId, result.ExamPaperId);
                 result.Score = UserAnswerList.Where(u => u.Answer != null && u.Answer.IsCorrectOrNot == 1).Count();
-                if (result.Score >= 21)
+                float PassCondition = (float)result.Score / (float)examPaper.Questions.Count * 100;
+                if (PassCondition > 80)// bài thi có tỉ lệ câu đúng > 80% thì pass
                 {
                     result.PassStatus = 1;// pass
                 }

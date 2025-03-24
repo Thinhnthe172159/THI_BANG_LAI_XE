@@ -46,7 +46,7 @@ namespace THI_BANG_LAI_XE.View.ExamView
             {
                 var list = _context.examDao.GetExamList();
                 var listCustom = from ex in list
-                let result = _context.resultDao.GetResult(User.UserId, ex.ExamId)
+                                 let result = _context.resultDao.GetResult(User.UserId, ex.ExamId)
                                  select new
                                  {
                                      Room = ex.Room,
@@ -66,7 +66,14 @@ namespace THI_BANG_LAI_XE.View.ExamView
             if (result != null)
             {
                 string PassedScore = result.PassStatus == 1 ? "Passed" : "Not Passed";
-                return $"your result :{(int)result.Score + "/25"} --> {PassedScore}";
+                var expper = _context.examPaperDao.getExamPaperById(result.ExamPaperId);
+                int questCount = 0;
+                if (expper != null)
+                {
+                    questCount = expper.Questions.Count;
+                }
+
+                return $"your result :{(int)result.Score} / {questCount} --> {PassedScore}";
             }
             return "No result recorded";
         }

@@ -121,5 +121,13 @@ namespace THI_BANG_LAI_XE.View
             this.Close();
 
         }
+
+        // Registration course
+        private void Button_Click_5(object sender, RoutedEventArgs e)
+        {
+            UpdateButtonSelection((Button)sender);
+            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+            mainWindow.ContentFrame.Navigate(new RegistrationView.CourseRegistrationPage());
+        }
     }
 }

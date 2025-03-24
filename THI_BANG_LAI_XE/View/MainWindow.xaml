@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:THI_BANG_LAI_XE.View"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="Home" Height="550" Width="1000">
+        Title="Home" Height="750" Width="1400">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -20,6 +20,7 @@
                 <Button Content="🏠 Home" HorizontalContentAlignment="Left" Margin="2" BorderThickness="0" Background="#614bd4" Padding="5" Click="Button_Click_1" Foreground="White"/>
                 <Button Content="👤 Your profile" HorizontalContentAlignment="Left" Margin="2" BorderThickness="0" Background="#614bd4" Padding="5" Click="Button_Click_2" Foreground="White" />
                 <Button Content="🎓 Courses" HorizontalContentAlignment="Left" Margin="2" BorderThickness="0" Background="#614bd4" Padding="5" Click="Button_Click" Foreground="White"/>
+                <Button Content="🎓 Courses Registration" HorizontalContentAlignment="Left" Margin="2" BorderThickness="0" Background="#614bd4" Padding="5" Foreground="White" Click="Button_Click_5"/>
                 <Button Content="🔔 Notificaiton" HorizontalContentAlignment="Left" Margin="2" BorderThickness="0" Background="#614bd4" Padding="5" Click="Button_Click_4" Foreground="White"/>
             </StackPanel>
         </Border>

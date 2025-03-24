@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Identity.Client;
+using Microsoft.Win32;
 using THI_BANG_LAI_XE.Dao;
 using THI_BANG_LAI_XE.Models;
 
@@ -28,6 +30,7 @@ namespace THI_BANG_LAI_XE.View.LectureView.ManagerExamPaper
         private Question quest;
         private ExamPaper examPaper;
         private bool isUpdatingUI = false;
+        private string imageFolderPath;
         public DetailQuestion(Question _question, ExamPaper exp)
         {
             _db = new ThiBangLaiXeContext();
@@ -36,6 +39,16 @@ namespace THI_BANG_LAI_XE.View.LectureView.ManagerExamPaper
             quest = _question;
             examPaper = exp;
             LoadQuestionContent();
+            string projectDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
+            imageFolderPath = System.IO.Path.Combine(projectDirectory, "QuestionImage");
+
+
+            // Tạo thư mục nếu chưa tồn tại
+            if (!Directory.Exists(imageFolderPath))
+            {
+                Directory.CreateDirectory(imageFolderPath);
+            }
+
         }
 
         void LoadQuestionContent()
@@ -172,5 +185,36 @@ namespace THI_BANG_LAI_XE.View.LectureView.ManagerExamPaper
                 LoadQuestionContent();
             }
         }
+
+        // upload image for question
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "Image files (*.jpg, *.jpeg, *.png, *.bmp, *.gif)|*.jpg;*.jpeg;*.png;*.bmp;*.gif",
+                Title = "Select an Image"
+            };
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string fileExtension = System.IO.Path.GetExtension(openFileDialog.FileName);
+                string newFileName = $"question_{quest.QuestionId}_{quest.ExamPaperId}";
+
+                string destinationPath = System.IO.Path.Combine(imageFolderPath, newFileName);
+
+                try
+                {
+                    File.Copy(openFileDialog.FileName, destinationPath, true);
+                    quest.ImageUrl = destinationPath;
+                    _context.questionDao.UpdateQuestion(quest);
+                    txtImageUrl.Source = new BitmapImage(new Uri(destinationPath));
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Lỗi khi lưu ảnh: " + ex.Message);
+                }
+            }
+        }
+
     }
 }

@@ -22,6 +22,27 @@ namespace THI_BANG_LAI_XE.Dao
         // get course list
         public List<Course> GetCourseList() => _context.Courses.Include(c => c.Teacher).Include(c => c.ExamPapers).ToList();
 
+        public List<Course> GetRigistedCourse(long userID)
+        {
+            var courseList = new List<Course>();
+            var RegisList = _context.Registrations.Include(a => a.Course).Where(a => a.UserId == userID).AsQueryable();
+            if (RegisList != null)
+            {
+                courseList = RegisList.Select(a => a.Course).ToList();
+            }
+            return courseList;
+        }
+
+        public List<Course> FilterCourse(string courseName)
+        {
+            var courseList = _context.Courses.Include(a => a.Teacher).Include(a => a.ExamPapers).AsQueryable();
+            if (!string.IsNullOrEmpty(courseName))
+            {
+                courseList = courseList.Where(a => a.CourseName.ToLower().Contains(courseName.ToLower()));
+            }
+            return courseList.ToList();
+        }
+
         public List<Course> GetCourseListBylectureId(long userid) => _context.Courses.Include(c => c.Registrations).Include(c => c.Teacher).Where(c => c.TeacherId == userid).ToList();
 
         //Filter Course by custom field

@@ -17,19 +17,19 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Border Grid.Row="0" BorderThickness="1" CornerRadius="5" Background="WhiteSmoke" >
-            <StackPanel Orientation="Horizontal" >
-                <StackPanel Orientation="Vertical">
-                    <Label Content="Enter question detail *" FontSize="20" FontWeight="Bold" Foreground="red"></Label>
-                    <TextBox Background="White" x:Name="txtQuestionDetail" Height="64" Width="700" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" TextChanged="txtQuestionDetail_TextChanged"></TextBox>
+        <Border Grid.Row="0" BorderThickness="1" HorizontalAlignment="Stretch" CornerRadius="5" Background="WhiteSmoke" >
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Stretch" >
+                <StackPanel Orientation="Vertical" Width="800">
+                    <Label Content="Enter question detail " FontSize="20" FontWeight="Bold" Foreground="red"></Label>
+                    <TextBox Background="White" x:Name="txtQuestionDetail" FontSize="15" HorizontalAlignment="Stretch" Height="100" AcceptsReturn="True" TextWrapping="Wrap" VerticalScrollBarVisibility="Auto" TextChanged="txtQuestionDetail_TextChanged"></TextBox>
                 </StackPanel>
             </StackPanel>
         </Border>
         <Border BorderThickness="1" Grid.Row="2" Background="WhiteSmoke">
             <StackPanel Orientation="Horizontal" Margin="5" HorizontalAlignment="Center">
-                <Image Margin="30,0,0,0" Height="150" Width="450" HorizontalAlignment="Left" x:Name="txtImageUrl" Source="{Binding ImageUrl}" ></Image>
+                <Image Margin="30,0,0,0" Height="150" Width="450" HorizontalAlignment="Left" x:Name="txtImageUrl" Source="{Binding ImageUrl}" Stretch="Uniform" ></Image>
                 <Border Margin="10" Background="ForestGreen" CornerRadius="5"  HorizontalAlignment="Right" VerticalAlignment="Center">
-                    <Button Content="Upload Image"  Background="Transparent" Margin="10,10,10,10"  Foreground="White" BorderThickness="0"></Button>
+                    <Button Content="Upload Image"  Background="Transparent" Margin="10,10,10,10"  Foreground="White" BorderThickness="0" Click="Button_Click_3"></Button>
                 </Border>
             </StackPanel>
         </Border>
@@ -46,7 +46,7 @@
         </StackPanel>
         <TextBox Name="txtAnswerId" Visibility="Hidden"></TextBox>
         <StackPanel Grid.Row="4" Orientation="Vertical" >
-            <DataGrid Height="190" AutoGenerateColumns="False" IsReadOnly="True" Name="DataAnswer" SelectionChanged="DataAnswer_SelectionChanged">
+            <DataGrid Height="150" AutoGenerateColumns="False" IsReadOnly="True" Name="DataAnswer" SelectionChanged="DataAnswer_SelectionChanged" VerticalScrollBarVisibility="Visible">
                 <DataGrid.Columns>
                     <DataGridTextColumn Width="*" Header="Question detail" Binding="{Binding DetailAnswer}" ></DataGridTextColumn>
                 </DataGrid.Columns>

@@ -1,0 +1,55 @@
+﻿<Page x:Class="THI_BANG_LAI_XE.View.LectureView.ManagerRegister.ManagerRegisterPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:THI_BANG_LAI_XE.View.LectureView.ManagerRegister"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ManagerRegisterPage">
+
+    <Grid Background="WhiteSmoke">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Registration" Grid.Row="0" FontSize="20" Margin="1" ></TextBlock>
+        <StackPanel Grid.Row="1" Margin="5" Orientation="Horizontal">
+            <StackPanel Orientation="Vertical">
+                <Label Content="🧑‍🎓 Student name"></Label>
+                <Border BorderBrush="Black" Height="40" BorderThickness="1" Background="White" CornerRadius="10">
+                    <TextBox Width="200" Height="35" Name="txtFUllName" BorderThickness="0" Background="Transparent" TextChanged="FilterByName"></TextBox>
+                </Border>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="20,0,0,0">
+                <Label Content=" 📞 Phone number"></Label>
+                <Border BorderBrush="Black" Height="40" BorderThickness="1" Background="White" CornerRadius="10">
+                    <TextBox Width="200" Height="35" Name="txtPhone" BorderThickness="0" Background="Transparent" TextChanged="FilterByPhoneNumber"></TextBox>
+                </Border>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="20,0,0,0">
+                <Label Content=" 🎓 Courses"></Label>
+                <ComboBox Width="200" Height="40" x:Name="ListCourse" Background="Transparent" BorderThickness="2" SelectionChanged="ListCourse_SelectionChanged"></ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="20,33,0,0">
+                <Border BorderBrush="Black" Height="25" BorderThickness="1" Background="White" CornerRadius="10">
+                    <Button Width="80" Height="20"  Content="Reset" BorderThickness="0" Background="Transparent" Click="Button_Click"></Button>
+                </Border>
+            </StackPanel>
+        </StackPanel>
+
+        <DataGrid Grid.Row="2" HorizontalScrollBarVisibility="Visible" Height="400" VerticalScrollBarVisibility="Visible" AutoGenerateColumns="False" IsReadOnly="True" x:Name="DataStudent" SelectionChanged="DataStudent_SelectionChanged" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="*" Header="FullName" Binding="{Binding FullName}"></DataGridTextColumn>
+                <DataGridTextColumn Width="*" Header="email" Binding="{Binding Email}"></DataGridTextColumn>
+                <DataGridTextColumn Width="*" Header="Phone" Binding="{Binding Phone}"></DataGridTextColumn>
+                <DataGridTextColumn Width="*" Header="Date" Binding="{Binding Date}"></DataGridTextColumn>
+                <DataGridTextColumn Width="*" Header="CourseName" Binding="{Binding courseName}"></DataGridTextColumn>
+                <DataGridTextColumn Width="*" Header="Regist Status" Binding="{Binding Status}"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Grid>
+</Page>
