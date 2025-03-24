@@ -22,46 +22,78 @@ namespace THI_BANG_LAI_XE.View.NotificationView
         private ThiBangLaiXeContext _db;
         private Query _context;
         private User? userInfor = MainWindow.userLogedIn;
+        private User user;
 
-        public NotificaitonListPage()
+        public NotificaitonListPage(User u)
         {
             InitializeComponent();
             _db = new ThiBangLaiXeContext();
             _context = new Query(_db);
-            LoadNotifications();
+            user = u;
+            //LoadNotifications();
+            loadListNofiticationByUser();
         }
 
-        private void LoadNotifications()
+        void loadListNofiticationByUser()
         {
-            if (userInfor != null)
-            {
-                List<string> notifications = new List<string>();
-
-                var results = _context.resultDao.GetResultsByUserId(userInfor.UserId);
-
-                if (results != null)
-                {
-                    foreach (var result in results)
-                    {
-                        if (result.PassStatus == 1)
-                        {
-                            // check exam để hiện noti
-                            var exam = _context.examDao.GetExamById(result.ExamId);
-                            if (exam != null)
-                            {
-                                notifications.Add($"● Bạn đã được cấp Certificate cho bài thi '{exam.Room}'.");
-                            }
-                            else
-                            {
-                                notifications.Add("● Bạn đã được cấp Certificate.");
-                            }
-                        }
-                    }
-                }
-
-                // Hiển thị thông báo
-                NotificationListBox.ItemsSource = notifications;
-            }
+            DataNofitication.ItemsSource = _context.notificationDao.FilterNotification(txtFilter.Text, user.UserId);
         }
+
+        private void Notification_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            var selectedNotification = DataNofitication.SelectedValue as Notification;
+            if (selectedNotification != null)
+            {
+                var nofitication = _context.notificationDao.GetNotification(selectedNotification.Id);
+                if (nofitication != null)
+                {
+                    _context.notificationDao.readNofification(nofitication.Id);
+                    txtTitle.Text = nofitication.Title;
+                    txtContent.Text = nofitication.Content;
+                }
+            }
+
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+
+
+        //private void LoadNotifications()
+        //{
+        //    if (userInfor != null)
+        //    {
+        //        List<string> notifications = new List<string>();
+
+        //        var results = _context.resultDao.GetResultsByUserId(userInfor.UserId);
+
+        //        if (results != null)
+        //        {
+        //            foreach (var result in results)
+        //            {
+        //                if (result.PassStatus == 1)
+        //                {
+        //                    // check exam để hiện noti
+        //                    var exam = _context.examDao.GetExamById(result.ExamId);
+        //                    if (exam != null)
+        //                    {
+        //                        notifications.Add($"● Bạn đã được cấp Certificate cho bài thi '{exam.Room}'.");
+        //                    }
+        //                    else
+        //                    {
+        //                        notifications.Add("● Bạn đã được cấp Certificate.");
+        //                    }
+        //                }
+        //            }
+        //        }
+
+        //        // Hiển thị thông báo
+        //        NotificationListBox.ItemsSource = notifications;
+        //    }
+        //}
     }
 }

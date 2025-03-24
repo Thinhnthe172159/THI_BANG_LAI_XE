@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Identity.Client;
 using THI_BANG_LAI_XE.Models;
 using THI_BANG_LAI_XE.Dao;
 
@@ -24,6 +25,8 @@ namespace THI_BANG_LAI_XE.Dao
             _result = new Lazy<ResultDao>(() => new ResultDao(_context));
             _userSelectAnswerDao = new Lazy<UserSelectAnswerDao>(() => new UserSelectAnswerDao(_context));
             _certificateDao = new Lazy<CertificateDao>(() => new CertificateDao(_context));
+            _notificationDao = new Lazy<NotificationDao>(() => new NotificationDao(_context));
+
         }
 
         private Lazy<AnswerDao> _answerDao;
@@ -36,6 +39,8 @@ namespace THI_BANG_LAI_XE.Dao
         private Lazy<ResultDao> _result;
         private Lazy<UserSelectAnswerDao> _userSelectAnswerDao;
         private Lazy<CertificateDao> _certificateDao;
+        private Lazy<NotificationDao> _notificationDao;
+
 
         public AnswerDao answerDao => _answerDao.Value;
         public CourseDao courseDao => _courseDao.Value;
@@ -47,6 +52,7 @@ namespace THI_BANG_LAI_XE.Dao
         public ResultDao resultDao => _result.Value;
         public UserSelectAnswerDao userSelectAnswerDao => _userSelectAnswerDao.Value;
         public CertificateDao certificateDao => _certificateDao.Value;
+        public NotificationDao notificationDao => _notificationDao.Value;
     }
 
 }

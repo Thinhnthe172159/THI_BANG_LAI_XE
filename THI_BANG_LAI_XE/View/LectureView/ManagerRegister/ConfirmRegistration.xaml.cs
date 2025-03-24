@@ -56,6 +56,14 @@ namespace THI_BANG_LAI_XE.View.LectureView.ManagerRegister
                     LectureMainWindow lectureMainWindow = (LectureMainWindow)Application.Current.MainWindow;
                     lectureMainWindow.ContentFrame.Navigate(new ManagerRegisterPage());
 
+                    var notificatin = new Notification
+                    {
+                        Receiver = regis.UserId,
+                        Sender = LectureMainWindow.userLogedIn.UserId,
+                        Title = "Thông Báo Khóa Học",
+                        Content = $"Gửi bạn {regis.User.FullName}\n Chúng tôi đã xác thực lại thông tin về yêu cầu đăng kí khóa học của bạn.\nMong bạn sẽ tham gia các buổi học và để ý lịch thi bằng lái xe trong thời gian tới."
+                    };
+                    _context.notificationDao.AddNotification(notificatin);
                 }
                 catch (Exception)
                 {
@@ -77,6 +85,14 @@ namespace THI_BANG_LAI_XE.View.LectureView.ManagerRegister
                     this.Close();
                     LectureMainWindow lectureMainWindow = (LectureMainWindow)Application.Current.MainWindow;
                     lectureMainWindow.ContentFrame.Navigate(new ManagerRegisterPage());
+                    var notificatin = new Notification
+                    {
+                        Receiver = regis.UserId,
+                        Sender = LectureMainWindow.userLogedIn.UserId,
+                        Title = "Thông Báo Khóa Học",
+                        Content = $"Gửi bạn {regis.User.FullName},\nChúng tôi rất tiếc vì không thể duyệt yêu cầu đăng ký của bạn trong thời gian này vì một vài lý do.\nMong bạn thông cảm"
+                    };
+                    _context.notificationDao.AddNotification(notificatin);
                 }
                 catch (Exception)
                 {

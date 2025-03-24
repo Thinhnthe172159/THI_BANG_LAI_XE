@@ -27,6 +27,8 @@ public partial class ThiBangLaiXeContext : DbContext
 
     public virtual DbSet<ExamPaper> ExamPapers { get; set; }
 
+    public virtual DbSet<Notification> Notifications { get; set; }
+
     public virtual DbSet<Question> Questions { get; set; }
 
     public virtual DbSet<Registration> Registrations { get; set; }
@@ -46,8 +48,8 @@ public partial class ThiBangLaiXeContext : DbContext
         builder.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
         var configuration = builder.Build();
         optionsBuilder.UseSqlServer(configuration.GetConnectionString("Default"));
-    }
 
+    }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -133,6 +135,22 @@ public partial class ThiBangLaiXeContext : DbContext
         {
             entity.Property(e => e.CreateDate).HasColumnType("datetime");
             entity.Property(e => e.ExamPaperName).HasMaxLength(100);
+        });
+
+        modelBuilder.Entity<Notification>(entity =>
+        {
+            entity.Property(e => e.Id).ValueGeneratedOnAdd();
+            entity.Property(e => e.DateTime).HasColumnType("datetime");
+            entity.Property(e => e.IsRead).HasColumnName("isRead");
+            entity.Property(e => e.Title).HasMaxLength(300);
+
+            entity.HasOne(d => d.ReceiverNavigation).WithMany(p => p.NotificationReceiverNavigations)
+                .HasForeignKey(d => d.Receiver)
+                .HasConstraintName("FK_Notifications_Users");
+
+            entity.HasOne(d => d.SenderNavigation).WithMany(p => p.NotificationSenderNavigations)
+                .HasForeignKey(d => d.Sender)
+                .HasConstraintName("FK_Notifications_Users1");
         });
 
         modelBuilder.Entity<Question>(entity =>
