@@ -14,20 +14,23 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using THI_BANG_LAI_XE.Models;
+using THI_BANG_LAI_XE.Dao;
+
 
 namespace THI_BANG_LAI_XE.View.Officer
 {
     public partial class CertificatePage : Page
     {
         private ThiBangLaiXeContext dbSet;
-        private User _user; // Thêm biến User
+        private User _user;
+        private Query _context;
 
-        // Sửa constructor để nhận User
-        public CertificatePage(User user)
+        public CertificatePage(User user, Query context)
         {
             InitializeComponent();
             dbSet = new ThiBangLaiXeContext();
             _user = user;
+            _context = context; // Khởi tạo Query
             LoadName();
         }
 
@@ -35,19 +38,24 @@ namespace THI_BANG_LAI_XE.View.Officer
         {
             try
             {
-                // Sử dụng thông tin User đã được truyền
-                if (_user != null)
+                var certificate = _context.certificateDao.GetCertificateByUserId(_user.UserId);
+                // check xem cer duyệt or chưa
+
+                if (_context.certificateDao.GetCertificateByUserId(_user.UserId) != null)
                 {
                     txtName.Text = _user.FullName;
+                    txtIssue.Text = certificate.IssuedDate.ToString("dd/MM/yyyy");
+                    txtExp.Text = certificate.ExpirationDate.ToString("dd/MM/yyyy");
                 }
                 else
                 {
-                    MessageBox.Show("Không có thông tin người dùng.");
+                    MessageBox.Show("Bạn chưa được cấp chứng chỉ.");
+
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Lỗi khi tải tên: {ex.Message}");
+                MessageBox.Show($"Lỗi khi tải thông tin chứng chỉ: {ex.Message}");
             }
         }
     }
