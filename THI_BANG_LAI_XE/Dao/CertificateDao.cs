@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using THI_BANG_LAI_XE.Models;
 
 namespace THI_BANG_LAI_XE.Dao
@@ -18,7 +19,7 @@ namespace THI_BANG_LAI_XE.Dao
 
         public Certificate GetCertificateByUserId(long userId)
         {
-            return _db.Certificates.FirstOrDefault(c => c.UserId == userId);
+            return _db.Certificates.Include(c => c.User).FirstOrDefault(c => c.UserId == userId);
         }
 
         public void AddCertificate(Certificate certificate)

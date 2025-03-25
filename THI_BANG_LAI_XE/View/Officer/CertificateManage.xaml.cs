@@ -92,8 +92,18 @@ namespace THI_BANG_LAI_XE.View.Officer
                     "Thông báo",
                     MessageBoxButton.OK,
                     MessageBoxImage.Information);
+                LoadEligibleUsers();
+
+                //thông báo đẩy
+                var notification = new Notification
+                {
+                    Sender = _context.userDao.System().UserId,
+                    Receiver = userId,
+                    Title = "Thông báo cấp chứng chỉ",
+                    Content = "Chứng chỉ của bạn đã được cấp và bạn có thể vào phần bài kiểm tra của mình để nhận chứng chỉ"
+                };
+                _context.notificationDao.AddNotification(notification);
             }
-            LoadEligibleUsers();
         }
 
         private void RejectCertificateButton_Click(object sender, RoutedEventArgs e)
@@ -113,6 +123,16 @@ namespace THI_BANG_LAI_XE.View.Officer
 
                 MessageBox.Show("Từ chối chứng chỉ thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
                 LoadEligibleUsers();
+
+                //thông báo đẩy
+                var notification = new Notification
+                {
+                    Sender = _context.userDao.System().UserId,
+                    Receiver = existingCertificate.User.UserId,
+                    Title = "Chứng chỉ bị hủy",
+                    Content = "Chứng chỉ của bạn đã bị hủy vì một số lý do"
+                };
+                _context.notificationDao.AddNotification(notification);
             }
         }
 

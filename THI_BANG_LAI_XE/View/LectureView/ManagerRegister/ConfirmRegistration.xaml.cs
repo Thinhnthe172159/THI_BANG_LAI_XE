@@ -45,7 +45,7 @@ namespace THI_BANG_LAI_XE.View.LectureView.ManagerRegister
         private void Accept(object sender, RoutedEventArgs e)
         {
             var regis = _context.registrationDao.getRegistedById(registration.RegistrationId);
-            if (regis != null)
+            if (regis != null && regis.Status != 1)
             {
                 try
                 {
@@ -70,12 +70,16 @@ namespace THI_BANG_LAI_XE.View.LectureView.ManagerRegister
                     MessageBox.Show("Đã xảy ra lỗi trong quá trình duyệt!");
                 }
             }
+            else
+            {
+                MessageBox.Show("bạn đã duyệt rồi!");
+            }
         }
 
         private void denine(object sender, RoutedEventArgs e)
         {
             var regis = _context.registrationDao.getRegistedById(registration.RegistrationId);
-            if (regis != null)
+            if (regis != null && regis.Status != 1)
             {
                 try
                 {
@@ -98,6 +102,10 @@ namespace THI_BANG_LAI_XE.View.LectureView.ManagerRegister
                 {
                     MessageBox.Show("Đã xảy ra lỗi trong quá trình duyệt!");
                 }
+            }
+            else
+            {
+                MessageBox.Show("Đã từ chối rồi!");
             }
         }
     }

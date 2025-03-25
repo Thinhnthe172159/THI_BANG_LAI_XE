@@ -23,7 +23,10 @@
                 <Button Content="🎓 Courses Registration" HorizontalContentAlignment="Left" Margin="2" BorderThickness="0" Background="#614bd4" Padding="5" Click="CourseRegistButton" Foreground="White"/>
                 <Button Content="📂 ExamPaper" HorizontalContentAlignment="Left" Margin="2" BorderThickness="0" Background="#614bd4" Padding="5" Click="ExamPaperButton" Foreground="White"/>
                 <Button Content="📋 Exam" HorizontalContentAlignment="Left" Margin="2" BorderThickness="0" Background="#614bd4" Padding="5" Click="ExamButton" Foreground="White"/>
-                <Button Content="🔔 Notificaiton" HorizontalContentAlignment="Left" Margin="2" BorderThickness="0" Background="#614bd4" Padding="5" Click="NotificationButton" Foreground="White"/>
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="🔔 Notificaiton" HorizontalContentAlignment="Left" Margin="2" BorderThickness="0" Background="#614bd4" Padding="5" Click="NotificationButton" Foreground="White"/>
+                    <TextBlock Name="txtCountMessageNotRead" Height="20" Foreground="White"></TextBlock>
+                </StackPanel>
             </StackPanel>
         </Border>
         <Button Content="🚪 Log out" HorizontalContentAlignment="Left" Margin="2,2,50,2" BorderThickness="0" 

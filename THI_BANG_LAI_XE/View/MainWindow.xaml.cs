@@ -38,6 +38,12 @@ namespace THI_BANG_LAI_XE.View
             _db = new ThiBangLaiXeContext();
             _context = new Query(_db);
             LoadButton();
+            countMessageNotRead();
+        }
+
+        public void countMessageNotRead()
+        {
+            txtCountMessageNotRead.Text = _context.notificationDao.CountMessageNotRead(userLogedIn.UserId).ToString();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

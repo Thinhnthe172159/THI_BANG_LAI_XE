@@ -14,6 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using THI_BANG_LAI_XE.Models;
 using THI_BANG_LAI_XE.Dao;
+using THI_BANG_LAI_XE.View.LectureView;
+using System.Threading;
 
 namespace THI_BANG_LAI_XE.View.NotificationView
 {
@@ -21,7 +23,6 @@ namespace THI_BANG_LAI_XE.View.NotificationView
     {
         private ThiBangLaiXeContext _db;
         private Query _context;
-        private User? userInfor = MainWindow.userLogedIn;
         private User user;
 
         public NotificaitonListPage(User u)
@@ -36,29 +37,58 @@ namespace THI_BANG_LAI_XE.View.NotificationView
 
         void loadListNofiticationByUser()
         {
-            DataNofitication.ItemsSource = _context.notificationDao.FilterNotification(txtFilter.Text, user.UserId);
+            var list = _context.notificationDao.FilterNotification(txtFilter.Text, user.UserId).OrderByDescending(a => a.DateTime);
+
+            var list2 = from a in list
+                        select new
+                        {
+                            Title = a.Title,
+                            DateTime = a.DateTime,
+                            isRead = a.IsRead == 1 ? "" : "🔴",
+                            id = a.Id,
+                        };
+            DataNofitication.ItemsSource = list2.ToList();
         }
 
         private void Notification_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
-            var selectedNotification = DataNofitication.SelectedValue as Notification;
+            dynamic selectedNotification = DataNofitication.SelectedValue;
             if (selectedNotification != null)
             {
-                var nofitication = _context.notificationDao.GetNotification(selectedNotification.Id);
+                var nofitication = _context.notificationDao.GetNotification(selectedNotification.id);
                 if (nofitication != null)
                 {
                     _context.notificationDao.readNofification(nofitication.Id);
                     txtTitle.Text = nofitication.Title;
                     txtContent.Text = nofitication.Content;
+                    txtSender.Text = nofitication.SenderNavigation.FullName;
+
+                    try
+                    {
+                        if (user.Role == 3)
+                        {
+                            MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+                            mainWindow.countMessageNotRead();
+                        }
+                        if (user.Role == 1)
+                        {
+                            LectureMainWindow lectureView = (LectureMainWindow)Application.Current.MainWindow;
+                            lectureView.countMessageNotRead();
+                        }
+                        loadListNofiticationByUser();
+                    }
+                    catch (Exception)
+                    {
+
+                    }
                 }
             }
-
         }
 
         private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            loadListNofiticationByUser();
         }
 
 

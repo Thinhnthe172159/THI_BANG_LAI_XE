@@ -5,43 +5,121 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:THI_BANG_LAI_XE.View"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="600" d:DesignWidth="1000"
       Title="UserProfilePage">
 
-    <Grid Background="WhiteSmoke">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="150"></RowDefinition>
-            <RowDefinition Height="40"></RowDefinition>
-            <RowDefinition Height="40"></RowDefinition>
-            <RowDefinition Height="40"></RowDefinition>
-            <RowDefinition Height="40"></RowDefinition>
-            <RowDefinition Height="40"></RowDefinition>
-            <RowDefinition Height="40"></RowDefinition>
-            <RowDefinition Height="40"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="291"/>
-            <ColumnDefinition Width="136"/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
-        <TextBlock Text="User Profile" FontSize="20" FontWeight="Bold"/>
-        <TextBlock Grid.Row="6" x:Name="txtName" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Red" FontSize="15" Height="20" Width="100"/>
-        <TextBlock Grid.Column="1" Grid.Row="1" Text="Full Name:" FontSize="15"/>
-        <TextBlock Grid.Column="2" Grid.Row="1" x:Name="txtFullName" VerticalAlignment="Top" Foreground="Red" FontSize="15" FontWeight="Bold" Height="20"/>
-        <TextBlock Grid.Column="1" Grid.Row="2" Text="Email:" FontSize="15"/>
-        <TextBlock Grid.Column="2" Grid.Row="2" x:Name="txtEmail" VerticalAlignment="Top" Foreground="Red" FontSize="15" FontWeight="Bold" Height="20"/>
-        <TextBlock Grid.Column="1" Grid.Row="3" Text="Phone:" FontSize="15"/>
-        <TextBlock Grid.Column="2" Grid.Row="3" x:Name="txtPhone" VerticalAlignment="Top" Foreground="Red" FontSize="15" FontWeight="Bold" Height="20"/>
-        <TextBlock Grid.Column="1" Grid.Row="4" Text="Class:" FontSize="15"/>
-        <TextBlock Grid.Column="2" Grid.Row="4" x:Name="txtClass" VerticalAlignment="Top" Foreground="Red" FontSize="15" FontWeight="Bold" Height="20"/>
-        <TextBlock Grid.Column="1" Grid.Row="5" Text="School:" FontSize="15"/>
-        <TextBlock Grid.Column="2" Grid.Row="5" x:Name="txtSchool" VerticalAlignment="Top" Foreground="Red" FontSize="15" FontWeight="Bold" Height="20"/>
-        <TextBlock Grid.Column="1" Grid.Row="6" Text="Role:" FontSize="15"/>
-        <TextBlock Grid.Column="2" Grid.Row="6" x:Name="txtRole" VerticalAlignment="Top" Foreground="Red" FontSize="15" FontWeight="Bold" Height="20"/>
-        <TextBlock Grid.Column="1" Grid.Row="7" Text="Date Created:" FontSize="15"/>
-        <TextBlock Grid.Column="2" Grid.Row="7" x:Name="txtDateCreate" VerticalAlignment="Top" Foreground="Red" FontSize="15" FontWeight="Bold" Height="20"/>
-        <Image Source="/Images/user-register-icon.png" Margin="0,0,3,0" Grid.RowSpan="5" Grid.Row="1"/>
+    <Grid Background="#f0f2f5">
 
-        <Button Grid.Row="7" Width="150" Height="40" Content="Change Information" VerticalAlignment="Bottom" HorizontalAlignment="Center" Background="LightGreen" Click="Button_ChangeInformation"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200"/>
+
+            <RowDefinition Height="Auto"/>
+
+            <RowDefinition Height="*"/>
+
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Background="#1877f2">
+
+        </Border>
+
+
+        <Grid Grid.Row="0" Margin="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Width="150" Height="150"
+                    BorderBrush="White" BorderThickness="5"
+                    CornerRadius="75"
+                    VerticalAlignment="Bottom">
+                <Image Source="/Images/user-register-icon.png" 
+                       Stretch="UniformToFill" 
+                       ClipToBounds="True"/>
+            </Border>
+        </Grid>
+
+
+        <Border Grid.Row="1" Background="White" Margin="20" Padding="20" CornerRadius="8">
+            <StackPanel>
+                <TextBlock x:Name="txtFullName" Text="Full Name" 
+                           FontSize="24" FontWeight="Bold" Foreground="#050505"/>
+                <TextBlock x:Name="txtName" Text="User Profile" 
+                           FontSize="16" Foreground="#65676b" Margin="0,5,0,0"/>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="2" Background="White" Margin="20" Padding="20" CornerRadius="8">
+            <StackPanel>
+                <Grid Margin="0,0,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Email:" 
+                               FontSize="16" FontWeight="SemiBold" Foreground="#050505"/>
+                    <TextBlock Grid.Column="1" x:Name="txtEmail" Text="user@example.com" 
+                               FontSize="16" Foreground="#050505"/>
+                </Grid>
+                <Grid Margin="0,0,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Phone:" 
+                               FontSize="16" FontWeight="SemiBold" Foreground="#050505"/>
+                    <TextBlock Grid.Column="1" x:Name="txtPhone" Text="123456789" 
+                               FontSize="16" Foreground="#050505"/>
+                </Grid>
+                <Grid Margin="0,0,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Class:" 
+                               FontSize="16" FontWeight="SemiBold" Foreground="#050505"/>
+                    <TextBlock Grid.Column="1" x:Name="txtClass" Text="Class name" 
+                               FontSize="16" Foreground="#050505"/>
+                </Grid>
+                <Grid Margin="0,0,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="School:" 
+                               FontSize="16" FontWeight="SemiBold" Foreground="#050505"/>
+                    <TextBlock Grid.Column="1" x:Name="txtSchool" Text="School name" 
+                               FontSize="16" Foreground="#050505"/>
+                </Grid>
+                <Grid Margin="0,0,0,10">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Role:" 
+                               FontSize="16" FontWeight="SemiBold" Foreground="#050505"/>
+                    <TextBlock Grid.Column="1" x:Name="txtRole" Text="Role" 
+                               FontSize="16" Foreground="#050505"/>
+                </Grid>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Column="0" Text="Date Created:" 
+                               FontSize="16" FontWeight="SemiBold" Foreground="#050505"/>
+                    <TextBlock Grid.Column="1" x:Name="txtDateCreate" Text="01/01/2020" 
+                               FontSize="16" Foreground="#050505"/>
+                </Grid>
+            </StackPanel>
+        </Border>
+
+        <Button Content="Change Information" 
+                Background="#42b72a" Foreground="White" 
+                FontSize="16" FontWeight="Bold"
+                Height="40" Width="200"
+                HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="20"
+                Click="Button_ChangeInformation"/>
     </Grid>
 </Page>

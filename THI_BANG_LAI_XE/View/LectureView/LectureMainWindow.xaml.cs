@@ -40,6 +40,12 @@ namespace THI_BANG_LAI_XE.View.LectureView
             _db = new ThiBangLaiXeContext();
             _context = new Query(_db);
             selectedButton = new Button();
+            countMessageNotRead();
+        }
+
+        public void countMessageNotRead()
+        {
+            txtCountMessageNotRead.Text = _context.notificationDao.CountMessageNotRead(userLogedIn.UserId).ToString();
         }
 
 
@@ -112,6 +118,7 @@ namespace THI_BANG_LAI_XE.View.LectureView
 
         private void CourseRegistButton(object sender, RoutedEventArgs e)
         {
+            UpdateButtonSelection((Button)sender);
             LectureMainWindow lectureMainWindow = (LectureMainWindow)Application.Current.MainWindow;
             managerRegisterPage = new ManagerRegisterPage();
             lectureMainWindow.ContentFrame.Navigate(managerRegisterPage);

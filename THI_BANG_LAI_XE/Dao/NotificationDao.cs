@@ -23,8 +23,8 @@ namespace THI_BANG_LAI_XE.Dao
         {
             //try
             //{
-                _context.Notifications.Add(notification);
-                _context.SaveChanges();
+            _context.Notifications.Add(notification);
+            _context.SaveChanges();
             //}
             //catch (Exception)
             //{
@@ -57,6 +57,11 @@ namespace THI_BANG_LAI_XE.Dao
                 _context.Notifications.Update(notification);
                 _context.SaveChanges();
             }
+        }
+
+        public int CountMessageNotRead(long userId)
+        {
+            return _context.Notifications.Where(a => a.Receiver == userId && a.IsRead != 1).Count();
         }
 
         //get by id
