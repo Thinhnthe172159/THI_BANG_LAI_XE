@@ -5,6 +5,7 @@ using System.Windows.Media;
 using THI_BANG_LAI_XE.Dao;
 using THI_BANG_LAI_XE.Models;
 using THI_BANG_LAI_XE.View;
+using THI_BANG_LAI_XE.View.NotificationView;
 using THI_BANG_LAI_XE.View.Officer;
 
 namespace THI_BANG_LAI_XE.View.Officer
@@ -24,6 +25,12 @@ namespace THI_BANG_LAI_XE.View.Officer
             _db = new ThiBangLaiXeContext();
             _context = new Query(_db);
             selectedButton = new Button();
+            countMessageNotRead();
+        }
+
+        public void countMessageNotRead()
+        {
+            txtCountMessageNotRead.Text = _context.notificationDao.CountMessageNotRead(userLogedIn.UserId).ToString();
         }
 
         private void HomeButton(object sender, RoutedEventArgs e)
@@ -38,11 +45,7 @@ namespace THI_BANG_LAI_XE.View.Officer
             ContentFrame.Navigate(new UserProfilePage(userLogedIn));
         }
 
-        private void StudentListButton(object sender, RoutedEventArgs e)
-        {
-            //UpdateButtonSelection((Button)sender);
-            //ContentFrame.Navigate(new StudentListPage());
-        }
+
 
         private void AccountManagerButton(object sender, RoutedEventArgs e)
         {
@@ -59,6 +62,7 @@ namespace THI_BANG_LAI_XE.View.Officer
         private void NotificationButton(object sender, RoutedEventArgs e)
         {
             UpdateButtonSelection((Button)sender);
+            ContentFrame.Navigate(new NotificaitonListPage(userLogedIn));
         }
 
         private void Button_Logout(object sender, RoutedEventArgs e)

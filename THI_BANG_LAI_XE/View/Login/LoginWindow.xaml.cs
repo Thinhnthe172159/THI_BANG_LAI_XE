@@ -62,6 +62,11 @@ namespace THI_BANG_LAI_XE
                     MessageBox.Show("Mật khẩu không chính xác.", "Lỗi", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
+                if(user.Role == 4)
+                {
+                    MessageBox.Show("Tài khoản giảng viên chưa được duyệt, vui lòng chờ đợi!", "Chờ phê duyệt tài khoản", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
 
                 //  MessageBox.Show("Đăng nhập thành công!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
 

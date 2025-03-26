@@ -23,9 +23,13 @@ namespace THI_BANG_LAI_XE
     /// </summary>
     public partial class RegisterWindow : Window
     {
+        private ThiBangLaiXeContext _db;
+        private Query _context;
         public RegisterWindow()
         {
             InitializeComponent();
+            _db = new ThiBangLaiXeContext();
+            _context = new Query(_db);
         }
         private void Border_MouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -118,8 +122,33 @@ namespace THI_BANG_LAI_XE
                 }
                 try
                 {
+                    if (newUser.Role == 1)
+                    {
+                        newUser.Role = 4;
+                    }
                     userDao.AddUser(newUser);
-                    MessageBox.Show("Registration successful!");
+                    if (newUser.Role == 3)
+                    {
+                        MessageBox.Show("Registration successful!");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Your regist is pending,please wait!");
+                        var officerList = userDao.getListUserByRole(2);
+
+                        foreach (var officer in officerList)
+                        {
+                            var notification = new Notification
+                            {
+                                Sender = userDao.System().UserId,
+                                Receiver = officer.UserId,
+                                Title = "Xác thực đăng ký giảng viên!",
+                                Content = $"Người dùng: {newUser.FullName}\nEmail: {newUser.Email}\nPhone: {newUser.Phone}\nSchool{newUser.School} \nvừa tạo tài khoản giảng viên và đang chờ bạn xét duyệt tài khoản."
+                            };
+                            _context.notificationDao.AddNotification(notification);
+                        }
+                    }
+
                 }
                 catch (Exception ex)
                 {

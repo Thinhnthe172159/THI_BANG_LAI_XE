@@ -149,7 +149,7 @@ namespace THI_BANG_LAI_XE.View.LectureView.ManagerExam
             {
                 if (MessageBox.Show("Bạn có muốn bài kiểm tra này không?", "Xóa bài kiểm tra", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                 {
-                    _context.examDao.removeAllExamPaperOfExam(_exam.ExamId);
+                    //_context.examDao.removeAllExamPaperOfExam(_exam.ExamId);
                     _context.examDao.RemoveExam(_exam.ExamId);
                     LectureMainWindow lectureMainWindow = (LectureMainWindow)Application.Current.MainWindow;
                     lectureMainWindow.ContentFrame.Navigate(new ExamManagerPage(_user));

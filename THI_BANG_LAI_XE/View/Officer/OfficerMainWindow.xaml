@@ -20,7 +20,10 @@
                 <Button Content="👤 Your profile" HorizontalContentAlignment="Left" Margin="2" BorderThickness="0" Background="#614bd4" Padding="5" Click="ProfileButton" Foreground="White" />
                 <Button Content="🎓 Account Manager" HorizontalContentAlignment="Left" Margin="2" BorderThickness="0" Background="#614bd4" Padding="5" Click="AccountManagerButton" Foreground="White"/>
                 <Button Content="📋 Certificate" HorizontalContentAlignment="Left" Margin="2" BorderThickness="0" Background="#614bd4" Padding="5" Click="CertificateButton" Foreground="White"/>
-                <Button Content="🔔 Notificaiton" HorizontalContentAlignment="Left" Margin="2" BorderThickness="0" Background="#614bd4" Padding="5" Click="NotificationButton" Foreground="White"/>
+                <StackPanel Orientation="Horizontal">
+                    <Button Content="🔔 Notificaiton" HorizontalContentAlignment="Left" Margin="2" BorderThickness="0" Background="#614bd4" Padding="5" Click="NotificationButton" Foreground="White"/>
+                    <TextBlock Name="txtCountMessageNotRead" Height="20" Foreground="White"></TextBlock>
+                </StackPanel>
             </StackPanel>
         </Border>
         <Button Content="🚪 Log out" HorizontalContentAlignment="Left" Margin="2,2,50,2" BorderThickness="0" 
