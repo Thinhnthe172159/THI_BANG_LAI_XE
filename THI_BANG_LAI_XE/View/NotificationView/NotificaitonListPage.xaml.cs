@@ -16,6 +16,7 @@ using THI_BANG_LAI_XE.Models;
 using THI_BANG_LAI_XE.Dao;
 using THI_BANG_LAI_XE.View.LectureView;
 using System.Threading;
+using THI_BANG_LAI_XE.View.Officer;
 
 namespace THI_BANG_LAI_XE.View.NotificationView
 {
@@ -75,6 +76,11 @@ namespace THI_BANG_LAI_XE.View.NotificationView
                         {
                             LectureMainWindow lectureView = (LectureMainWindow)Application.Current.MainWindow;
                             lectureView.countMessageNotRead();
+                        }
+                        if (user.Role == 2)
+                        {
+                            OfficerMainWindow of = (OfficerMainWindow)Application.Current.MainWindow;
+                            of.countMessageNotRead();
                         }
                         loadListNofiticationByUser();
                     }

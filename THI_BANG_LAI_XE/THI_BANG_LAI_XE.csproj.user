@@ -6,4 +6,152 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
   </ItemGroup>
+  <ItemGroup>
+    <Compile Update="View\CourseView\CourseDetail.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\CourseView\CourseExamPaper.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\CourseView\CourseListPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\ExamView\ExamListPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\ExamView\TakingExamWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\HomePage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\LectureView\LectureMainWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\LectureView\ManagerCourse\AddCoursePage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\LectureView\ManagerCourse\CourseDetail.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\LectureView\ManagerCourse\CourseManagerPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\LectureView\ManagerExamPaper\AddExamPaper.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\LectureView\ManagerExamPaper\DetailQuestion.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\LectureView\ManagerExamPaper\ManagerExamPaperPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\LectureView\ManagerExamPaper\PageBlank.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\LectureView\ManagerExam\AddExamPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\LectureView\ManagerExam\DetailExamPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\LectureView\ManagerExam\ExamManagerPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\LectureView\ManagerRegister\ConfirmRegistration.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\LectureView\ManagerRegister\ManagerRegisterPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\LectureView\ManagerStudent\StudentManagerPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\NotificationView\NotificaitonListPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\RegistrationView\CourseRegisForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\RegistrationView\CourseRegistrationPage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="View\UserView\UserProfilePage.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="View\CourseView\CourseDetail.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\CourseView\CourseExamPaper.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\CourseView\CourseListPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\ExamView\ExamListPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\ExamView\TakingExamWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\HomePage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\LectureView\LectureMainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\LectureView\ManagerCourse\AddCoursePage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\LectureView\ManagerCourse\CourseDetail.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\LectureView\ManagerCourse\CourseManagerPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\LectureView\ManagerExamPaper\AddExamPaper.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\LectureView\ManagerExamPaper\DetailQuestion.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\LectureView\ManagerExamPaper\ManagerExamPaperPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\LectureView\ManagerExamPaper\PageBlank.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\LectureView\ManagerExam\AddExamPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\LectureView\ManagerExam\DetailExamPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\LectureView\ManagerExam\ExamManagerPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\LectureView\ManagerRegister\ConfirmRegistration.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\LectureView\ManagerRegister\ManagerRegisterPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\LectureView\ManagerStudent\StudentManagerPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\NotificationView\NotificaitonListPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\RegistrationView\CourseRegisForm.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\RegistrationView\CourseRegistrationPage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="View\UserView\UserProfilePage.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
 </Project>

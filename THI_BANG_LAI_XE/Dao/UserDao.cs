@@ -37,6 +37,11 @@ namespace THI_BANG_LAI_XE.Dao
             }
         }
 
+        public List<User> getListUserByRole(int role)
+        {
+            return _context.Users.Where(a => a.Role == role).ToList();
+        }
+
         //get userList 
         public IPagedList<User> GetUserPageList(int page = 1, int pageSize = 10)
         {
@@ -68,6 +73,15 @@ namespace THI_BANG_LAI_XE.Dao
 
 
             return list.ToPagedList(page, pageSize);
+        }
+
+
+        public List<User> getStudentListInCourseId(long lectureId, int courseId)
+        {
+            var listCourseOfLecture = _context.Courses.Where(c => c.TeacherId == lectureId).Select(c => c.CourseId).ToList();
+            var UserRegistrationsList = _context.Registrations.Include(r => r.Course).Where(r => listCourseOfLecture.Contains((int)r.CourseId)).Select(r => r.User).Where(r => r.Role == 3).AsQueryable();
+            UserRegistrationsList = UserRegistrationsList.Where(u => u.Registrations.Any(r => r.CourseId == courseId));
+            return UserRegistrationsList.ToList();
         }
 
         public List<User> GetUserList()

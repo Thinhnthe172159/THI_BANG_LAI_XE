@@ -107,6 +107,18 @@ namespace THI_BANG_LAI_XE.View.LectureView.ManagerExam
                     if (newestExam != null)
                     {
                         AddExamPaper(newestExam.ExamId);
+                        var studentList = _context.userDao.getStudentListInCourseId(_user.UserId, courseId);
+                        foreach (var student in studentList)
+                        {
+                            var notification = new Notification
+                            {
+                                Sender = _user.UserId,
+                                Receiver = student.UserId,
+                                Title = "(QUAN TRỌNG) Lịch thi bằng lái xe!",
+                                Content = $"Đã có lịch thi bằng lái xe vào thời điểm {newestExam.Date}, Vui lòng chú ý thời điểm thi."
+                            };
+                            _context.notificationDao.AddNotification(notification);
+                        }
                         MessageBox.Show("Đã thêm bài kiểm tra");
                         LectureMainWindow lectureMainWindow = (LectureMainWindow)Application.Current.MainWindow;
                         lectureMainWindow.ContentFrame.Navigate(new ExamManagerPage(_user));

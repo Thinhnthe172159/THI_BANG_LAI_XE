@@ -182,9 +182,21 @@ namespace THI_BANG_LAI_XE.View.ExamView
                 List<UserSelectedAnswer> UserAnswerList = _context.userSelectAnswerDao.getListUserAnswer(userInfor.UserId, result.ExamPaperId);
                 result.Score = UserAnswerList.Where(u => u.Answer != null && u.Answer.IsCorrectOrNot == 1).Count();
                 float PassCondition = (float)result.Score / (float)examPaper.Questions.Count * 100;
-                if (PassCondition > 80)// bài thi có tỉ lệ câu đúng > 80% thì pass
+                if (PassCondition >= 80)// bài thi có tỉ lệ câu đúng > 80% thì pass
                 {
                     result.PassStatus = 1;// pass
+                    var officerList = _context.userDao.getListUserByRole(2);
+                    foreach (var users in officerList)
+                    {
+                        var no = new Notification
+                        {
+                            Sender = userInfor.UserId,
+                            Receiver = users.UserId,
+                            Title = "Xét chứng chỉ",
+                            Content = $"Thí sinh {userInfor.FullName} đã vượt qua kì thi chứng chỉ lái xe và đang chờ nhận được chứng chỉ"
+                        };
+                        _context.notificationDao.AddNotification(no);
+                    }
                 }
                 else
                 {
